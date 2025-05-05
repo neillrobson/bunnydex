@@ -1,1 +1,3 @@
 .vscode
+db/default.store
+db/*.json
