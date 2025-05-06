@@ -1,3 +1,5 @@
 .vscode
-db/default.store
-db/*.json
+.DS_Store
+xcuserdata/
+.build/
+Bunnydex/data/*.json

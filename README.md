@@ -9,9 +9,9 @@
 
 ## Development
 
-### Building the Database
+### Seeding the Database
 
-Card data is assumed to exist in a JSON file named `db/01_deck_blue.json`.
+Card data is assumed to exist in a JSON file named `Bunnydex/data/01_deck_blue.json`.
 (Eventually, we'll support one file per deck.)
 The JSON is expected to look like the following:
 
@@ -33,8 +33,6 @@ The JSON is expected to look like the following:
 ]
 ```
 
-In the `db` directory, run the following command:
-
-```
-sqlite3 default.store < create.sql
-```
+Right now, a persistent SwiftData database is checked on app startup.
+If it is empty, it is seeded with the contents of the JSON files.
+A more robust solution certainly exists, but for now, this setup will suffice for a proof-of-concept.
