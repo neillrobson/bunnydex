@@ -9,15 +9,22 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Query var cards: [Card]
+    @Query(sort: \Card.id) var cards: [Card]
+
+    @State private var searchText: String = ""
 
     var body: some View {
-        VStack {
-            ForEach(cards) { card in
-                Text(card.title)
+        NavigationStack {
+            List {
+                ForEach(cards.filter {
+                    searchText.isEmpty || $0.title.lowercased().contains(searchText.lowercased())
+                }) { card in
+                    Text(card.title)
+                }
             }
+            .searchable(text: $searchText, prompt: "Search")
+            .navigationTitle("Cards")
         }
-        .padding()
     }
 }
 
