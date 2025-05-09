@@ -15,6 +15,19 @@ struct CardDetailView: View {
         VStack {
             Text(card.id)
             Text(card.title)
+            List {
+                Section {
+                    LabeledContent("Card type") {
+                        Text(card.type.rawValue)
+                    }
+                    LabeledContent("Bunny requirement") {
+                        Text(card.bunnyRequirement.rawValue)
+                    }
+                }
+                Section(header: Text("Card Text")) {
+                    Text("Players that have three bunnies in The Bunny Circle of the same color or kind may play two cards per turn.")
+                }
+            }
         }
         .navigationTitle(card.title)
         .navigationBarTitleDisplayMode(.inline)
