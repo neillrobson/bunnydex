@@ -15,17 +15,8 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(cards.filter {
-                    searchText.isEmpty || $0.title.lowercased().contains(searchText.lowercased())
-                }) { card in
-                    NavigationLink(card.title) {
-                        CardDetailView(card: card)
-                    }
-                }
-            }
+            CardListView(searchFilter: searchText)
             .searchable(text: $searchText, prompt: "Search")
-            .navigationTitle("Cards")
         }
     }
 }
