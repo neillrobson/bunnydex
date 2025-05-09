@@ -8,6 +8,19 @@
 import Foundation
 import SwiftData
 
+let cards: [Card] = {
+    do {
+        guard let url = Bundle.main.url(forResource: "01_deck_blue", withExtension: "json", subdirectory: "data") else {
+            fatalError("Failed to find 01_deck_blue.json")
+        }
+
+        let data = try Data(contentsOf: url)
+        return try JSONDecoder().decode([Card].self, from: data)
+    } catch {
+        fatalError("Failed to read JSON file: \(error)")
+    }
+}()
+
 @MainActor
 let appContainer: ModelContainer = {
     do {
@@ -16,16 +29,12 @@ let appContainer: ModelContainer = {
         var itemFetchDescriptor = FetchDescriptor<Card>()
         itemFetchDescriptor.fetchLimit = 1
 
-        guard try container.mainContext.fetchCount(itemFetchDescriptor) == 0 else {
-            return container
-        }
+        // TODO: Determine how to intelligently pre-load or re-load the database
+//        guard try container.mainContext.fetchCount(itemFetchDescriptor) == 0 else {
+//            return container
+//        }
 
-        guard let url = Bundle.main.url(forResource: "01_deck_blue", withExtension: "json", subdirectory: "data") else {
-            fatalError("Failed to find 01_deck_blue.json")
-        }
-
-        let data = try Data(contentsOf: url)
-        let cards = try JSONDecoder().decode([Card].self, from: data)
+        try container.mainContext.delete(model: Card.self)
 
         for card in cards {
             container.mainContext.insert(card)

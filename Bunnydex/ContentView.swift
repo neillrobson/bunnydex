@@ -19,7 +19,9 @@ struct ContentView: View {
                 ForEach(cards.filter {
                     searchText.isEmpty || $0.title.lowercased().contains(searchText.lowercased())
                 }) { card in
-                    Text(card.title)
+                    NavigationLink(card.title) {
+                        CardDetailView(card: card)
+                    }
                 }
             }
             .searchable(text: $searchText, prompt: "Search")
