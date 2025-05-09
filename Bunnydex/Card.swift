@@ -32,12 +32,18 @@ enum BunnyRequirement: String, Codable {
 
 @Model
 class Card: Codable {
+    struct Rule: Codable {
+        var title: String
+        var text: String
+    }
+
     enum CodingKeys: CodingKey {
         case id,
         title,
         type,
         deck,
-        bunnyRequirement
+        bunnyRequirement,
+        rules
     }
 
     var id: String
@@ -45,6 +51,7 @@ class Card: Codable {
     var type: CardType
     var deck: Deck
     var bunnyRequirement: BunnyRequirement
+    var rules: [Rule]?
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -53,6 +60,7 @@ class Card: Codable {
         self.type = try container.decode(CardType.self, forKey: .type)
         self.deck = try container.decode(Deck.self, forKey: .deck)
         self.bunnyRequirement = try container.decode(BunnyRequirement.self, forKey: .bunnyRequirement)
+        self.rules = try container.decodeIfPresent([Rule].self, forKey: .rules)
     }
 
     func encode(to encoder: any Encoder) throws {
@@ -62,5 +70,6 @@ class Card: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(deck, forKey: .deck)
         try container.encode(bunnyRequirement, forKey: .bunnyRequirement)
+        try container.encodeIfPresent(rules, forKey: .rules)
     }
 }
