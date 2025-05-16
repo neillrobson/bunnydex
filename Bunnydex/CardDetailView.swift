@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct CardDetailView: View {
-    @Bindable var card: Card
+    let card: Card
+    @Binding var path: NavigationPath
 
     var body: some View {
         List {
@@ -26,17 +27,34 @@ struct CardDetailView: View {
             }
             ForEach(card.rules ?? [], id: \.title) { rule in
                 Section(header: Text(rule.title)) {
-                    Text(rule.text)
+                    Text(.init(rule.text))
                 }
             }
+            .environment(\.openURL, OpenURLAction(handler: { URL in
+                if URL.scheme == "bunnypedia" {
+                    let rawId = URL.lastPathComponent
+                    let id = String(String(rawId.reversed()).padding(toLength: 4, withPad: "0", startingAt: 0).reversed())
+                    path.append(id)
+
+                    return .handled
+                }
+
+                return .systemAction
+            }))
         }
         .navigationTitle(card.title)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(for: String.self) { id in
+            CardDetailQueryView(id: id, path: $path)
+        }
     }
 }
 
 #Preview {
-    NavigationStack {
-        CardDetailView(card: CARDS[0])
+    @Previewable @State var path = NavigationPath()
+
+    NavigationStack(path: $path) {
+        CardDetailView(card: CARDS[0], path: $path)
     }
+    .modelContainer(appContainer)
 }

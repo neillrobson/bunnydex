@@ -10,10 +10,11 @@ import SwiftData
 
 struct ContentView: View {
     @State private var searchText: String = ""
+    @State private var path = NavigationPath()
 
     var body: some View {
-        NavigationStack {
-            CardListView(searchFilter: searchText)
+        NavigationStack(path: $path) {
+            CardListView(searchFilter: searchText, path: $path)
             .searchable(text: $searchText, prompt: "Search")
         }
     }
