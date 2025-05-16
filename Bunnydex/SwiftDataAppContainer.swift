@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-let cards: [Card] = {
+let CARDS: [Card] = {
     do {
         guard let url = Bundle.main.url(forResource: "01_deck_blue", withExtension: "json", subdirectory: "data") else {
             fatalError("Failed to find 01_deck_blue.json")
@@ -36,7 +36,7 @@ let appContainer: ModelContainer = {
 
         try container.mainContext.delete(model: Card.self)
 
-        for card in cards {
+        for card in CARDS {
             container.mainContext.insert(card)
         }
 

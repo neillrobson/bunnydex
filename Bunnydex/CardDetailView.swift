@@ -37,6 +37,6 @@ struct CardDetailView: View {
 
 #Preview {
     NavigationStack {
-        CardDetailView(card: cards[0])
+        CardDetailView(card: CARDS[0])
     }
 }

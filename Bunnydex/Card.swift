@@ -53,6 +53,15 @@ class Card: Codable {
     var bunnyRequirement: BunnyRequirement
     var rules: [Rule]?
 
+    init(id: String, title: String, type: CardType, deck: Deck, bunnyRequirement: BunnyRequirement, rules: [Rule]?) {
+        self.id = id
+        self.title = title
+        self.type = type
+        self.deck = deck
+        self.bunnyRequirement = bunnyRequirement
+        self.rules = rules
+    }
+
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
@@ -72,4 +81,13 @@ class Card: Codable {
         try container.encode(bunnyRequirement, forKey: .bunnyRequirement)
         try container.encodeIfPresent(rules, forKey: .rules)
     }
+
+    static let placeholder = Card(
+        id: "0000",
+        title: "Placeholder Card",
+        type: .run,
+        deck: .blue,
+        bunnyRequirement: .no,
+        rules: []
+    )
 }

@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Query(sort: \Card.id) var cards: [Card]
-
     @State private var searchText: String = ""
 
     var body: some View {
