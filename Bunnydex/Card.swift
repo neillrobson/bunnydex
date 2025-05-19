@@ -30,13 +30,24 @@ enum BunnyRequirement: String, Codable {
          play = "PLAY"
 }
 
+struct Rule: Codable {
+    var title: String
+    var text: String
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.title = try container.decode(String.self, forKey: .title)
+        let rawText = try container.decode(String.self, forKey: .text)
+
+        let regex = "<a href=\"(.+?)\">(.+?)<\\/a>"
+        let repl = "[$2]($1)"
+
+        self.text = rawText.replacingOccurrences(of: regex, with: repl, options: .regularExpression)
+    }
+}
+
 @Model
 class Card: Codable {
-    struct Rule: Codable {
-        var title: String
-        var text: String
-    }
-
     enum CodingKeys: CodingKey {
         case id,
         title,
