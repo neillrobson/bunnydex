@@ -16,18 +16,55 @@ enum CardType: String, Codable {
     special = "SPECIAL",
     verySpecial = "VERY_SPECIAL",
     playImmediately = "PLAY_IMMEDIATELY",
+    playRightNow = "PLAY_RIGHT_NOW",
     dolla = "DOLLA",
+    bunnyBuck = "BUNNY_BUCK",
     starter = "STARTER",
-    carrotSupply = "CARROT_SUPPLY"
+    carrotSupply = "CARROT_SUPPLY",
+    zodiac = "ZODIAC",
+    chineseZodiac = "CHINESE_ZODIAC",
+    rank = "RANK",
+    mysteriousPlace = "MYSTERIOUS_PLACE",
+    senator = "SENATOR",
+    metal = "METAL",
+    bunderground = "BUNDERGROUND"
 }
 
 enum Deck: String, Codable {
     case blue = "BLUE"
+    case yellow = "YELLOW"
+    case red = "RED"
+    case violet = "VIOLET"
+    case orange = "ORANGE"
+    case green = "GREEN"
+    case twilightWhite = "TWILIGHT_WHITE"
+    case stainlessSteel = "STAINLESS_STEEL"
+    case perfectlyPink = "PERFECTLY_PINK"
+    case wackyKhaki = "WACKY_KHAKI"
+    case ominousOnyx = "OMINOUS_ONYX"
+    case chocolate = "CHOCOLATE"
+    case fantastic = "FANTASTIC"
+    case caramelSwirl = "CARAMEL_SWIRL"
+    case creatureFeature = "CREATURE_FEATURE"
+    case pumpkinSpice = "PUMPKIN_SPICE"
+    case conquestBlue = "CONQUEST_BLUE"
+    case conquestYellow = "CONQUEST_YELLOW"
+    case conquestRed = "CONQUEST_RED"
+    case conquestViolet = "CONQUEST_VIOLET"
+    case kinderBlue = "KINDER_BLUE"
+    case kinderYellow = "KINDER_YELLOW"
+    case ladidaLondon = "LA-DI-DA_LONDON"
 }
 
 enum BunnyRequirement: String, Codable {
     case no = "NO",
-         play = "PLAY"
+         play = "PLAY",
+         playX2 = "PLAY_X2",
+         playAndSave = "PLAY_AND_SAVE"
+
+    init(from decoder: any Decoder) throws {
+        self = try BunnyRequirement(rawValue: decoder.singleValueContainer().decode(String.self)) ?? .no
+    }
 }
 
 struct Rule: Codable {
@@ -75,11 +112,16 @@ class Card: Codable {
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
+        do {
+            self.id = try container.decode(String.self, forKey: .id)
+        } catch DecodingError.typeMismatch {
+            let intId = try container.decode(Int.self, forKey: .id)
+            self.id = String(intId)
+        }
         self.title = try container.decode(String.self, forKey: .title)
         self.type = try container.decode(CardType.self, forKey: .type)
         self.deck = try container.decode(Deck.self, forKey: .deck)
-        self.bunnyRequirement = try container.decode(BunnyRequirement.self, forKey: .bunnyRequirement)
+        self.bunnyRequirement = try container.decodeIfPresent(BunnyRequirement.self, forKey: .bunnyRequirement) ?? .no
         self.rules = try container.decodeIfPresent([Rule].self, forKey: .rules)
     }
 

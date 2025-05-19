@@ -10,12 +10,14 @@ import SwiftData
 
 let CARDS: [Card] = {
     do {
-        guard let url = Bundle.main.url(forResource: "01_deck_blue", withExtension: "json", subdirectory: "data") else {
-            fatalError("Failed to find 01_deck_blue.json")
+        guard let urls = Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: "data") else {
+            fatalError("No data files found in bundle")
         }
 
-        let data = try Data(contentsOf: url)
-        return try JSONDecoder().decode([Card].self, from: data)
+        return try urls.flatMap { url in
+            let data = try Data(contentsOf: url)
+            return try JSONDecoder().decode([Card].self, from: data)
+        }
     } catch {
         fatalError("Failed to read JSON file: \(error)")
     }
