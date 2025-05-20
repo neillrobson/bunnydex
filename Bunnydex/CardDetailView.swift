@@ -32,8 +32,7 @@ struct CardDetailView: View {
             }
             .environment(\.openURL, OpenURLAction(handler: { URL in
                 if URL.scheme == "bunnypedia" {
-                    let rawId = URL.lastPathComponent
-                    let id = String(String(rawId.reversed()).padding(toLength: 4, withPad: "0", startingAt: 0).reversed())
+                    let id = URL.lastPathComponent
                     path.append(id)
 
                     return .handled
