@@ -11,8 +11,7 @@
 
 ### Seeding the Database
 
-Card data is assumed to exist in a JSON file named `Bunnydex/data/01_deck_blue.json`.
-(Eventually, we'll support one file per deck.)
+Card data is assumed to exist in JSON files withing the `Bunnydex/data` directory.
 The JSON is expected to look like the following:
 
 ```
@@ -32,6 +31,10 @@ The JSON is expected to look like the following:
     }
 ]
 ```
+
+Currently, the decks found in the [Bunnypedia repository](https://github.com/joshfriend/bunnypedia/blob/81e13219ebf8a38d85ce688c9f88acd4cf7c1cd6/database/deck01_blue.json)
+are used for reference.
+They are not committed into this repository for the time being.
 
 Right now, a persistent SwiftData database is checked on app startup.
 If it is empty, it is seeded with the contents of the JSON files.

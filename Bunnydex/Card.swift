@@ -27,7 +27,7 @@ enum CardType: String, Codable {
     mysteriousPlace = "MYSTERIOUS_PLACE",
     senator = "SENATOR",
     metal = "METAL",
-    bunderground = "BUNDERGROUND"
+    bundergroundStation = "BUNDERGROUND_STATION"
 }
 
 enum Deck: String, Codable {
@@ -51,9 +51,12 @@ enum Deck: String, Codable {
     case conquestYellow = "CONQUEST_YELLOW"
     case conquestRed = "CONQUEST_RED"
     case conquestViolet = "CONQUEST_VIOLET"
-    case kinderBlue = "KINDER_BLUE"
-    case kinderYellow = "KINDER_YELLOW"
-    case ladidaLondon = "LA-DI-DA_LONDON"
+    case kinderSkyBlue = "KINDER_SKY_BLUE"
+    case kinderSunshineYellow = "KINDER_SUNSHINE_YELLOW"
+    case laDiDaLondon = "LA_DI_DA_LONDON"
+    case cakeBatter = "CAKE_BATTER"
+    case radioactiveRobots = "RADIOACTIVE_ROBOTS"
+    case almondCrisp = "ALMOND_CRISP"
 }
 
 enum BunnyRequirement: String, Codable {
@@ -112,12 +115,7 @@ class Card: Codable {
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {
-            self.id = try container.decode(String.self, forKey: .id)
-        } catch DecodingError.typeMismatch {
-            let intId = try container.decode(Int.self, forKey: .id)
-            self.id = String(intId)
-        }
+        self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
         self.type = try container.decode(CardType.self, forKey: .type)
         self.deck = try container.decode(Deck.self, forKey: .deck)
