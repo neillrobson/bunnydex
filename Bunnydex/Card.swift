@@ -82,7 +82,14 @@ struct Rule: Codable {
         let regex = "<a href=\"(.+?)\">(.+?)<\\/a>"
         let repl = "[$2]($1)"
 
-        self.text = rawText.replacingOccurrences(of: regex, with: repl, options: .regularExpression)
+        self.text = rawText
+            .replacingOccurrences(of: regex, with: repl, options: .regularExpression)
+            .replacingOccurrences(of: "<br>", with: "\n")
+            .replacingOccurrences(of: "<ul>", with: "\n")
+            .replacingOccurrences(of: "</ul>", with: "\n")
+            .replacingOccurrences(of: "<li>", with: "\n- ")
+            .replacingOccurrences(of: "</li>", with: "\n")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
