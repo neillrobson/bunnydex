@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 // TODO: Automate upper-snake-case raw-value generation
 // https://stackoverflow.com/a/56672572/2977638
@@ -70,6 +71,76 @@ enum BunnyRequirement: String, Codable {
     }
 }
 
+enum Die: String, Codable {
+    case blue = "BLUE",
+         yellow = "YELLOW",
+         violet = "VIOLET",
+         orange = "ORANGE",
+         green = "GREEN",
+         red = "RED",
+         pink = "PINK",
+         black = "BLACK",
+         clear = "CLEAR",
+         brown = "BROWN",
+         blueD10 = "BLUE_D10",
+         yellowD10 = "YELLOW_D10",
+         violetD10 = "VIOLET_D10",
+         orangeD10 = "ORANGE_D10",
+         greenD10 = "GREEN_D10",
+         zodiac = "ZODIAC",
+         chineseZodiac = "CHINESE_ZODIAC"
+
+    var systemImageName: String {
+        switch self {
+        case .clear:
+            return "20.square"
+        case .blueD10, .yellowD10, .violetD10, .orangeD10, .greenD10:
+            return "10.square.fill"
+        case .zodiac:
+            return "z.square.fill"
+        case .chineseZodiac:
+            return "c.square.fill"
+        default:
+            return "12.square.fill"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .blue, .blueD10:
+            return .blue
+        case .yellow, .yellowD10:
+            return .yellow
+        case .green, .greenD10:
+            return .green
+        case .violet, .violetD10:
+            return .purple
+        case .orange, .orangeD10:
+            return .orange
+        case .red:
+            return .red
+        case .pink:
+            return .pink
+        case .brown:
+            return .brown
+        default:
+            return .gray
+        }
+    }
+}
+
+enum Pawn: String, Codable {
+    case blue = "BLUE",
+         yellow = "YELLOW",
+         violet = "VIOLET",
+         orange = "ORANGE",
+         green = "GREEN",
+         red = "RED",
+         pink = "PINK",
+         black = "BLACK",
+         brown = "BROWN"
+}
+
 struct Rule: Codable {
     var title: String
     var text: String
@@ -101,6 +172,8 @@ class Card: Codable {
         type,
         deck,
         bunnyRequirement,
+        dice,
+        pawn,
         rules
     }
 
@@ -109,14 +182,17 @@ class Card: Codable {
     var type: CardType
     var deck: Deck
     var bunnyRequirement: BunnyRequirement
+    var dice: [Die]?
+    var pawn: Pawn?
     var rules: [Rule]?
 
-    init(id: String, title: String, type: CardType, deck: Deck, bunnyRequirement: BunnyRequirement, rules: [Rule]?) {
+    init(id: String, title: String, type: CardType, deck: Deck, bunnyRequirement: BunnyRequirement, dice: [Die]?, rules: [Rule]?) {
         self.id = id
         self.title = title
         self.type = type
         self.deck = deck
         self.bunnyRequirement = bunnyRequirement
+        self.dice = dice
         self.rules = rules
     }
 
@@ -127,6 +203,8 @@ class Card: Codable {
         self.type = try container.decode(CardType.self, forKey: .type)
         self.deck = try container.decode(Deck.self, forKey: .deck)
         self.bunnyRequirement = try container.decodeIfPresent(BunnyRequirement.self, forKey: .bunnyRequirement) ?? .no
+        self.dice = try container.decodeIfPresent([Die].self, forKey: .dice)
+        self.pawn = try container.decodeIfPresent(Pawn.self, forKey: .pawn)
         self.rules = try container.decodeIfPresent([Rule].self, forKey: .rules)
     }
 
@@ -137,6 +215,8 @@ class Card: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(deck, forKey: .deck)
         try container.encode(bunnyRequirement, forKey: .bunnyRequirement)
+        try container.encodeIfPresent(dice, forKey: .dice)
+        try container.encodeIfPresent(pawn, forKey: .pawn)
         try container.encodeIfPresent(rules, forKey: .rules)
     }
 
@@ -146,6 +226,7 @@ class Card: Codable {
         type: .run,
         deck: .blue,
         bunnyRequirement: .no,
+        dice: [.blue, .pink, .black, .orange, .red, .yellow, .green, .brown, .clear, .violet, .blueD10, .orangeD10, .yellowD10, .greenD10, .violetD10, .zodiac, .chineseZodiac],
         rules: []
     )
 }
