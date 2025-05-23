@@ -22,6 +22,10 @@ struct CardDetailView: View {
 
     var body: some View {
         List {
+            Image("1")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 370, height: 450, alignment: .top)
             Section {
                 LabeledContent("ID") {
                     Text(card.id)
