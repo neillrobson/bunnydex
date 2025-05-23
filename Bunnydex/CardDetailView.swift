@@ -12,6 +12,14 @@ struct CardDetailView: View {
     let card: Card
     @Binding var path: NavigationPath
 
+    let columns = [
+        GridItem(.fixed(10), spacing: 15),
+        GridItem(.fixed(10), spacing: 15),
+        GridItem(.fixed(10), spacing: 15),
+        GridItem(.fixed(10), spacing: 15),
+        GridItem(.fixed(10), spacing: 15),
+    ]
+
     var body: some View {
         List {
             Section {
@@ -26,18 +34,13 @@ struct CardDetailView: View {
                 }
                 card.dice.map { dice in
                     LabeledContent("Dice") {
-                        GeometryReader { geom in
-                            ScrollView(.horizontal) {
-                                HStack {
-                                    ForEach(dice, id: \.self) { die in
-                                        Image(systemName: die.systemImageName)
-                                            .foregroundStyle(die.color)
-                                    }
-                                }
-                                .frame(width: geom.size.width, alignment: .trailing)
+                        LazyVGrid(columns: columns, alignment: .leading, spacing: 5) {
+                            ForEach(dice, id: \.self) { die in
+                                Image(systemName: die.systemImageName)
+                                    .foregroundStyle(die.color)
                             }
                         }
-                        .background(Color.gray.opacity(0.2))
+                        .environment(\.layoutDirection, .rightToLeft)
                     }
                 }
             }

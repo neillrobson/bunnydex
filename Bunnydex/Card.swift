@@ -120,9 +120,11 @@ enum Die: String, Codable {
         case .red:
             return .red
         case .pink:
-            return .pink
+            return .init(hue: 0.9, saturation: 0.5, brightness: 1.0)
         case .brown:
-            return .brown
+            return .init(hue: 0.1, saturation: 0.9, brightness: 0.75)
+        case .black:
+            return .black
         default:
             return .gray
         }
@@ -226,7 +228,7 @@ class Card: Codable {
         type: .run,
         deck: .blue,
         bunnyRequirement: .no,
-        dice: [.blue, .pink, .black, .orange, .red, .yellow, .green, .brown, .clear, .violet, .blueD10, .orangeD10, .yellowD10, .greenD10, .violetD10, .zodiac, .chineseZodiac],
+        dice: [.violet, .orange, .green, .yellow, .blue, .pink, .black, .red, .brown, .clear, .violetD10, .orangeD10, .greenD10, .yellowD10, .blueD10, .zodiac, .chineseZodiac],
         rules: []
     )
 }
