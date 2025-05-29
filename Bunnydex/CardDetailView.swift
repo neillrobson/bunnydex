@@ -8,8 +8,21 @@
 import SwiftUI
 import SwiftData
 
+extension String {
+    func trimZeroes() -> String {
+        guard let index = firstIndex(where: { !CharacterSet(charactersIn: String($0)).isSubset(of: CharacterSet(charactersIn: "0")) }) else {
+            return self
+        }
+
+        return String(self[index...])
+    }
+}
+
 struct CardDetailView: View {
     let card: Card
+    var imageId: String {
+        card.id.trimZeroes()
+    }
     @Binding var path: NavigationPath
 
     let columns = [
@@ -22,10 +35,13 @@ struct CardDetailView: View {
 
     var body: some View {
         List {
-            Image("1")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 370, height: 450, alignment: .top)
+            if UIImage(named: imageId) != nil {
+                Image(imageId)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 580, height: 200, alignment: .top)
+                    .offset(x: 0, y: -160)
+            }
             Section {
                 LabeledContent("ID") {
                     Text(card.id)
