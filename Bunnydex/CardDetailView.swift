@@ -8,20 +8,10 @@
 import SwiftUI
 import SwiftData
 
-extension String {
-    func trimZeroes() -> String {
-        guard let index = firstIndex(where: { !CharacterSet(charactersIn: String($0)).isSubset(of: CharacterSet(charactersIn: "0")) }) else {
-            return self
-        }
-
-        return String(self[index...])
-    }
-}
-
 struct CardDetailView: View {
     let card: Card
     var imageId: String {
-        card.id.trimZeroes()
+        "01xQ\(card.id)"
     }
     @Binding var path: NavigationPath
 
