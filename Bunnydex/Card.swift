@@ -31,6 +31,7 @@ enum CardType: String, Codable {
     bundergroundStation = "BUNDERGROUND_STATION"
 }
 
+// TODO: Implement LosslessStringConvertible so that we can use Int RawValues for sorting
 enum Deck: String, Codable {
     case blue = "BLUE"
     case yellow = "YELLOW"
@@ -58,6 +59,12 @@ enum Deck: String, Codable {
     case cakeBatter = "CAKE_BATTER"
     case radioactiveRobots = "RADIOACTIVE_ROBOTS"
     case almondCrisp = "ALMOND_CRISP"
+}
+
+extension String {
+    var deck: Deck {
+        .init(rawValue: self) ?? .blue
+    }
 }
 
 enum BunnyRequirement: String, Codable {
@@ -176,7 +183,8 @@ class Card: Codable {
         bunnyRequirement,
         dice,
         pawn,
-        rules
+        rules,
+        deckSort
     }
 
     var id: String
@@ -187,6 +195,37 @@ class Card: Codable {
     var dice: [Die]?
     var pawn: Pawn?
     var rules: [Rule]?
+
+    var deckSort: Int {
+        switch deck {
+        case .blue: return 0
+        case .yellow: return 1
+        case .red: return 2
+        case .violet: return 3
+        case .orange: return 4
+        case .green: return 5
+        case .twilightWhite: return 6
+        case .stainlessSteel: return 7
+        case .perfectlyPink: return 8
+        case .wackyKhaki: return 9
+        case .kinderSkyBlue: return 10
+        case .kinderSunshineYellow: return 11
+        case .ominousOnyx: return 12
+        case .chocolate: return 13
+        case .conquestBlue: return 14
+        case .conquestYellow: return 15
+        case .conquestRed: return 16
+        case .conquestViolet: return 17
+        case .fantastic: return 18
+        case .caramelSwirl: return 19
+        case .creatureFeature: return 20
+        case .pumpkinSpice: return 21
+        case .laDiDaLondon: return 22
+        case .cakeBatter: return 23
+        case .radioactiveRobots: return 24
+        case .almondCrisp: return 25
+        }
+    }
 
     init(id: String, title: String, type: CardType, deck: Deck, bunnyRequirement: BunnyRequirement, dice: [Die]?, rules: [Rule]?) {
         self.id = id
