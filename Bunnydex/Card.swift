@@ -31,39 +31,70 @@ enum CardType: String, Codable {
     bundergroundStation = "BUNDERGROUND_STATION"
 }
 
-// TODO: Implement LosslessStringConvertible so that we can use Int RawValues for sorting
-enum Deck: String, Codable {
-    case blue = "BLUE"
-    case yellow = "YELLOW"
-    case red = "RED"
-    case violet = "VIOLET"
-    case orange = "ORANGE"
-    case green = "GREEN"
-    case twilightWhite = "TWILIGHT_WHITE"
-    case stainlessSteel = "STAINLESS_STEEL"
-    case perfectlyPink = "PERFECTLY_PINK"
-    case wackyKhaki = "WACKY_KHAKI"
-    case ominousOnyx = "OMINOUS_ONYX"
-    case chocolate = "CHOCOLATE"
-    case fantastic = "FANTASTIC"
-    case caramelSwirl = "CARAMEL_SWIRL"
-    case creatureFeature = "CREATURE_FEATURE"
-    case pumpkinSpice = "PUMPKIN_SPICE"
-    case conquestBlue = "CONQUEST_BLUE"
-    case conquestYellow = "CONQUEST_YELLOW"
-    case conquestRed = "CONQUEST_RED"
-    case conquestViolet = "CONQUEST_VIOLET"
-    case kinderSkyBlue = "KINDER_SKY_BLUE"
-    case kinderSunshineYellow = "KINDER_SUNSHINE_YELLOW"
-    case laDiDaLondon = "LA_DI_DA_LONDON"
-    case cakeBatter = "CAKE_BATTER"
-    case radioactiveRobots = "RADIOACTIVE_ROBOTS"
-    case almondCrisp = "ALMOND_CRISP"
-}
+enum Deck: Int, LosslessStringConvertible {
+    case blue, yellow, red, violet, orange, green, twilightWhite, stainlessSteel, perfectlyPink, wackyKhaki, ominousOnyx, chocolate, fantastic, caramelSwirl, creatureFeature, pumpkinSpice, conquestBlue, conquestYellow, conquestRed, conquestViolet, kinderSkyBlue, kinderSunshineYellow, laDiDaLondon, cakeBatter, radioactiveRobots, almondCrisp;
 
-extension String {
-    var deck: Deck {
-        .init(rawValue: self) ?? .blue
+    init?(_ description: String) {
+        switch description {
+        case "BLUE": self = .blue
+        case "YELLOW": self = .yellow
+        case "RED": self = .red
+        case "VIOLET": self = .violet
+        case "ORANGE": self = .orange
+        case "GREEN": self = .green
+        case "TWILIGHT_WHITE": self = .twilightWhite
+        case "STAINLESS_STEEL": self = .stainlessSteel
+        case "PERFECTLY_PINK": self = .perfectlyPink
+        case "WACKY_KHAKI": self = .wackyKhaki
+        case "OMINOUS_ONYX": self = .ominousOnyx
+        case "CHOCOLATE": self = .chocolate
+        case "FANTASTIC": self = .fantastic
+        case "CARAMEL_SWIRL": self = .caramelSwirl
+        case "CREATURE_FEATURE": self = .creatureFeature
+        case "PUMPKIN_SPICE": self = .pumpkinSpice
+        case "CONQUEST_BLUE": self = .conquestBlue
+        case "CONQUEST_YELLOW": self = .conquestYellow
+        case "CONQUEST_RED": self = .conquestRed
+        case "CONQUEST_VIOLET": self = .conquestViolet
+        case "KINDER_SKY_BLUE": self = .kinderSkyBlue
+        case "KINDER_SUNSHINE_YELLOW": self = .kinderSunshineYellow
+        case "LA_DI_DA_LONDON": self = .laDiDaLondon
+        case "CAKE_BATTER": self = .cakeBatter
+        case "RADIOACTIVE_ROBOTS": self = .radioactiveRobots
+        case "ALMOND_CRISP": self = .almondCrisp
+        default: return nil
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .blue: return "BLUE"
+        case .yellow: return "YELLOW"
+        case .red: return "RED"
+        case .violet: return "VIOLET"
+        case .orange: return "ORANGE"
+        case .green: return "GREEN"
+        case .twilightWhite: return "TWILIGHT_WHITE"
+        case .stainlessSteel: return "STAINLESS_STEEL"
+        case .perfectlyPink: return "PERFECTLY_PINK"
+        case .wackyKhaki: return "WACKY_KHAKI"
+        case .ominousOnyx: return "OMINOUS_ONYX"
+        case .chocolate: return "CHOCOLATE"
+        case .fantastic: return "FANTASTIC"
+        case .caramelSwirl: return "CARAMEL_SWIRL"
+        case .creatureFeature: return "CREATURE_FEATURE"
+        case .pumpkinSpice: return "PUMPKIN_SPICE"
+        case .conquestBlue: return "CONQUEST_BLUE"
+        case .conquestYellow: return "CONQUEST_YELLOW"
+        case .conquestRed: return "CONQUEST_RED"
+        case .conquestViolet: return "CONQUEST_VIOLET"
+        case .kinderSkyBlue: return "KINDER_SKY_BLUE"
+        case .kinderSunshineYellow: return "KINDER_SUNSHINE_YELLOW"
+        case .laDiDaLondon: return "LA_DI_DA_LONDON"
+        case .cakeBatter: return "CAKE_BATTER"
+        case .radioactiveRobots: return "RADIOACTIVE_ROBOTS"
+        case .almondCrisp: return "ALMOND_CRISP"
+        }
     }
 }
 
@@ -183,55 +214,27 @@ class Card: Codable {
         bunnyRequirement,
         dice,
         pawn,
-        rules,
-        deckSort
+        rules
     }
 
     var id: String
     var title: String
     var type: CardType
-    var deck: Deck
+    var rawDeck: Int
     var bunnyRequirement: BunnyRequirement
     var dice: [Die]?
     var pawn: Pawn?
     var rules: [Rule]?
 
-    var deckSort: Int {
-        switch deck {
-        case .blue: return 0
-        case .yellow: return 1
-        case .red: return 2
-        case .violet: return 3
-        case .orange: return 4
-        case .green: return 5
-        case .twilightWhite: return 6
-        case .stainlessSteel: return 7
-        case .perfectlyPink: return 8
-        case .wackyKhaki: return 9
-        case .kinderSkyBlue: return 10
-        case .kinderSunshineYellow: return 11
-        case .ominousOnyx: return 12
-        case .chocolate: return 13
-        case .conquestBlue: return 14
-        case .conquestYellow: return 15
-        case .conquestRed: return 16
-        case .conquestViolet: return 17
-        case .fantastic: return 18
-        case .caramelSwirl: return 19
-        case .creatureFeature: return 20
-        case .pumpkinSpice: return 21
-        case .laDiDaLondon: return 22
-        case .cakeBatter: return 23
-        case .radioactiveRobots: return 24
-        case .almondCrisp: return 25
-        }
+    var deck: Deck {
+        return .init(rawValue: rawDeck)!
     }
 
-    init(id: String, title: String, type: CardType, deck: Deck, bunnyRequirement: BunnyRequirement, dice: [Die]?, rules: [Rule]?) {
+    init(id: String, title: String, type: CardType, rawDeck: Int, bunnyRequirement: BunnyRequirement, dice: [Die]?, rules: [Rule]?) {
         self.id = id
         self.title = title
         self.type = type
-        self.deck = deck
+        self.rawDeck = 0
         self.bunnyRequirement = bunnyRequirement
         self.dice = dice
         self.rules = rules
@@ -242,11 +245,14 @@ class Card: Codable {
         self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
         self.type = try container.decode(CardType.self, forKey: .type)
-        self.deck = try container.decode(Deck.self, forKey: .deck)
         self.bunnyRequirement = try container.decodeIfPresent(BunnyRequirement.self, forKey: .bunnyRequirement) ?? .no
         self.dice = try container.decodeIfPresent([Die].self, forKey: .dice)
         self.pawn = try container.decodeIfPresent(Pawn.self, forKey: .pawn)
         self.rules = try container.decodeIfPresent([Rule].self, forKey: .rules)
+
+        let deckId = try container.decode(String.self, forKey: .deck)
+        let deck = Deck.init(deckId)!
+        self.rawDeck = deck.rawValue
     }
 
     func encode(to encoder: any Encoder) throws {
@@ -254,7 +260,7 @@ class Card: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
         try container.encode(type, forKey: .type)
-        try container.encode(deck, forKey: .deck)
+        try container.encode(deck.description, forKey: .deck)
         try container.encode(bunnyRequirement, forKey: .bunnyRequirement)
         try container.encodeIfPresent(dice, forKey: .dice)
         try container.encodeIfPresent(pawn, forKey: .pawn)
@@ -265,7 +271,7 @@ class Card: Codable {
         id: "0000",
         title: "Placeholder Card",
         type: .run,
-        deck: .blue,
+        rawDeck: Deck.blue.rawValue,
         bunnyRequirement: .no,
         dice: [.violet, .orange, .green, .yellow, .blue, .pink, .black, .red, .brown, .clear, .violetD10, .orangeD10, .greenD10, .yellowD10, .blueD10, .zodiac, .chineseZodiac],
         rules: []
