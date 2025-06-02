@@ -11,7 +11,7 @@ import SwiftData
 struct CardDetailView: View {
     let card: Card
     var imageId: String {
-        "01xQ\(card.id)"
+        "01x\(card.deck.isKinder ? "K" : "Q")\(card.id)"
     }
     @Binding var path: NavigationPath
 

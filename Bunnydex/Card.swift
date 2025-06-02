@@ -96,6 +96,13 @@ enum Deck: Int, LosslessStringConvertible {
         case .almondCrisp: return "ALMOND_CRISP"
         }
     }
+
+    var isKinder: Bool {
+        switch self {
+        case .kinderSkyBlue, .kinderSunshineYellow: return true
+        default: return false
+        }
+    }
 }
 
 enum BunnyRequirement: String, Codable {
