@@ -17,7 +17,7 @@ struct CardListView: View {
             searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter)
         }
 
-        _cards = Query(filter: predicate, sort: \.id)
+        _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
 
         _path = path
     }
