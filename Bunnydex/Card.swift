@@ -8,9 +8,8 @@
 import Foundation
 import SwiftData
 import SwiftUI
+import EnumStringConvertible
 
-// TODO: Automate upper-snake-case raw-value generation
-// https://stackoverflow.com/a/56672572/2977638
 enum CardType: String, Codable {
     case run = "RUN",
     roamingRedRun = "ROAMING_RED_RUN",
@@ -31,71 +30,9 @@ enum CardType: String, Codable {
     bundergroundStation = "BUNDERGROUND_STATION"
 }
 
+@enumStringConvertible
 enum Deck: Int, LosslessStringConvertible {
     case blue, yellow, red, violet, orange, green, twilightWhite, stainlessSteel, perfectlyPink, wackyKhaki, ominousOnyx, chocolate, fantastic, caramelSwirl, creatureFeature, pumpkinSpice, conquestBlue, conquestYellow, conquestRed, conquestViolet, kinderSkyBlue, kinderSunshineYellow, laDiDaLondon, cakeBatter, radioactiveRobots, almondCrisp;
-
-    init?(_ description: String) {
-        switch description {
-        case "BLUE": self = .blue
-        case "YELLOW": self = .yellow
-        case "RED": self = .red
-        case "VIOLET": self = .violet
-        case "ORANGE": self = .orange
-        case "GREEN": self = .green
-        case "TWILIGHT_WHITE": self = .twilightWhite
-        case "STAINLESS_STEEL": self = .stainlessSteel
-        case "PERFECTLY_PINK": self = .perfectlyPink
-        case "WACKY_KHAKI": self = .wackyKhaki
-        case "OMINOUS_ONYX": self = .ominousOnyx
-        case "CHOCOLATE": self = .chocolate
-        case "FANTASTIC": self = .fantastic
-        case "CARAMEL_SWIRL": self = .caramelSwirl
-        case "CREATURE_FEATURE": self = .creatureFeature
-        case "PUMPKIN_SPICE": self = .pumpkinSpice
-        case "CONQUEST_BLUE": self = .conquestBlue
-        case "CONQUEST_YELLOW": self = .conquestYellow
-        case "CONQUEST_RED": self = .conquestRed
-        case "CONQUEST_VIOLET": self = .conquestViolet
-        case "KINDER_SKY_BLUE": self = .kinderSkyBlue
-        case "KINDER_SUNSHINE_YELLOW": self = .kinderSunshineYellow
-        case "LA_DI_DA_LONDON": self = .laDiDaLondon
-        case "CAKE_BATTER": self = .cakeBatter
-        case "RADIOACTIVE_ROBOTS": self = .radioactiveRobots
-        case "ALMOND_CRISP": self = .almondCrisp
-        default: return nil
-        }
-    }
-
-    var description: String {
-        switch self {
-        case .blue: return "BLUE"
-        case .yellow: return "YELLOW"
-        case .red: return "RED"
-        case .violet: return "VIOLET"
-        case .orange: return "ORANGE"
-        case .green: return "GREEN"
-        case .twilightWhite: return "TWILIGHT_WHITE"
-        case .stainlessSteel: return "STAINLESS_STEEL"
-        case .perfectlyPink: return "PERFECTLY_PINK"
-        case .wackyKhaki: return "WACKY_KHAKI"
-        case .ominousOnyx: return "OMINOUS_ONYX"
-        case .chocolate: return "CHOCOLATE"
-        case .fantastic: return "FANTASTIC"
-        case .caramelSwirl: return "CARAMEL_SWIRL"
-        case .creatureFeature: return "CREATURE_FEATURE"
-        case .pumpkinSpice: return "PUMPKIN_SPICE"
-        case .conquestBlue: return "CONQUEST_BLUE"
-        case .conquestYellow: return "CONQUEST_YELLOW"
-        case .conquestRed: return "CONQUEST_RED"
-        case .conquestViolet: return "CONQUEST_VIOLET"
-        case .kinderSkyBlue: return "KINDER_SKY_BLUE"
-        case .kinderSunshineYellow: return "KINDER_SUNSHINE_YELLOW"
-        case .laDiDaLondon: return "LA_DI_DA_LONDON"
-        case .cakeBatter: return "CAKE_BATTER"
-        case .radioactiveRobots: return "RADIOACTIVE_ROBOTS"
-        case .almondCrisp: return "ALMOND_CRISP"
-        }
-    }
 
     var isKinder: Bool {
         switch self {
@@ -258,7 +195,9 @@ class Card: Codable {
         self.rules = try container.decodeIfPresent([Rule].self, forKey: .rules)
 
         let deckId = try container.decode(String.self, forKey: .deck)
-        let deck = Deck.init(deckId)!
+        guard let deck = Deck.init(deckId) else {
+            fatalError("Deck ID \(deckId) not found")
+        }
         self.rawDeck = deck.rawValue
     }
 
@@ -274,7 +213,7 @@ class Card: Codable {
         try container.encodeIfPresent(rules, forKey: .rules)
     }
 
-    static let placeholder = Card(
+    @MainActor static let placeholder = Card(
         id: "0000",
         title: "Placeholder Card",
         type: .run,

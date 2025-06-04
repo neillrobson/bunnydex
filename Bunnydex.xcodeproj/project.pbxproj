@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6F92F2F32DF0CD4B00093471 /* EnumStringConvertible in Frameworks */ = {isa = PBXBuildFile; productRef = 6F92F2F22DF0CD4B00093471 /* EnumStringConvertible */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6FA131E82DC946270093D27F /* Bunnydex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bunnydex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -26,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F92F2F32DF0CD4B00093471 /* EnumStringConvertible in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +73,7 @@
 			);
 			name = Bunnydex;
 			packageProductDependencies = (
+				6F92F2F22DF0CD4B00093471 /* EnumStringConvertible */,
 			);
 			productName = Bunnydex;
 			productReference = 6FA131E82DC946270093D27F /* Bunnydex.app */;
@@ -97,6 +103,9 @@
 			);
 			mainGroup = 6FA131DF2DC946270093D27F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6F92F2F12DF0CD4B00093471 /* XCLocalSwiftPackageReference "../EnumStringConvertible" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6FA131E92DC946270093D27F /* Products */;
 			projectDirPath = "";
@@ -272,7 +281,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.neillrobson.Bunnydex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -300,7 +309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.neillrobson.Bunnydex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -327,6 +336,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		6F92F2F12DF0CD4B00093471 /* XCLocalSwiftPackageReference "../EnumStringConvertible" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../EnumStringConvertible;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6F92F2F22DF0CD4B00093471 /* EnumStringConvertible */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EnumStringConvertible;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6FA131E02DC946270093D27F /* Project object */;
 }

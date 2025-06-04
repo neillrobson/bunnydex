@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-let CARDS: [Card] = {
+@MainActor let CARDS: [Card] = {
     do {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: "data") else {
             fatalError("No data files found in bundle")
