@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F92F2F32DF0CD4B00093471 /* EnumStringConvertible in Frameworks */ = {isa = PBXBuildFile; productRef = 6F92F2F22DF0CD4B00093471 /* EnumStringConvertible */; };
+		989E37FE2DF11F3A0017185B /* EnumStringConvertible in Frameworks */ = {isa = PBXBuildFile; productRef = 989E37FD2DF11F3A0017185B /* EnumStringConvertible */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F92F2F32DF0CD4B00093471 /* EnumStringConvertible in Frameworks */,
+				989E37FE2DF11F3A0017185B /* EnumStringConvertible in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,7 +73,7 @@
 			);
 			name = Bunnydex;
 			packageProductDependencies = (
-				6F92F2F22DF0CD4B00093471 /* EnumStringConvertible */,
+				989E37FD2DF11F3A0017185B /* EnumStringConvertible */,
 			);
 			productName = Bunnydex;
 			productReference = 6FA131E82DC946270093D27F /* Bunnydex.app */;
@@ -104,7 +104,7 @@
 			mainGroup = 6FA131DF2DC946270093D27F;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				6F92F2F12DF0CD4B00093471 /* XCLocalSwiftPackageReference "../EnumStringConvertible" */,
+				989E37FC2DF11F3A0017185B /* XCLocalSwiftPackageReference "../EnumStringConvertible" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6FA131E92DC946270093D27F /* Products */;
@@ -338,14 +338,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		6F92F2F12DF0CD4B00093471 /* XCLocalSwiftPackageReference "../EnumStringConvertible" */ = {
+		989E37FC2DF11F3A0017185B /* XCLocalSwiftPackageReference "../EnumStringConvertible" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../EnumStringConvertible;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6F92F2F22DF0CD4B00093471 /* EnumStringConvertible */ = {
+		989E37FD2DF11F3A0017185B /* EnumStringConvertible */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EnumStringConvertible;
 		};
