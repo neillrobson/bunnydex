@@ -75,6 +75,11 @@ struct CardDetailView: View {
         .navigationDestination(for: String.self) { id in
             CardDetailQueryView(id: id, path: $path)
         }
+        .toolbar {
+            Button("Home", systemImage: "House") {
+                path = NavigationPath()
+            }
+        }
     }
 }
 
