@@ -47,13 +47,25 @@ struct CardDetailView: View {
                 }
                 card.dice.map { dice in
                     LabeledContent("Dice") {
-                        LazyVGrid(columns: columns, alignment: .leading, spacing: 5) {
-                            ForEach(dice, id: \.self) { die in
-                                Image(systemName: die.systemImageName)
-                                    .foregroundStyle(die.color)
+                        Grid(alignment: .center, horizontalSpacing: 5, verticalSpacing: 5) {
+                            ForEach (0...dice.count/5, id: \.self) { row in
+                                let rowStart = row * 5
+                                let offsetEnd = min(dice.count - rowStart, 5)
+                                let offsetStart = offsetEnd - 5
+
+                                GridRow {
+                                    ForEach(offsetStart..<offsetEnd, id: \.self) { offset in
+                                        if offset < 0 {
+                                            Color.clear.gridCellUnsizedAxes([.horizontal, .vertical])
+                                        } else {
+                                            let die = dice[rowStart + offset]
+                                            Image(systemName: die.systemImageName)
+                                                .foregroundStyle(die.color)
+                                        }
+                                    }
+                                }
                             }
                         }
-                        .environment(\.layoutDirection, .rightToLeft)
                     }
                 }
             }
