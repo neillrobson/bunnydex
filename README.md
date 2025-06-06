@@ -9,33 +9,33 @@
 
 ## Development
 
-### Seeding the Database
+The iOS application itself is in the aptly-named `App` directory.
+Open `App/Bunnydex.xcodeproj` in Xcode to develop.
 
-Card data is assumed to exist in JSON files withing the `Bunnydex/data` directory.
-The JSON is expected to look like the following:
+A Swift macro, used for building the enumerations in the Card model,
+is packaged in the `EnumStringConvertible` directory.
+The Xcode project should automatically detect and import that dependency.
 
-```
-[
-    {
-        "type": "RUN",
-        "deck": "BLUE",
-        "id": "0001",
-        "bunnyRequirement": "NO",
-        "rules": [
-            {
-                "title": "Card Text",
-                "text": "Players that have three bunnies in The Bunny Circle of the same color or kind may play two cards per turn."
-            }
-        ],
-        "title": "Blue Congenial Bunny"
-    }
-]
-```
+> [!NOTE]
+> This project organization strategy isn't particularly robust.
+> It is merely the result of my learning and hacking together a bare-bones iOS application.
+>
+> In the future, I may adjust and modularize the structure further.
 
-Currently, the decks found in the [Bunnypedia repository](https://github.com/joshfriend/bunnypedia/blob/81e13219ebf8a38d85ce688c9f88acd4cf7c1cd6/database/deck01_blue.json)
-are used for reference.
-They are not committed into this repository for the time being.
+### Data
 
-Right now, a persistent SwiftData database is checked on app startup.
-If it is empty, it is seeded with the contents of the JSON files.
-A more robust solution certainly exists, but for now, this setup will suffice for a proof-of-concept.
+At the moment, all text and images are simply stored as JSON and `.xcasset` files
+within the `App/Bunnydex` directory.
+Although inefficient from a source-control perspective,
+the size of the data did not warrant a more robust system (at least for an initial prototype).
+
+## Attributions
+
+> [!IMPORTANT]
+> Only the `.swift` source code files in this repository are my (Neill Robson's) intellectual property.
+> All assets and inspiration are borrowed with much gratitude from the following talented people!
+
+- Jeff Bellinger: creator of the Killer Bunnies card game
+- Jonathan Young: Killer Bunnies card illustrator
+- Josh Friend: creator of [Bunnypedia](https://github.com/joshfriend/bunnypedia), a Killer Bunnies card browser app for Android. The JSON card data came from his app.
+- Jennifer Robson: graphic designer for the Bunnydex app logo
