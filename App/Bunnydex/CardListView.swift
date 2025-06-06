@@ -32,6 +32,9 @@ struct CardListView: View {
         .navigationDestination(for: Card.self) { card in
             CardDetailView(card: card, path: $path)
         }
+        .navigationDestination(for: String.self) { id in
+            CardDetailQueryView(id: id, path: $path)
+        }
     }
 }
 

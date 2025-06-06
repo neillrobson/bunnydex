@@ -87,9 +87,6 @@ struct CardDetailView: View {
         }
         .navigationTitle(card.title)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(for: String.self) { id in
-            CardDetailQueryView(id: id, path: $path)
-        }
         .toolbar {
             if path.count > 1 {
                 Button {
@@ -105,7 +102,7 @@ struct CardDetailView: View {
 #Preview {
     @Previewable @State var path = NavigationPath()
 
-    if let card = CARDS.first(where: { $0.id == "0066" }) {
+    if let card = getCardsFromJSON().first(where: { $0.id == "0066" }) {
         NavigationStack(path: $path) {
             CardDetailView(card: card, path: $path)
         }

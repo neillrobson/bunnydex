@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-@MainActor let CARDS: [Card] = {
+func getCardsFromJSON() -> [Card] {
     do {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: "data") else {
             fatalError("No data files found in bundle")
@@ -21,25 +21,20 @@ import SwiftData
     } catch {
         fatalError("Failed to read JSON file: \(error)")
     }
-}()
+}
 
 @MainActor
 let appContainer: ModelContainer = {
     do {
         let container = try ModelContainer(for: Card.self)
+        let hasLoadedData = UserDefaults.standard.bool(forKey: "hasLoadedData")
 
-        var itemFetchDescriptor = FetchDescriptor<Card>()
-        itemFetchDescriptor.fetchLimit = 1
+        if !hasLoadedData {
+            for card in getCardsFromJSON() {
+                container.mainContext.insert(card)
+            }
 
-        // TODO: Determine how to intelligently pre-load or re-load the database
-//        guard try container.mainContext.fetchCount(itemFetchDescriptor) == 0 else {
-//            return container
-//        }
-
-        try container.mainContext.delete(model: Card.self)
-
-        for card in CARDS {
-            container.mainContext.insert(card)
+            UserDefaults.standard.set(true, forKey: "hasLoadedData")
         }
 
         return container
