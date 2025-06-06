@@ -1,0 +1,1150 @@
+[
+  {
+    "id": "0606",
+    "title": "Alfred - Single Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This is a single Celebrity Bunny. Players that have three in The Bunny Circle may play two cards per turn."}
+    ]
+  },
+  {
+    "id": "0607",
+    "title": "Carl - Single Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "symbols": ["JUPITER"],
+    "rules": [
+      {"title": "Card Text", "text": "This is a single Celebrity Bunny. Players that have three in The Bunny Circle may play two cards per turn."},
+      {"title": "Mysterious Place", "text": "The player who currently holds the Yellow Ball can control the destiny of this card. The opponent must play the card first, then the player holding the Yellow Ball may redirect it to any other player, bunny or the Discard Pile."}
+    ]
+  },
+  {
+    "id": "0608",
+    "title": "Samantha - Single Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This is a single Celebrity Bunny. Players that have three in The Bunny Circle may play two cards per turn."}
+    ]
+  },
+  {
+    "id": "0609",
+    "title": "August & 44 - Double Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This is a double Celebrity Bunny. Players that have three in The Bunny Circle may play two cards per turn."}
+    ]
+  },
+  {
+    "id": "0610",
+    "title": "Loki & Bartleby - Double Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This is a double Celebrity Bunny. Players that have three in The Bunny Circle may play two cards per turn."}
+    ]
+  },
+  {
+    "id": "0611",
+    "title": "Phineas & Jeffrey - Double Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This is a double Celebrity Bunny. Players that have three in The Bunny Circle may play two cards per turn."}
+    ]
+  },
+  {
+    "id": "0612",
+    "title": "B'Elanna, Kathryn & Seven - Triple Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This is a triple Celebrity Bunny. Players with this bunny in The Bunny Circle may play two cards per turn."}
+    ]
+  },
+  {
+    "id": "0613",
+    "title": "Jerry, Parker & Mikey - Triple Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This is a triple Celebrity Bunny. Players with this bunny in The Bunny Circle may play two cards per turn."}
+    ]
+  },
+  {
+    "id": "0614",
+    "title": "Rygel, d'Argo & John - Triple Celebrity Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This is a triple Celebrity Bunny. Players with this bunny in The Bunny Circle may play two cards per turn."}
+    ]
+  },
+  {
+    "id": "0615",
+    "title": "Extra Super Red Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This bunny possesses all of the advantages of Super bunnies and all of the special features of all of the Red bunnies."},
+      {"title": "Additional Rules", "text": "The advantages of Super bunnies:<br><ol><li> The player with a Super Bunny in The Bunny Circle may automatically play two cards per turn.</li><li> When a Super Bunny is attacked with a Weapon card, the player may roll the Clear 20-sided die regardless of the weapon level. Even though this has no advantage if the weapon level is 13 or higher, it is a great advantage for weapons with levels 1-12.</li><li> When a Super Bunny is placed in The Bunny Circle, all bunnies that are the same color (or half color) as the Super Bunny are immediately eliminated from The Bunny Circle. Until the Super Bunny itself is eliminated, no bunny of the same color (or half color) can survive in The Bunny Circle.<br><br>A Red or Pink bunny that has The <a href=\"bunnypedia://cards/0058\">Heavenly Halo</a> is not eliminated from The Bunny Circle if a Red or Pink Extra Super Bunny of the same color arrives. If The Heavenly Halo is placed on the Extra Super Bunny, then all bunnies of the same color arriving in The Bunny Circle are safe (not discarded).</li><br><br>Once an Extra Super Bunny has been eliminated, it cannot be purchased from Weil's Pawn Shop nor can it be brought back into the game for any reason using any card. In addition, an Extra Super Bunny cannot be affected by the cards: <a href=\"bunnypedia://cards/0407\">Cloning</a>, <a href=\"bunnypedia://cards/0239\">Bunny Booster</a>, <a href=\"bunnypedia://cards/0254\">Random Paintball Assault</a>, <a href=\"bunnypedia://cards/0568\">Better Bunny Booster</a> or <a href=\"bunnypedia://cards/0515\">Blanch</a>."},
+      {"title": "Red Bunny Benefits", "text": "<ul><li><a href=\"bunnypedia://cards/0166\">Red Congenial Bunny</a> - 3 Cabbage and 3 Water Units</li><li><a href=\"bunnypedia://cards/0167\">Red Gleeful Bunny</a> - 3 Dolla</li><li><a href=\"bunnypedia://cards/0168\">Red Lumbering Bunny</a> - Triple Lucky Clover</li><li><a href=\"bunnypedia://cards/0169\">Red Sinister Bunny</a> - Bounce Back Force Field</li><li><a href=\"bunnypedia://cards/0170\">Red Timid Bunny</a> - re-roll capabilities for all of the dice.</li></ul>"}
+    ]
+  },
+  {
+    "id": "0616",
+    "title": "Extra Super Pink Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "This bunny possesses all of the advantages of Super bunnies and all of the special features of all of the Pink bunnies."},
+      {"title": "Additional Rules", "text": "The advantages of Super bunnies:<br><ol><li> The player with a Super Bunny in The Bunny Circle may automatically play two cards per turn.</li><li> When a Super Bunny is attacked with a Weapon card, the player may roll the Clear 20-sided die regardless of the weapon level. Even though this has no advantage if the weapon level is 13 or higher, it is a great advantage for weapons with levels 1-12.</li><li> When a Super Bunny is placed in The Bunny Circle, all bunnies that are the same color (or half color) as the Super Bunny are immediately eliminated from The Bunny Circle. Until the Super Bunny itself is eliminated, no bunny of the same color (or half color) can survive in The Bunny Circle.<br>A Red or Pink bunny that has The <a href=\"bunnypedia://cards/0058\">Heavenly Halo</a> is not eliminated from The Bunny Circle if a Red or Pink Extra Super Bunny of the same color arrives. If The Heavenly Halo is placed on the Extra Super Bunny, then all bunnies of the same color arriving in The Bunny Circle are safe (not discarded).</li><br><br>Once an Extra Super Bunny has been eliminated, it cannot be purchased from Weil's Pawn Shop nor can it be brought back into the game for any reason using any card. In addition, an Extra Super Bunny cannot be affected by the cards: <a href=\"bunnypedia://cards/0407\">Cloning</a>, <a href=\"bunnypedia://cards/0239\">Bunny Booster</a>, <a href=\"bunnypedia://cards/0254\">Random Paintball Assault</a>, <a href=\"bunnypedia://cards/0568\">Better Bunny Booster</a> or <a href=\"bunnypedia://cards/0515\">Blanch</a>."},
+      {"title": "Pink Bunny Benefits", "text": "<ul><li> <a href=\"bunnypedia://cards/0496\">Pink Congenial</a> - 5 Cabbage and Water Units</li><li> <a href=\"bunnypedia://cards/0497\">Pink Gleeful</a> - 5 Dolla</li><li> <a href=\"bunnypedia://cards/0498\">Pink Lumbering</a> - Quindruple Lucky Clover</li><li> <a href=\"bunnypedia://cards/0499\">Pink Sinister</a> - Bounce-Back Force Field</li><li> <a href=\"bunnypedia://cards/0500\">Pink Timid</a> - Substitute Pink die for any roll</li></ul>"}
+    ]
+  },
+  {
+    "id": "0617",
+    "title": "Choose A Carrot",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "aggressive": false,
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to choose a Carrot from Kaballa's Market. When all the carrots are taken from Kaballa's Market the game is over and The Magic Carrot is revealed."}
+    ]
+  },
+  {
+    "id": "0618",
+    "title": "Choose 2 Carrots",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "aggressive": false,
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to choose two Carrots from Kaballa's Market. When all the carrots are taken from Kaballa's Market the game is over and The Magic Carrot is revealed."}
+    ]
+  },
+  {
+    "id": "0619",
+    "title": "Feed The Bunny 2/5",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "cabbage": 2,
+    "water": 5,
+    "rules": [
+      {"title": "Card Text", "text": "May be placed on any bunny which must feed the amounts shown by the end of its next turn or die."}
+    ]
+  },
+  {
+    "id": "0620",
+    "title": "Feed The Bunny 5/2",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "cabbage": 5,
+    "water": 2,
+    "rules": [
+      {"title": "Card Text", "text": "May be placed on any bunny which must feed the amounts shown by the end of its next turn or die."}
+    ]
+  },
+  {
+    "id": "0621",
+    "title": "Feed The Bunny 3/5",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "cabbage": 3,
+    "water": 5,
+    "rules": [
+      {"title": "Card Text", "text": "May be placed on any bunny which must feed the amounts shown by the end of its next turn or die."}
+    ]
+  },
+  {
+    "id": "0622",
+    "title": "Feed The Bunny 5/3",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "cabbage": 5,
+    "water": 3,
+    "rules": [
+      {"title": "Card Text", "text": "May be placed on any bunny which must feed the amounts shown by the end of its next turn or die."}
+    ]
+  },
+  {
+    "id": "0623",
+    "title": "C4",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "weaponLevel": "Guy/Guy",
+    "dice": ["BLUE", "BLACK"],
+    "rules": [
+      {"title": "Card Text", "text": "Must be used by a Guy player against a Guy opponent's bunny. The player rolls the Blue die first to determine the Weapon Level. The opponent rolls the Black die which must be higher than the Blue die for the bunny to survive."},
+      {"title": "Additional Rules", "text": "If you have a Gender Weapon in your hand that you cannot play, then you may either trade it to another player, or run it through the Bottom and Top Run card cycle and discard it.<br><br>Players may declare themselves male or female before the start of the game if they wish to choose their gender.<br><br>Gender Weapons that are reversed, bounced back or otherwise redirected by a player must still follow the gender restrictions. For example, if Tim plays a Guy/Gal weapon on one of Carol's bunnies, she cannot use <a href=\"bunnypedia://cards/0152\">Reversal Of Fortune</a> to send it back to Tim since she is not a Guy and he is not a Gal. If a <a href=\"bunnypedia://cards/0169\">Red Sinister</a> (with a Bounce Back Force Field) is unsuccessfully attacked with a Gender Weapon, then it would only return to one of the attacker's bunnies if the gender conditions were satisfied."}
+    ]
+  },
+  {
+    "id": "0624",
+    "title": "Ten Foot Pole",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "weaponLevel": "Guy/Gal",
+    "dice": ["BLUE", "BLACK"],
+    "rules": [
+      {"title": "Card Text", "text": "Must be used by a Guy player against a Gal opponent's bunny. The player rolls the Blue die first to determine the Weapon Level. The opponent rolls the Black die which must be higher than the Blue die for the bunny to survive."},
+      {"title": "Additional Rules", "text": "If you have a Gender Weapon in your hand that you cannot play, then you may either trade it to another player, or run it through the Bottom and Top Run card cycle and discard it.<br><br>Players may declare themselves male or female before the start of the game if they wish to choose their gender.<br><br>Gender Weapons that are reversed, bounced back or otherwise redirected by a player must still follow the gender restrictions. For example, if Tim plays a Guy/Gal weapon on one of Carol's bunnies, she cannot use <a href=\"bunnypedia://cards/0152\">Reversal Of Fortune</a> to send it back to Tim since she is not a Guy and he is not a Gal. If a <a href=\"bunnypedia://cards/0169\">Red Sinister</a> (with a Bounce Back Force Field) is unsuccessfully attacked with a Gender Weapon, then it would only return to one of the attacker's bunnies if the gender conditions were satisfied."}
+    ]
+  },
+  {
+    "id": "0625",
+    "title": "Weather Vain",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "weaponLevel": "Gal/Guy",
+    "dice": ["BLACK", "PINK"],
+    "rules": [
+      {"title": "Card Text", "text": "Must be used by a Gal player against a Guy opponent's Bunny. The player rolls the Pink die first to determine the Weapon Level. The opponent rolls the Black die which must be higher than the Pink die for the bunny to survive."},
+      {"title": "Additional Rules", "text": "If you have a Gender Weapon in your hand that you cannot play, then you may either trade it to another player, or run it through the Bottom and Top Run card cycle and discard it.<br><br>Players may declare themselves male or female before the start of the game if they wish to choose their gender.<br><br>Gender Weapons that are reversed, bounced back or otherwise redirected by a player must still follow the gender restrictions. For example, if Tim plays a Guy/Gal weapon on one of Carol's bunnies, she cannot use <a href=\"bunnypedia://cards/0152\">Reversal Of Fortune</a> to send it back to Tim since she is not a Guy and he is not a Gal. If a <a href=\"bunnypedia://cards/0169\">Red Sinister</a> (with a Bounce Back Force Field) is unsuccessfully attacked with a Gender Weapon, then it would only return to one of the attacker's bunnies if the gender conditions were satisfied."}
+    ]
+  },
+  {
+    "id": "0626",
+    "title": "Hare Pulling",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "weaponLevel": "Gal/Gal",
+    "dice": ["BLACK", "PINK"],
+    "rules": [
+      {"title": "Card Text", "text": "Must be used by a Gal player against a Gal opponent's Bunny. The player rolls the Pink die first to determine the Weapon Level. The opponent rolls the Black die which must be higher than the Pink die for the bunny to survive."},
+      {"title": "Additional Rules", "text": "If you have a Gender Weapon in your hand that you cannot play, then you may either trade it to another player, or run it through the Bottom and Top Run card cycle and discard it.<br><br>Players may declare themselves male or female before the start of the game if they wish to choose their gender.<br><br>Gender Weapons that are reversed, bounced back or otherwise redirected by a player must still follow the gender restrictions. For example, if Tim plays a Guy/Gal weapon on one of Carol's bunnies, she cannot use <a href=\"bunnypedia://cards/0152\">Reversal Of Fortune</a> to send it back to Tim since she is not a Guy and he is not a Gal. If a <a href=\"bunnypedia://cards/0169\">Red Sinister</a> (with a Bounce Back Force Field) is unsuccessfully attacked with a Gender Weapon, then it would only return to one of the attacker's bunnies if the gender conditions were satisfied."}
+    ]
+  },
+  {
+    "id": "0627",
+    "title": "Adventures in Bunnysitting",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to move any two Kinder bunnies to any other position in The Bunny Circle."}
+    ]
+  },
+  {
+    "id": "0628",
+    "title": "Alliteration Situation",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "symbols": ["MYSTERIOUS_PLACE_BALL"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to take any card from the Discard Pile that has a title beginning with the same letter as the player's first name. The card taken must be used immediately."},
+      {"title": "Additional Rules", "text": "If the title of a card has more than one word, then a player will have to match the first letter of the first word."},
+      {"title": "Mysterious Place", "text": "The player who currently holds the Yellow Ball can control the destiny of this card. The opponent must play the card first, then the player holding the Yellow Ball may redirect it to any other player, bunny or the Discard Pile."}
+    ]
+  },
+  {
+    "id": "0629",
+    "title": "Ambassador Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "A Violet bunny that is owned by one player but is placed in any opponent's area in The Bunny Circle."},
+      {"title": "Additional Rules", "text": "The bunny is owned exclusively by the first player, and does not allow the opponent (host player) to use the bunny to play Aggressive cards. At the end of the game, Ambassador Bunny may be used by the player to win the game."}
+    ]
+  },
+  {
+    "id": "0630",
+    "title": "Angry Hoe",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to move all of the Cabbage Cards in Kaballa's Market to the Discard Pile."}
+    ]
+  },
+  {
+    "id": "0631",
+    "title": "Arctic Caribou",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to freeze any opponent's food supply. Arctic Caribou is removed once the opponent kills any bunny in The Bunny Circle (or in space)."},
+      {"title": "Additional Rules", "text": "Cabbage Units or Water Units as cards or Vouchers that are owned by the opponent at the time that Arctic Caribou is played may not be used to <a href=\"bunnypedia://cards/0024\">Feed The Bunny</a> or to trade with other players. Cabbage Units or Water Units purchased afterwards will be available to the opponent.<br><br>Also, the opponent's Cabbage Units and Water Units may not be taken for any reason by cards such as <a href=\"bunnypedia://cards/0056\">Drought</a>, <a href=\"bunnypedia://cards/0064\">Maggots</a> or <a href=\"bunnypedia://cards/0142\">Rock Bottom</a>."}
+    ]
+  },
+  {
+    "id": "0632",
+    "title": "Awesome Recruiter",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to assign all Rank cards in the Discard Pile to any bunnies in The Bunny Circle."},
+      {"title": "Additional Rules", "text": "Not all Rank cards in the Discard Pile have to be used if there are not enough bunnies in The Bunny Circle. No Rank card already assigned to a bunny may be removed or exchanged."}
+    ]
+  },
+  {
+    "id": "0633",
+    "title": "Beauty On Duty",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to move any Rank card in The Bunny Circle to any female Kinder bunny."},
+      {"title": "Additional Rules", "text": "The female Kinder bunnies are easy to spot because they are wearing bows."}
+    ]
+  },
+  {
+    "id": "0634",
+    "title": "Bird-Like Warriors",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to move any one Timid Bunny to any other position in The Bunny Circle."}
+    ]
+  },
+  {
+    "id": "0635",
+    "title": "Brundle Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "An Orange bunny that cannot be directly targeted by any weapon or safety hazard. All <a href=\"bunnypedia://cards/0024\">FTB</a> cards placed on this bunny require twice the amounts (or two <a href=\"bunnypedia://cards/0072\">Danish</a>)"}
+    ]
+  },
+  {
+    "id": "0636",
+    "title": "Bunny Bowling",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "dice": ["VIOLET", "ORANGE", "GREEN", "YELLOW", "BLUE", "BLACK", "RED", "PINK"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to choose a Carrot from Kaballa's Market for each strike (roll of 10) or spare (combination of two dice that add to 10) rolled."},
+      {"title": "Additional Rules", "text": "Carrots may only be taken if Kaballa's Market is open."}
+    ]
+  },
+  {
+    "id": "0637",
+    "title": "Bunny Budd",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to sacrifice one of his Yellow (or half Yellow) Enlisted ranked bunnies to eliminate any Officer ranked bunny."}
+    ]
+  },
+  {
+    "id": "0638",
+    "title": "Bunny Detroit",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "rules": [
+      {"title": "Card Text", "text": "A Yellow bunny that can only be directly targeted with an Aggressive card by a player who is a Mom."},
+      {"title": "Additional Rules", "text": "Bunny Detroit may fall victim to a Terrible Misfortune or may be killed by range weapons or Roaming Red Run cards provided that he was not the direct target."}
+    ]
+  },
+  {
+    "id": "0639",
+    "title": "Bunny Tax",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be given to any player who must pay 2 Dolla each to keep his bunnies alive or discard them."},
+      {"title": "Additional Rules", "text": "All bunnies belonging to the player in The Bunny Circle and in space are taxed. Any bunny that cannot be paid for is discarded."}
+    ]
+  },
+  {
+    "id": "0640",
+    "title": "Cabbage Patch",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "Allows a player to take all of the remaining Cabbage Cards from Kaballa's Market."}
+    ]
+  },
+  {
+    "id": "0641",
+    "title": "Cairo Practor",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to get 'back' all of the Kinder bunnies that he lost at any time during the game if they are still in the Discard Pile. Bunnies owned by other players do not go back."}
+    ]
+  },
+  {
+    "id": "0642",
+    "title": "Court Marshall",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to remove and discard any Rank card from under any one bunny."}
+    ]
+  },
+  {
+    "id": "0643",
+    "title": "Delinquent Minors",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player (under the age of 18) to exchange his entire five-card hand with any opponent."},
+      {"title": "Additional Rules", "text": "The player must choose the opponent before the exchange."}
+    ]
+  },
+  {
+    "id": "0644",
+    "title": "Echo Valley 2-6809",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "dice": ["VIOLET", "ORANGE", "GREEN", "YELLOW", "BLUE", "BLACK", "RED", "PINK", "VIOLET_D10", "ORANGE_D10", "GREEN_D10", "YELLOW_D10", "BLUE_D10"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to take the saved Mysterious Place card of his choice from any opponent if any five dice match the last five digits of his phone number."},
+      {"title": "Additional Rules", "text": "If a player has more than one phone number, then he must declare which number he is attempting to roll before he begins. On the 12-sided dice, a roll of 10 equals a 0 and rolls of 11 or 12 do not count as any number."}
+    ]
+  },
+  {
+    "id": "0645",
+    "title": "The Fifth Element",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "dice": ["VIOLET", "ORANGE", "GREEN", "YELLOW", "BLUE", "BLACK", "RED", "PINK", "VIOLET_D10", "ORANGE_D10", "GREEN_D10", "YELLOW_D10", "BLUE_D10"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to take any one bunny in The Bunny Circle, saved Zodiac card, or Mysterious Place card that has a 5 in the card identification number if at least one 5 is rolled."},
+      {"title": "Additional Rules", "text": "If at least five 5s are rolled, then the player may take all of the bunnies in The Bunny Circle, saved Zodiac cards and saved Mysterious Place cards that have a 5 in the Card Identification Number."}
+    ]
+  },
+  {
+    "id": "0646",
+    "title": "Follow The Queen",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "dice": ["VIOLET"],
+    "rules": [
+      {"title": "Card Text", "text": "The Queen goes to the player with the saved Mysterious Place card numbered the same as the violet die roll. When a player owns the Queen, none of his bunnies may be attacked directly using an Aggressive card The queen moves each time the Violet die is rolled."},
+      {"title": "Additional Rules", "text": "While waiting in the center of the table, the Queen may be attacked using any single target weapon, and any player may roll for her outcome. If the attack is successful, then the Queen is removed (discarded). The Queen may not carry any Bunny Modifiers."}
+    ]
+  },
+  {
+    "id": "0647",
+    "title": "Goody Two Shoes",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to force any opponent who has not killed at least one bunny to return all of his Carrots to Kaballa's Market."}
+    ]
+  },
+  {
+    "id": "0648",
+    "title": "Identity Crisis",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "dice": ["ZODIAC"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once to force players whose birth zodiac sign is the same as the one rolled to switch positions exchanging all of their possessions with another player."},
+      {"title": "Additional Rules", "text": "Identity Crisis may be stopped by <a href=\"bunnypedia://cards/0080\">The Magic Spatula</a>. If only one player has the birth zodiac sign rolled, then no switching occurs."}
+    ]
+  },
+  {
+    "id": "0649",
+    "title": "Matrixing",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "The player borrows the Blue and Red Pawns, holds one in his left hand and challenges an opponent for possession of one of his bunnies. The opponent must choose either the Blue Pawn or the Red Pawn. If correct he keeps his bunny. If incorrect the player takes the bunny."},
+      {"title": "Additional Rules", "text": "The Blue and Red Pawns are returned to Weil's Pawn Shop or the players when Matrixing is complete."}
+    ]
+  },
+  {
+    "id": "0650",
+    "title": "My Big Fat Bunny Wedding",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to force any opponent to share half of his Carrots with his spouse."},
+      {"title": "Additional Rules", "text": "If there is an odd number of Carrots, then the spouse will get the extra Carrot. To avoid confusion during play, players are encouraged to announce their spouses at the start of the game."}
+    ]
+  },
+  {
+    "id": "0651",
+    "title": "O-75",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once to force all players to reveal one card from their five-card hand. The player whose card has the highest Card Identification Number may exchange it for a Carrot."},
+      {"title": "Additional Rules", "text": "If the player takes a Carrot, then their revealed card is discarded, and a replacement card is drawn immediately from the Draw Pile. O-75 may not be used if Kaballa's Market is closed."}
+    ]
+  },
+  {
+    "id": "0652",
+    "title": "An Officer And A Gentlebunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "dice": ["YELLOW", "PINK"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to take one Officer ranked bunny and one single color unranked bunny (not Red or Pink) from any opponent(s) if two Odd numbers are rolled."}
+    ]
+  },
+  {
+    "id": "0653",
+    "title": "Pawn Star",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to force the opponent with the most Pawns to give them away to other players."},
+      {"title": "Additional Rules", "text": "If two (or more) opponents have the same amount of Pawns, then they must both (all) give them away to other players (not each other). If no other players exist, then all of the Pawns are returned to Weil's Pawn Shop."}
+    ]
+  },
+  {
+    "id": "0654",
+    "title": "Pinch Your Place",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "dice": ["RED"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to pinch (steal) the Mysterious Place card that matches the number rolled."},
+      {"title": "Spider Bunny", "text": "<a href=\"bunnypedia://cards/0728\">Spider Bunny</a> may be used to counteract Pinch Your Place."}
+    ]
+  },
+  {
+    "id": "0655",
+    "title": "President Ficus",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be placed in The Bunny Circle and attacked in any way that a bunny is attacked. The highest Officer ranked bunny must ask permission from the President to play an extra card."},
+      {"title": "Additional Rules", "text": "President Ficus may be placed in The Bunny Circle and attacked in any way that a bunny is attacked (and killed) including weapons and Terrible Misfortune. The player with the highest Officer ranked bunny (HORB) must ask permission from the player with President Ficus to play an extra card. President Ficus can supercede the HORB's decision to allow (or not allow) the highest Enlisted ranked bunny (HERB) to play an extra card.<br><br>Just before the Magic Carrot is revealed, the player with President Ficus can order all bunnies with a Rank card in The Bunny Circle into the Discard Pile. President Ficus itself is not a bunny, and therefore cannot be used to play Aggressive cards or to win the game."}
+    ]
+  },
+  {
+    "id": "0656",
+    "title": "Splash The Zero",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to sacrifice 5 Water Units to eliminate any bunny in The Bunny Circle that have two zeroes in the Card Identification Number."}
+    ]
+  },
+  {
+    "id": "0657",
+    "title": "Strawberry Fields",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to change any saved <a href=\"bunnypedia://cards/0072\">Danish</a> to a Strawberry Tart that may only be used to feed Red, half Red, or Pink bunnies."}
+    ]
+  },
+  {
+    "id": "0658",
+    "title": "Trading Places",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to force any opponent to exchange two of his Mysterious Place cards for one of yours."},
+      {"title": "Additional Rules", "text": "In order to use this card against an opponent, that player must have at least two saved Mysterious Place cards. Trading Places cannot be used for a one to one exchange. The player chooses all three saved Mysterious Place cards in the exchange."}
+    ]
+  },
+  {
+    "id": "0659",
+    "title": "Two Fish In A Tank",
+    "deck": "OMINOUS_ONYX",
+    "type": "ROAMING_RED_RUN",
+    "bunnyRequirement": "PLAY",
+    "dice": ["BLUE", "CLEAR"],
+    "rules": [
+      {"title": "Card Text", "text": "May be placed on any Mysterious Place card and travels counter-clockwise visiting Mysterious Place cards in ascending numerical order. Each Mysterious Place card is destroyed unless the player can roll its number on either the Blue or Clear die then Two Fish are destroyed."},
+      {"title": "Additional Rules", "text": "The player who must roll to protect his saved Mysterious Place card may choose which die to roll. As they travel around The Bunny Circle, Two Fish destroy any <a href=\"bunnypedia://cards/0185\">Barriers</a> that they encounter between players, but are destroyed themselves by <a href=\"bunnypedia://cards/0463\">Neutronium Barriers</a>. If at any time, no player has a Mysterious Place card saved, then Two Fish is discarded."},
+      {"title": "Bad Mood Ood", "text": "<a href=\"bunnypedia://cards/1193\">Bad Mood Ood</a> may be used to eliminate this card."}
+    ]
+  },
+  {
+    "id": "0660",
+    "title": "Watering Hole",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "Allows a player to take all of the remaining Water Cards from Kaballa's Market."}
+    ]
+  },
+  {
+    "id": "0661",
+    "deck": "OMINOUS_ONYX",
+    "title": "White Party",
+    "type": "RUN",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to receive <a href=\"bunnypedia://cards/0430\">The White Stuff</a>, the White Pawn, and all White Bunnies (<a href=\"bunnypedia://cards/0057\">Free Agent</a>, <a href=\"bunnypedia://cards/0296\">Double Free Agent</a>, and <a href=\"bunnypedia://cards/0515\">Blanch</a>) in The Bunny Circle."},
+      {"title": "Additional Rules", "text": "The player may give the items to any opponent or opponents that he wishes or keep them for himself."}
+    ]
+  },
+  {
+    "id": "0662",
+    "title": "Woburn",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to move all of the Water Cards in Kaballa's Market to the Discard Pile."}
+    ]
+  },
+  {
+    "id": "0663",
+    "title": "Zener Diode",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be placed on any Roaming Red Run card currently roaming which prevents the card from changing direction when it encounters a <a href=\"bunnypedia://cards/0185\">Barrier</a>."},
+      {"title": "Additional Rules", "text": "If it should encounter a Barrier, then Zener Diode and the Roaming Red Run card will remain dormant until the Barrier is either moved, or eliminated (discarded). Zener Diode does not prevent a Roaming Red Run from being destroyed by a <a href=\"bunnypedia://cards/0463\">Neutronium Barrier</a>."}
+    ]
+  },
+  {
+    "id": "0664",
+    "title": "Abe Froeman",
+    "deck": "OMINOUS_ONYX",
+    "type": "SPECIAL",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "The player that has this card saved and the Green Pawn doubles the value of his Cabbage Units."},
+      {"title": "Additional Rules", "text": "A player without the half Cabbage Unit must round up to the nearest Cabbage Unit when asked to feed an odd amount of Cabbage."}
+    ]
+  },
+  {
+    "id": "0665",
+    "title": "Incriminating Photos",
+    "deck": "OMINOUS_ONYX",
+    "type": "SPECIAL",
+    "bunnyRequirement": "PLAY_AND_SAVE",
+    "rules": [
+      {"title": "Card Text", "text": "The player that has this card saved may control the special privilege (extra) card played every round by the opponent who has the highest Officer ranked bunny. If at any time the player has no bunnies in The Bunny Circle then Incriminating Photos is discarded."},
+      {"title": "Additional Rules", "text": "The player chooses which card in the opponent's five-card hand to use and how to use it. The opponent can be forced to discard the card, play it against another opponent or even against himself. Every round of play (during the opponent's turn), the player may use his Incriminating Photos."}
+    ]
+  },
+  {
+    "id": "0666",
+    "title": "Insurance Porpoises",
+    "deck": "OMINOUS_ONYX",
+    "type": "SPECIAL",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be placed on any bunny along with 5 Dolla. If the bunny is killed then the player may return it to The Bunny Circle and discard both Insurance Porpoises and the 5 Dolla."},
+      {"title": "Additional Rules", "text": "If the bunny is killed, then the player may return it to The Bunny Circle at the start of his next turn and discard both Insurance Porpoises and the 5 Dolla. All Bunny Modifers remain with the bunny."}
+    ]
+  },
+  {
+    "id": "0667",
+    "title": "Loan Shark",
+    "deck": "OMINOUS_ONYX",
+    "type": "SPECIAL",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to borrow up to 20 Dolla from the Discard Pile. An amount equal to 150% of the original loan must be paid back before the game ends or the player must forfeit all of his Carrots, Zodiac, and Mysterious Place cards to his oldest opponent."}
+    ]
+  },
+  {
+    "id": "0668",
+    "title": "Mike Post",
+    "deck": "OMINOUS_ONYX",
+    "type": "SPECIAL",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "The player that has this card saved and the Black Pawn doubles the value of all of his Defense Units."}
+    ]
+  },
+  {
+    "id": "0669",
+    "title": "Schroedinger's Bunny",
+    "deck": "OMINOUS_ONYX",
+    "type": "SPECIAL",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to eliminate any bunny that is alone between two <a href=\"bunnypedia://cards/0185\">Barriers</a>."}
+    ]
+  },
+  {
+    "id": "0670",
+    "title": "Time Worf",
+    "deck": "OMINOUS_ONYX",
+    "type": "SPECIAL",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once to force all players to move their Top Run card to the next player clockwise and their Bottom Run card to the next player counter-clockwise."},
+      {"title": "Additional Rules", "text": "If the player decides to use Time Worf right away, he must first slide his Bottom Run card into the Top Run card position and replace his Bottom Run card."}
+    ]
+  },
+  {
+    "id": "0671",
+    "title": "Zan",
+    "deck": "OMINOUS_ONYX",
+    "type": "SPECIAL",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "The player that has this card saved and the Blue Pawn doubles the value of all of his Water Units."},
+      {"title": "Additional Rules", "text": "A player without the half Water Unit must round up to the nearest Water Unit when asked to feed an odd amount of Water."}
+    ]
+  },
+  {
+    "id": "0672",
+    "title": "Bunny Bunker",
+    "deck": "OMINOUS_ONYX",
+    "type": "VERY_SPECIAL",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to protect any one bunny from the effects of a range weapon. The bunny cannot be the direct target of the weapon. May be used at any time!"},
+      {"title": "Additional Rules", "text": "Bunny Bunker may be used once by a player to protect any one bunny from the effects of a range weapon such as the <a href=\"bunnypedia://cards/0048\">Nuclear Warhead</a>. The bunny cannot be the direct target of the weapon or connected to the direct target using <a href\"bunnypedia://cards/0349\">Fingercuffs</a>. May be used at any time!"}
+    ]
+  },
+  {
+    "id": "0673",
+    "title": "Bunnyback Mountain",
+    "deck": "OMINOUS_ONYX",
+    "type": "VERY_SPECIAL",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to take a Carrot from each adjacent player if he receives a bunny back that he owned earlier in the game. The player must be the sole owner of the bunny. Must be used during the same turn that the bunny returned."}
+    ]
+  },
+  {
+    "id": "0674",
+    "title": "Einstein",
+    "deck": "OMINOUS_ONYX",
+    "type": "VERY_SPECIAL",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to immediately kill a second bunny belonging to the same opponent after killing the first. Essentially killing two bunnies with Einstein (one stone). Must be used during the same turn that the first bunny died."}
+    ]
+  },
+  {
+    "id": "0675",
+    "title": "Feed Now Or Die",
+    "deck": "OMINOUS_ONYX",
+    "type": "VERY_SPECIAL",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to force any player with a pending <a href=\"bunnypedia://cards/0024\">Feed The Bunny</a> on one of his bunnies to Feed Now Or Die. May be used at any time!"}
+    ]
+  },
+  {
+    "id": "0676",
+    "title": "Focused Fury",
+    "deck": "OMINOUS_ONYX",
+    "type": "VERY_SPECIAL",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to limit any range weapon to a single bunny target. May be used at any time!"}
+    ]
+  },
+  {
+    "id": "0677",
+    "title": "Platinum Rosebud",
+    "deck": "OMINOUS_ONYX",
+    "type": "VERY_SPECIAL",
+    "bunnyRequirement": "PLAY",
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to control the destiny of any opponent's Top Run card. Must be played before the opponent starts his turn. May be played at any time."},
+      {"title": "Additional Rules", "text": "After the opponent reveals the Top Run card, the player first decides whether the opponent may use it, or if he wishes the opponent to discard it. Next, the player may decide where the card will be placed (if it is a weapon card), or force the opponent to play a dangerous card on one of his own bunnies. Finally, if the card is beneficial, the player may insist that the opponent give the card to him."}
+    ]
+  },
+  {
+    "id": "0678",
+    "title": "Rerun",
+    "deck": "OMINOUS_ONYX",
+    "type": "VERY_SPECIAL",
+    "bunnyRequirement": "PLAY",
+    "symbols": ["MYSTERIOUS_PLACE_BALL"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to place any one of his bunnies from The Bunny Circle back into his five-card hand and to discard any unwanted card. May be used between any two player's turns!"},
+      {"title": "Additional Rules", "text": "When bunnies are Rerun, they lose all of their Bunny Modifiers."},
+      {"title": "Mysterious Place", "text": "The player who currently holds the Yellow Ball can control the destiny of this card. The opponent must play the card first, then the player holding the Yellow Ball may redirect it to any other player, bunny or the Discard Pile."}
+    ]
+  },
+  {
+    "id": "0679",
+    "title": "Rue The Day",
+    "deck": "OMINOUS_ONYX",
+    "type": "VERY_SPECIAL",
+    "bunnyRequirement": "NO",
+    "dice": ["ORANGE", "PINK"],
+    "rules": [
+      {"title": "Card Text", "text": "May be used once by a player to stop the commandeering of a Yellow Ball card if either die (or both dice combined) total today's date, or may be used once to stop <a href=\"bunnypedia://cards/089\">Switch-A-Roo</a>. May be used at any time!"}
+    ]
+  },
+  {
+    "id": "0680",
+    "title": "Dark Violets",
+    "deck": "OMINOUS_ONYX",
+    "type": "PLAY_IMMEDIATELY",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "Every player may discard up to three cards from their five-card hand and replace them with new cards from the Draw Pile."},
+      {"title": "Additional Rules", "text": "Dark Violets cannot be used to force any player to discard any card."}
+    ]
+  },
+  {
+    "id": "0681",
+    "title": "Terrible Misfortune – Train",
+    "deck": "OMINOUS_ONYX",
+    "type": "PLAY_IMMEDIATELY",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "One of your bunnies was just a bit too slow while playing chicken near a set of railroad tracks!"},
+      {"title": "Additional Rules", "text": "If a player draws a PLAY IMMEDIATELY card but has no bunny in The Bunny Circle, then he must place the card on an opponent's bunny in The Bunny Circle causing it to die (discarded). This is also true if the player's only bunny in The Bunny Circle is protected by <a href=\"bunnypedia://cards/0058\">The Heavenly Halo</a> or <a href=\"bunnypedia://cards/0819\">Angel Wings</a>"},
+      {"title": "Protection", "text": "<a href=\"bunnypedia://cards/0058\">The Heavenly Halo</a> and <a href=\"bunnypedia://cards/0819\">Angel Wings</a> will protect a bunny from any terrible misfortune. The <a href=\"bunnypedia://cards/0204\">Guardian Angle</a> can be used to eliminate a Terrible Misfortune."}
+    ]
+  },
+  {
+    "id": "0682",
+    "title": "Very Terrible Misfortune – Irate ducks",
+    "deck": "OMINOUS_ONYX",
+    "type": "PLAY_IMMEDIATELY",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "Because of an argument over the bill all of your bunnies in The Bunny Circle get pecked to death by dastardly irate ducks!"},
+      {"title": "Additional Rules", "text": "If a player draws a PLAY IMMEDIATELY card but has no bunny in The Bunny Circle, then he must place the card on an opponent's bunny in The Bunny Circle causing it to die (discarded). This is also true if the player's only bunny in The Bunny Circle is protected by <a href=\"bunnypedia://cards/0058\">The Heavenly Halo</a> or <a href=\"bunnypedia://cards/0819\">Angel Wings</a>"},
+      {"title": "Protection", "text": "<a href=\"bunnypedia://cards/0058\">The Heavenly Halo</a> and <a href=\"bunnypedia://cards/0819\">Angel Wings</a> will protect a bunny from any terrible misfortune. The <a href=\"bunnypedia://cards/0204\">Guardian Angle</a> can be used to eliminate a Terrible Misfortune."}
+    ]
+  },
+  {
+    "id": "0683",
+    "title": "Extremely Terrible Misfortune – Instantaneous Proton Decay",
+    "deck": "OMINOUS_ONYX",
+    "type": "PLAY_IMMEDIATELY",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "All bunnies in The Bunny Circle (and in space) experience instantaneous proton decay and disappear."},
+      {"title": "Additional Rules", "text": "If a player draws a PLAY IMMEDIATELY card but has no bunny in The Bunny Circle, then he must place the card on an opponent's bunny in The Bunny Circle causing it to die (discarded). This is also true if the player's only bunny in The Bunny Circle is protected by <a href=\"bunnypedia://cards/0058\">The Heavenly Halo</a> or <a href=\"bunnypedia://cards/0819\">Angel Wings</a>"},
+      {"title": "Protection", "text": "<a href=\"bunnypedia://cards/0058\">The Heavenly Halo</a> and <a href=\"bunnypedia://cards/0819\">Angel Wings</a> will protect a bunny from any terrible misfortune. The <a href=\"bunnypedia://cards/0204\">Guardian Angle</a> can be used to eliminate a Terrible Misfortune."}
+    ]
+  },
+  {
+    "id": "0684",
+    "canonicalId": "0087",
+    "title": "1 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0685",
+    "canonicalId": "0087",
+    "title": "1 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0686",
+    "canonicalId": "0087",
+    "title": "1 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0687",
+    "canonicalId": "0092",
+    "title": "2 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0688",
+    "canonicalId": "0092",
+    "title": "2 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0689",
+    "canonicalId": "0092",
+    "title": "2 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0690",
+    "canonicalId": "0210",
+    "title": "3 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0691",
+    "canonicalId": "0210",
+    "title": "3 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0692",
+    "canonicalId": "0210",
+    "title": "3 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0693",
+    "canonicalId": "0098",
+    "title": "5 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0694",
+    "canonicalId": "0098",
+    "title": "5 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0695",
+    "canonicalId": "0098",
+    "title": "5 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0696",
+    "canonicalId": "0101",
+    "title": "10 Dolla",
+    "deck": "OMINOUS_ONYX",
+    "type": "DOLLA"
+  },
+  {
+    "id": "0697",
+    "deck": "OMINOUS_ONYX",
+    "title": "Chief",
+    "type": "RANK",
+    "rank": "E7",
+    "rules": [
+      {"title": "Card Text", "text": "Must immediately be placed under any bunny. The player with the highest Enlisted ranked bunny may play one card directly from his five-card hand each turn."},
+      {"title": "Highest Enlisted Ranked Bunny", "text": "The special privilege awarded to the player who owns the highest Enlisted ranked bunny (HERB) is the ability to play an extra card directly from his five-card hand each turn. The card may be played at the start, middle or end of the player's turn. If the card is a Run card, then the player may use or discard it. If the card is a Special (or Very Special) card, then the player may use or save it. A player who obtains the HERB may use the special privilege during the turn it was acquired. A player who has the second highest Enlisted ranked bunny is encouraged to kill the HERB so that he may obtain the special privilege for himself.<br><br>If any bunnies in The Bunny Circle have Officer ranks, then the player who owns the HERB must ask the permission of the player who owns the HORB to use the special privilege. If the player who owns the HORB replies in the negative, then the player who owns the HERB loses the special privilege for one round of play. The player who owns the HERB may ask permission each round of play, but the decision to allow him the special privilege, or to disallow him the special privilege, lies solely with the player who owns the HORB at the time.<br><br>If at any time, no bunnies with Officer ranks are in The Bunny Circle, then the player who owns the HERB may use the special privilege without asking anyone's permission."},
+      {"title": "Rank Exchange", "text": "<a href=\"bunnypedia://cards/0522\">Rank Exchange</a> can be used to swap the ranks of two bunnies."},
+      {"title": "Court Marshall", "text": "Rank is lost if the bunny <a href=\"bunnypedia://cards/0642\">Court Marshalled</a>"}
+    ]
+  },
+  {
+    "id": "0698",
+    "deck": "OMINOUS_ONYX",
+    "title": "Senior Chief Rank E-8 (Bunny Modifier)",
+    "type": "RANK",
+    "rank": "E8",
+    "rules": [
+      {"title": "Card Text", "text": "Must immediately be placed under any bunny. The player with the highest Enlisted ranked bunny may play one card directly from his five-card hand each turn."},
+      {"title": "Highest Enlisted Ranked Bunny", "text": "The special privilege awarded to the player who owns the highest Enlisted ranked bunny (HERB) is the ability to play an extra card directly from his five-card hand each turn. The card may be played at the start, middle or end of the player's turn. If the card is a Run card, then the player may use or discard it. If the card is a Special (or Very Special) card, then the player may use or save it. A player who obtains the HERB may use the special privilege during the turn it was acquired. A player who has the second highest Enlisted ranked bunny is encouraged to kill the HERB so that he may obtain the special privilege for himself.<br><br>If any bunnies in The Bunny Circle have Officer ranks, then the player who owns the HERB must ask the permission of the player who owns the HORB to use the special privilege. If the player who owns the HORB replies in the negative, then the player who owns the HERB loses the special privilege for one round of play. The player who owns the HERB may ask permission each round of play, but the decision to allow him the special privilege, or to disallow him the special privilege, lies solely with the player who owns the HORB at the time.<br><br>If at any time, no bunnies with Officer ranks are in The Bunny Circle, then the player who owns the HERB may use the special privilege without asking anyone's permission."},
+      {"title": "Rank Exchange", "text": "<a href=\"bunnypedia://cards/0522\">Rank Exchange</a> can be used to swap the ranks of two bunnies."},
+      {"title": "Court Marshall", "text": "Rank is lost if the bunny <a href=\"bunnypedia://cards/0642\">Court Marshalled</a>"}
+    ]
+  },
+  {
+    "id": "0699",
+    "deck": "OMINOUS_ONYX",
+    "title": "Master Chief Rank E-8 (Bunny Modifier)",
+    "type": "RANK",
+    "rank": "E9",
+    "rules": [
+      {"title": "Card Text", "text": "Must immediately be placed under any bunny. The player with the highest Enlisted ranked bunny may play one card directly from his five-card hand each turn."},
+      {"title": "Highest Enlisted Ranked Bunny", "text": "The special privilege awarded to the player who owns the highest Enlisted ranked bunny (HERB) is the ability to play an extra card directly from his five-card hand each turn. The card may be played at the start, middle or end of the player's turn. If the card is a Run card, then the player may use or discard it. If the card is a Special (or Very Special) card, then the player may use or save it. A player who obtains the HERB may use the special privilege during the turn it was acquired. A player who has the second highest Enlisted ranked bunny is encouraged to kill the HERB so that he may obtain the special privilege for himself.<br><br>If any bunnies in The Bunny Circle have Officer ranks, then the player who owns the HERB must ask the permission of the player who owns the HORB to use the special privilege. If the player who owns the HORB replies in the negative, then the player who owns the HERB loses the special privilege for one round of play. The player who owns the HERB may ask permission each round of play, but the decision to allow him the special privilege, or to disallow him the special privilege, lies solely with the player who owns the HORB at the time.<br><br>If at any time, no bunnies with Officer ranks are in The Bunny Circle, then the player who owns the HERB may use the special privilege without asking anyone's permission."},
+      {"title": "Rank Exchange", "text": "<a href=\"bunnypedia://cards/0522\">Rank Exchange</a> can be used to swap the ranks of two bunnies."},
+      {"title": "Court Marshall", "text": "Rank is lost if the bunny <a href=\"bunnypedia://cards/0642\">Court Marshalled</a>"}
+    ]
+  },
+  {
+    "id": "0700",
+    "deck": "OMINOUS_ONYX",
+    "title": "Lower Rear Admiral Rank O-7 (Bunny Modifier)",
+    "type": "RANK",
+    "rank": "O7",
+    "rules": [
+      {"title": "Card Text", "text": "Must immediately be placed under any bunny. The player with the highest Officer ranked bunny may play one card directly from his five-card hand each turn."},
+      {"title": "Highest Officer Ranked Bunny", "text": "The special privilege awarded to the player who owns the highest Officer ranked bunny (HORB) is the ability to play an extra card directly from his five-card hand each turn. The card may be played at the start, middle or end of a player's turn. If the card is a Run card, then the player may use or discard it. If the card is a Special (or Very Special) card, then the player may use or save it. A player who obtains the HORB may use the special privilege during the turn it was acquired. A player who has the second highest Officer ranked bunny is encouraged to kill the HORB so that he may obtain the special privilege for himself."},
+      {"title": "Rank Exchange", "text": "<a href=\"bunnypedia://cards/0522\">Rank Exchange</a> can be used to swap the ranks of two bunnies."},
+      {"title": "Court Marshall", "text": "Rank is lost if the bunny <a href=\"bunnypedia://cards/0642\">Court Marshalled</a>"},
+      {"title": "Incriminating Photos", "text": "The player who has <a href=\"bunnypedia://cards/0655\">Incriminating Photos</a> may control the special privilege (extra) card played every round by the opponent who has the highest Officer ranked bunny (HORB)"}
+    ]
+  },
+  {
+    "id": "0701",
+    "deck": "OMINOUS_ONYX",
+    "title": "Upper Rear Admiral Rank O-8 (Bunny Modifier)",
+    "type": "RANK",
+    "rank": "O8",
+    "rules": [
+      {"title": "Card Text", "text": "Must immediately be placed under any bunny. The player with the highest Officer ranked bunny may play one card directly from his five-card hand each turn."},
+      {"title": "Highest Officer Ranked Bunny", "text": "The special privilege awarded to the player who owns the highest Officer ranked bunny (HORB) is the ability to play an extra card directly from his five-card hand each turn. The card may be played at the start, middle or end of a player's turn. If the card is a Run card, then the player may use or discard it. If the card is a Special (or Very Special) card, then the player may use or save it. A player who obtains the HORB may use the special privilege during the turn it was acquired. A player who has the second highest Officer ranked bunny is encouraged to kill the HORB so that he may obtain the special privilege for himself."},
+      {"title": "Rank Exchange", "text": "<a href=\"bunnypedia://cards/0522\">Rank Exchange</a> can be used to swap the ranks of two bunnies."},
+      {"title": "Court Marshall", "text": "Rank is lost if the bunny <a href=\"bunnypedia://cards/0642\">Court Marshalled</a>"},
+      {"title": "Incriminating Photos", "text": "The player who has <a href=\"bunnypedia://cards/0655\">Incriminating Photos</a> may control the special privilege (extra) card played every round by the opponent who has the highest Officer ranked bunny (HORB)"}
+    ]
+  },
+  {
+    "id": "0702",
+    "deck": "OMINOUS_ONYX",
+    "title": "Vice Admiral",
+    "type": "RANK",
+    "rank": "O9",
+    "rules": [
+      {"title": "Card Text", "text": "Must immediately be placed under any bunny. The player with the highest Officer ranked bunny may play one card directly from his five-card hand each turn."},
+      {"title": "Highest Officer Ranked Bunny", "text": "The special privilege awarded to the player who owns the highest Officer ranked bunny (HORB) is the ability to play an extra card directly from his five-card hand each turn. The card may be played at the start, middle or end of a player's turn. If the card is a Run card, then the player may use or discard it. If the card is a Special (or Very Special) card, then the player may use or save it. A player who obtains the HORB may use the special privilege during the turn it was acquired. A player who has the second highest Officer ranked bunny is encouraged to kill the HORB so that he may obtain the special privilege for himself."},
+      {"title": "Rank Exchange", "text": "<a href=\"bunnypedia://cards/0522\">Rank Exchange</a> can be used to swap the ranks of two bunnies."},
+      {"title": "Court Marshall", "text": "Rank is lost if the bunny <a href=\"bunnypedia://cards/0642\">Court Marshalled</a>"},
+      {"title": "Incriminating Photos", "text": "The player who has <a href=\"bunnypedia://cards/0655\">Incriminating Photos</a> may control the special privilege (extra) card played every round by the opponent who has the highest Officer ranked bunny (HORB)"}
+    ]
+  },
+  {
+    "id": "0703",
+    "title": "74 West 89 South",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0704",
+    "title": "Chaco Canyon",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0705",
+    "title": "Easter Island",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0706",
+    "title": "Giza Plateau",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0707",
+    "title": "Great Wall",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0708",
+    "title": "Kukulkan",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0709",
+    "title": "Machu Picchu",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0710",
+    "title": "Nasca",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0711",
+    "title": "Newgrange",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0712",
+    "title": "Petra",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0713",
+    "title": "Rosslyn Chapel",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0714",
+    "title": "Stonehenge",
+    "deck": "OMINOUS_ONYX",
+    "type": "MYSTERIOUS_PLACE",
+    "rules": [
+      {"title": "Card Text", "text": "The player who picks the last Mysterious Place card controls all cards played that have a Yellow Ball with a Red Stripe"},
+      {"title": "Additional Rules", "text": "When you draw a Mysterious Place Card, you must immediately place it face up in front of you and draw another card. Mysterious Place Cards may not be kept in your hand. If a player is given a Mysterious Place card during the initial deal at the start of the game, or picks one from the Draw Pile during play, then the card is saved and the player draws another card. This is very similar to how players save Kaballa Dolla and Zodiac cards. Many new cards will refer to these saved Mysterious Place cards during play.<br><br>After the initial deal, and once game play begins, any player who draws a Mysterious Place card will take control of the Yellow Ball (with the Red Stripe). The Yellow Ball will always be placed on top of the last Mysterious Place card that was drawn. The player who has control of the Yellow Ball may control the destiny of any card played by any opponent that has a Yellow Ball in the picture. The opponent must play the card first, then the player may redirect it to any other player, bunny or the Discard Pile. Control of the Yellow Ball will always reside with the player who drew the last Mysterious Place card.<br><br>At the end of the game (before the Winning Zodiac is revealed), the small deck of Mysterious Place Cards, hidden away at the start of the game, is inspected. The player holding the Mysterious Place card that matches the picture on the small Mysterious Place Card at the bottom of the deck is allowed to steal all saved Zodiac cards of any one type (Air, Earth, Fire, Water) from any opponents.<br><br>It is possible that at the end of the game no player is holding the matching Mysterious Place card. If this is the case, then the game simply continues by revealing the Winning Zodiac using the small deck of Zodiac Cards."}
+    ]
+  },
+  {
+    "id": "0715",
+    "title": "Much More!",
+    "deck": "OMINOUS_ONYX",
+    "type": "RUN",
+    "bunnyRequirement": "NO",
+    "rules": [
+      {"title": "Card Text", "text": "May be given to any player that has Much More bunnies, Cabbage Units, Water Units, Defense Units, Pawns, Zodiac cards, or Mysterious Place cards than all of the other players. The player must distribute his possessions equally amongst himself and the other players."},
+      {"title": "Additional Rules", "text": "Much More is defined as more than twice the amount of any opponent. Each of the items listed on the card must be evaluated separately. The player must distribute his possessions equally amongst himself and his opponents. Equally is defined as meaning that each player will receive one item (or Unit) before any player gets a second of the same item (or Unit)."}
+    ]
+  }
+]
