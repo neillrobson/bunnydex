@@ -14,7 +14,7 @@ struct CardListView: View {
 
     init(searchFilter: String = "", path: Binding<NavigationPath>) {
         let predicate = #Predicate<Card> { card in
-            searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter)
+            searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter
         }
 
         _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
