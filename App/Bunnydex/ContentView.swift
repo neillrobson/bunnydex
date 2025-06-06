@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @State private var showInfo: Bool = false
     @State private var searchText: String = ""
     @State private var path = NavigationPath()
 
@@ -19,12 +20,14 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
-                        print("TODO: about page")
+                        showInfo.toggle()
                     } label: {
                         Image(systemName: "info.circle")
                     }
                 }
             }
+        }.sheet(isPresented: $showInfo) {
+            InfoView()
         }
     }
 }
