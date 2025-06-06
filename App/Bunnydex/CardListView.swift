@@ -25,7 +25,7 @@ struct CardListView: View {
     var body: some View {
         List {
             ForEach(cards) { card in
-                NavigationLink(card.title, value: card)
+                NavigationLink("\(card.id) — \(card.title)", value: card)
             }
         }
         .navigationTitle("Cards")

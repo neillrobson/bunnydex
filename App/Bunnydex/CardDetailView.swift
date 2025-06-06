@@ -36,6 +36,9 @@ struct CardDetailView: View {
                 LabeledContent("ID") {
                     Text(card.id)
                 }
+                LabeledContent("Deck") {
+                    Text(card.deck.description)
+                }
                 LabeledContent("Card type") {
                     Text(card.type.rawValue)
                 }
