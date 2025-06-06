@@ -91,8 +91,12 @@ struct CardDetailView: View {
             CardDetailQueryView(id: id, path: $path)
         }
         .toolbar {
-            Button("Home", systemImage: "House") {
-                path = NavigationPath()
+            if path.count > 1 {
+                Button {
+                    path = NavigationPath()
+                } label: {
+                    Image(systemName: "house.circle")
+                }
             }
         }
     }

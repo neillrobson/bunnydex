@@ -16,6 +16,15 @@ struct ContentView: View {
         NavigationStack(path: $path) {
             CardListView(searchFilter: searchText, path: $path)
             .searchable(text: $searchText, prompt: "Search")
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        print("TODO: about page")
+                    } label: {
+                        Image(systemName: "info.circle")
+                    }
+                }
+            }
         }
     }
 }
