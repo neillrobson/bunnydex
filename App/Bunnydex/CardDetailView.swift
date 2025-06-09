@@ -15,22 +15,27 @@ struct CardDetailView: View {
     }
     @Binding var path: NavigationPath
 
-    let columns = [
-        GridItem(.fixed(10), spacing: 15),
-        GridItem(.fixed(10), spacing: 15),
-        GridItem(.fixed(10), spacing: 15),
-        GridItem(.fixed(10), spacing: 15),
-        GridItem(.fixed(10), spacing: 15),
-    ]
+    @State private var currentZoom = 0.0
+    @State private var totalZoom = 1.0
 
     var body: some View {
         List {
             if UIImage(named: imageId) != nil {
                 Image(imageId)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 580, height: 200, alignment: .top)
-                    .offset(x: 0, y: -160)
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, maxHeight: 200)
+                    .scaleEffect(currentZoom + totalZoom)
+                    .gesture(
+                        MagnifyGesture()
+                            .onChanged { value in
+                                currentZoom = value.magnification - 1
+                            }
+                            .onEnded { value in
+                                totalZoom += currentZoom
+                                currentZoom = 0
+                            }
+                    )
             }
             Section {
                 LabeledContent("ID") {
