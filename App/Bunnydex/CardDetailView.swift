@@ -8,6 +8,17 @@
 import SwiftUI
 import SwiftData
 
+extension CGSize {
+    static func +(lhs: Self, rhs: Self) -> Self {
+        Self(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+    }
+
+    static func +=(lhs: inout Self, rhs: Self) {
+        lhs.width += rhs.width
+        lhs.height += rhs.height
+    }
+}
+
 struct CardDetailView: View {
     let card: Card
     var imageId: String {
@@ -18,6 +29,9 @@ struct CardDetailView: View {
     @State private var currentZoom = 0.0
     @State private var totalZoom = 1.0
 
+    @State private var currentPan: CGSize = .zero
+    @State private var totalPan: CGSize = .zero
+
     var body: some View {
         List {
             if UIImage(named: imageId) != nil {
@@ -26,6 +40,7 @@ struct CardDetailView: View {
                     .scaledToFit()
                     .frame(maxWidth: .infinity, maxHeight: 200)
                     .scaleEffect(currentZoom + totalZoom)
+                    .offset(currentPan + totalPan)
                     .gesture(
                         MagnifyGesture()
                             .onChanged { value in
@@ -34,6 +49,16 @@ struct CardDetailView: View {
                             .onEnded { value in
                                 totalZoom += currentZoom
                                 currentZoom = 0
+                            }
+                    )
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                currentPan = value.translation
+                            }
+                            .onEnded { value in
+                                totalPan += currentPan
+                                currentPan = .zero
                             }
                     )
             }
