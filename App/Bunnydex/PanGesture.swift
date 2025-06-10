@@ -15,7 +15,7 @@ struct PanGestureValue {
     var translation: CGSize
     var magnification: Double
 
-    static let zero = PanGestureValue(location: .zero, startLocation: .zero, translation: .zero, magnification: 0)
+    static let zero = PanGestureValue(location: .zero, startLocation: .zero, translation: .zero, magnification: 1)
 }
 
 class GestureObserver: ObservableObject {
@@ -29,7 +29,35 @@ class GestureObserver: ObservableObject {
             return
         }
 
-        // TODO: The remainder of this fn
+        touches.append(points)
+
+        guard let firstTwoFingerTouch = touches.first(where: { $0.count == 2 }),
+              let lastTwoFingerTouch = touches.last(where: { $0.count == 2 }) else {
+                  return
+              }
+
+        let startDist = CGPointDistance(from: firstTwoFingerTouch[0], to: firstTwoFingerTouch[1])
+        let currentDist = CGPointDistance(from: lastTwoFingerTouch[0], to: lastTwoFingerTouch[1])
+
+        let zoom = currentDist / startDist
+
+        let startLocationX = -(firstTwoFingerTouch[0].x + firstTwoFingerTouch[1].x) / 2
+        let startLocationY = -(firstTwoFingerTouch[0].y + firstTwoFingerTouch[1].y) / 2
+
+        let locationX = (lastTwoFingerTouch[0].x + lastTwoFingerTouch[1].x) / 2
+        let locationY = (lastTwoFingerTouch[0].y + lastTwoFingerTouch[1].y) / 2
+
+        let offsetX = startLocationX + locationX
+        let offsetY = startLocationY + locationY
+
+        let startLocation = CGPoint(x: startLocationX, y: startLocationY)
+        let location = CGPoint(x: locationX, y: locationY)
+        let offset = CGSize(width: offsetX, height: offsetY)
+
+        self.value.location = location
+        self.value.startLocation = startLocation
+        self.value.magnification = zoom
+        self.value.translation = offset
     }
 }
 
@@ -68,7 +96,25 @@ class PanGestureUIView: UIView {
         onTouch?(Array(activeTouches.values))
     }
 
-    // TODO: The override fucntions
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        updateTouches(touches)
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        updateTouches(touches)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        removeTouches(touches)
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        removeTouches(touches)
+    }
 }
 
 struct PanGestureModifier: ViewModifier {
