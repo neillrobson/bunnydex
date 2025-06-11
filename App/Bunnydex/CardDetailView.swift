@@ -26,7 +26,32 @@ struct CardDetailView: View {
     }
     @Binding var path: NavigationPath
 
-    @State private var gestureValue = PanGestureValue.zero
+    @State private var currentZoom = 0.0
+    @State private var finalZoom = 1.0
+    @State private var currentOffset: CGSize = .zero
+    @State private var finalOffset: CGSize = .zero
+
+    private var dragGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                currentOffset = value.translation
+            }
+            .onEnded({ value in
+                finalOffset += currentOffset
+                currentOffset = .zero
+            })
+    }
+
+    private var magnificationGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged { amount in
+                currentZoom = amount - 1
+            }
+            .onEnded({ amount in
+                finalZoom += currentZoom
+                currentZoom = 0
+            })
+    }
 
     var body: some View {
         List {
@@ -35,11 +60,9 @@ struct CardDetailView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: .infinity, maxHeight: 200)
-                    .scaleEffect(gestureValue.magnification)
-                    .offset(gestureValue.translation)
-                    .panGesture { value in
-                        gestureValue = value
-                    }
+                    .scaleEffect(currentZoom + finalZoom)
+                    .offset(currentOffset + finalOffset)
+                    .gesture(dragGesture.simultaneously(with: magnificationGesture))
             }
             Section {
                 LabeledContent("ID") {
