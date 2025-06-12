@@ -13,8 +13,11 @@ struct CardListView: View {
     @Binding var path: NavigationPath
 
     init(searchFilter: String = "", path: Binding<NavigationPath>) {
+        let decks = [Deck.blue.rawValue, Deck.cakeBatter.rawValue]
+
         let predicate = #Predicate<Card> { card in
-            searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter
+            (searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter) &&
+            (decks.isEmpty || decks.contains(card.rawDeck))
         }
 
         _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
