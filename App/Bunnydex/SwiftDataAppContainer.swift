@@ -24,16 +24,26 @@ func getCardsFromJSON() -> [Card] {
 }
 
 @MainActor
+func resetData(_ context: ModelContext) {
+    do {
+        try context.delete(model: Card.self)
+    } catch {
+        print("Failed to delete existing data: \(error)")
+    }
+
+    for card in getCardsFromJSON() {
+        context.insert(card)
+    }
+}
+
+@MainActor
 let appContainer: ModelContainer = {
     do {
         let container = try ModelContainer(for: Card.self)
         let hasLoadedData = UserDefaults.standard.bool(forKey: "hasLoadedData")
 
         if !hasLoadedData {
-            for card in getCardsFromJSON() {
-                container.mainContext.insert(card)
-            }
-
+            resetData(container.mainContext)
             UserDefaults.standard.set(true, forKey: "hasLoadedData")
         }
 
