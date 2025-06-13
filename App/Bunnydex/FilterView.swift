@@ -15,8 +15,9 @@ extension String {
 
 struct FilterView: View {
     @Environment(\.dismiss) var dismiss
-    
-    @State private var deckSelection = Set<Deck>()
+
+    @Binding var deckSelection: Set<Deck>
+
     @State private var expanded = true
 
     var body: some View {
@@ -54,5 +55,7 @@ struct FilterView: View {
 }
 
 #Preview {
-    FilterView()
+    @Previewable @State var deckSelection: Set<Deck> = []
+
+    FilterView(deckSelection: $deckSelection)
 }

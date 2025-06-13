@@ -12,12 +12,11 @@ struct CardListView: View {
     @Query private var cards: [Card]
     @Binding var path: NavigationPath
 
-    init(searchFilter: String = "", path: Binding<NavigationPath>) {
-        let decks = [Deck.blue.rawValue, Deck.cakeBatter.rawValue]
-
+    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = []) {
+        let rawDecks = decks.map(\.rawValue)
         let predicate = #Predicate<Card> { card in
             (searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter) &&
-            (decks.isEmpty || decks.contains(card.rawDeck))
+            (rawDecks.isEmpty || rawDecks.contains(card.rawDeck))
         }
 
         _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
