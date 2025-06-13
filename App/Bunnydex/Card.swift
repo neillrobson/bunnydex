@@ -117,16 +117,13 @@ enum Die: String, Codable {
     }
 }
 
-enum Pawn: String, Codable {
-    case blue = "BLUE",
-         yellow = "YELLOW",
-         violet = "VIOLET",
-         orange = "ORANGE",
-         green = "GREEN",
-         red = "RED",
-         pink = "PINK",
-         black = "BLACK",
-         brown = "BROWN"
+@enumStringConvertible
+enum Pawn: Int, Codable, CaseIterable {
+    case blue, yellow, violet, orange, green, red, pink, black, brown
+}
+
+extension Pawn: Identifiable {
+    var id: Self { self }
 }
 
 struct Rule: Codable {
@@ -169,13 +166,17 @@ class Card: Codable {
     var title: String
     var type: CardType
     var rawDeck: Int
+    var rawPawn: Int?
     var bunnyRequirement: BunnyRequirement
     var dice: [Die]?
-    var pawn: Pawn?
     var rules: [Rule]?
 
     var deck: Deck {
         return .init(rawValue: rawDeck)!
+    }
+
+    var pawn: Pawn? {
+        return rawPawn.flatMap { .init(rawValue: $0) }
     }
 
     init(id: String, title: String, type: CardType, rawDeck: Int, bunnyRequirement: BunnyRequirement, dice: [Die]?, rules: [Rule]?) {
@@ -195,7 +196,6 @@ class Card: Codable {
         self.type = try container.decode(CardType.self, forKey: .type)
         self.bunnyRequirement = try container.decodeIfPresent(BunnyRequirement.self, forKey: .bunnyRequirement) ?? .no
         self.dice = try container.decodeIfPresent([Die].self, forKey: .dice)
-        self.pawn = try container.decodeIfPresent(Pawn.self, forKey: .pawn)
         self.rules = try container.decodeIfPresent([Rule].self, forKey: .rules)
 
         let deckId = try container.decode(String.self, forKey: .deck)
@@ -203,6 +203,14 @@ class Card: Codable {
             fatalError("Deck ID \(deckId) not found")
         }
         self.rawDeck = deck.rawValue
+
+        let pawnId = try container.decodeIfPresent(String.self, forKey: .pawn)
+        pawnId.map { pawnId in
+            guard let pawn = Pawn.init(pawnId) else {
+                fatalError("Pawn ID \(pawnId) not found")
+            }
+            self.rawPawn = pawn.rawValue
+        }
     }
 
     func encode(to encoder: any Encoder) throws {

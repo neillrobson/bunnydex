@@ -17,13 +17,15 @@ struct FilterView: View {
     @Environment(\.dismiss) var dismiss
 
     @Binding var deckSelection: Set<Deck>
+    @Binding var pawnSelection: Set<Pawn>
 
-    @State private var expanded = true
+    @State private var deckExpanded = false
+    @State private var pawnExpanded = false
 
     var body: some View {
         NavigationView {
             List {
-                Section(isExpanded: $expanded) {
+                Section(isExpanded: $deckExpanded) {
                     ForEach(Deck.allCases) { deck in
                         Toggle(isOn: Binding(get: {
                             deckSelection.contains(deck)
@@ -39,6 +41,24 @@ struct FilterView: View {
                     }
                 } header: {
                     Text("Decks")
+                }
+
+                Section(isExpanded: $pawnExpanded) {
+                    ForEach(Pawn.allCases) { pawn in
+                        Toggle(isOn: Binding(get: {
+                            pawnSelection.contains(pawn)
+                        }, set: { value in
+                            if value {
+                                pawnSelection.insert(pawn)
+                            } else {
+                                pawnSelection.remove(pawn)
+                            }
+                        })) {
+                            Text(pawn.description.display)
+                        }
+                    }
+                } header: {
+                    Text("Pawns")
                 }
             }
             .listStyle(.sidebar)
@@ -56,6 +76,7 @@ struct FilterView: View {
 
 #Preview {
     @Previewable @State var deckSelection: Set<Deck> = []
+    @Previewable @State var pawnSelection: Set<Pawn> = []
 
-    FilterView(deckSelection: $deckSelection)
+    FilterView(deckSelection: $deckSelection, pawnSelection: $pawnSelection)
 }

@@ -12,11 +12,14 @@ struct CardListView: View {
     @Query private var cards: [Card]
     @Binding var path: NavigationPath
 
-    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = []) {
+    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], pawns: Set<Pawn> = []) {
         let rawDecks = decks.map(\.rawValue)
+        let rawPawns = pawns.map(\.rawValue)
+
         let predicate = #Predicate<Card> { card in
             (searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter) &&
-            (rawDecks.isEmpty || rawDecks.contains(card.rawDeck))
+            (rawDecks.isEmpty || rawDecks.contains(card.rawDeck)) &&
+            (rawPawns.isEmpty || (card.rawPawn.flatMap { rawPawns.contains($0) } ?? false))
         }
 
         _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
@@ -49,11 +52,21 @@ struct CardListView: View {
     .modelContainer(appContainer)
 }
 
-#Preview("Filtered") {
+#Preview("Search") {
     @Previewable @State var path = NavigationPath()
 
     NavigationStack(path: $path) {
         CardListView(searchFilter: "carrot", path: $path)
+    }
+    .modelContainer(appContainer)
+}
+
+#Preview("Filtered") {
+    @Previewable @State var path = NavigationPath()
+    var pawns: Set<Pawn> = [.green]
+
+    NavigationStack(path: $path) {
+        CardListView(path: $path, pawns: pawns)
     }
     .modelContainer(appContainer)
 }

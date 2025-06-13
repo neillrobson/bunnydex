@@ -13,11 +13,12 @@ struct ContentView: View {
     @State private var showFilters: Bool = false
     @State private var searchText: String = ""
     @State private var decks: Set<Deck> = []
+    @State private var pawns: Set<Pawn> = []
     @State private var path = NavigationPath()
 
     var body: some View {
         NavigationStack(path: $path) {
-            CardListView(searchFilter: searchText, path: $path, decks: decks)
+            CardListView(searchFilter: searchText, path: $path, decks: decks, pawns: pawns)
             .searchable(text: $searchText, prompt: "Search")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -38,7 +39,7 @@ struct ContentView: View {
         }.sheet(isPresented: $showInfo) {
             InfoView()
         }.sheet(isPresented: $showFilters) {
-            FilterView(deckSelection: $decks)
+            FilterView(deckSelection: $decks, pawnSelection: $pawns)
         }
     }
 }
