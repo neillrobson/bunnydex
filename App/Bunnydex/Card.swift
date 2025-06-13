@@ -31,7 +31,7 @@ enum CardType: String, Codable {
 }
 
 @enumStringConvertible
-enum Deck: Int, LosslessStringConvertible {
+enum Deck: Int, LosslessStringConvertible, CaseIterable {
     case blue, yellow, red, violet, orange, green, twilightWhite, stainlessSteel, perfectlyPink, wackyKhaki, ominousOnyx, chocolate, fantastic, caramelSwirl, creatureFeature, pumpkinSpice, conquestBlue, conquestYellow, conquestRed, conquestViolet, kinderSkyBlue, kinderSunshineYellow, laDiDaLondon, cakeBatter, radioactiveRobots, almondCrisp;
 
     var isKinder: Bool {
@@ -40,6 +40,10 @@ enum Deck: Int, LosslessStringConvertible {
         default: return false
         }
     }
+}
+
+extension Deck: Identifiable {
+    var id: Self { self }
 }
 
 enum BunnyRequirement: String, Codable {

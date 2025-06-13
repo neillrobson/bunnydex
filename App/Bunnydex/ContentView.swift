@@ -10,6 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @State private var showInfo: Bool = false
+    @State private var showFilters: Bool = false
     @State private var searchText: String = ""
     @State private var path = NavigationPath()
 
@@ -18,16 +19,25 @@ struct ContentView: View {
             CardListView(searchFilter: searchText, path: $path)
             .searchable(text: $searchText, prompt: "Search")
             .toolbar {
-                ToolbarItem {
+                ToolbarItem(placement: .topBarLeading) {
                     Button {
                         showInfo.toggle()
                     } label: {
                         Image(systemName: "info.circle")
                     }
                 }
+                ToolbarItem {
+                    Button {
+                        showFilters.toggle()
+                    } label: {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                    }
+                }
             }
         }.sheet(isPresented: $showInfo) {
             InfoView()
+        }.sheet(isPresented: $showFilters) {
+            FilterView()
         }
     }
 }
