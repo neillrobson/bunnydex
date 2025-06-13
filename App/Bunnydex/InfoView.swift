@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 let infoText = """
                 [Killer Bunnies](https://killerbunnies.com/) is a registered trademark of Jeffrey Bellinger. All rights reserved. All copyrights and trademarks used under license.
@@ -19,24 +20,36 @@ let infoText = """
 
 struct InfoView: View {
     @Environment(\.dismiss) var dismiss
+    #if DEBUG
+    @Environment(\.modelContext) var context
+    #endif
 
     var body: some View {
         NavigationStack {
-            Text(.init(infoText))
-                .multilineTextAlignment(.center)
-                .padding()
-                .navigationTitle("About")
-                .toolbar {
-                    ToolbarItem {
-                        Button("Done") {
-                            dismiss()
-                        }
+            VStack {
+                Text(.init(infoText))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .navigationTitle("About")
+
+                #if DEBUG
+                Button("Reset database") {
+                    resetData(context)
+                }
+                #endif
+            }
+            .toolbar {
+                ToolbarItem {
+                    Button("Done") {
+                        dismiss()
                     }
                 }
+            }
         }
     }
 }
 
 #Preview {
     InfoView()
+        .modelContainer(appContainer)
 }

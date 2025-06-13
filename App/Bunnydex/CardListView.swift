@@ -63,7 +63,7 @@ struct CardListView: View {
 
 #Preview("Filtered") {
     @Previewable @State var path = NavigationPath()
-    var pawns: Set<Pawn> = [.green]
+    let pawns: Set<Pawn> = [.green]
 
     NavigationStack(path: $path) {
         CardListView(path: $path, pawns: pawns)
