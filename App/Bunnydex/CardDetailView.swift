@@ -60,9 +60,7 @@ struct CardDetailView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: .infinity, maxHeight: 200)
-                    .scaleEffect(currentZoom + finalZoom)
-                    .offset(currentOffset + finalOffset)
-                    .gesture(dragGesture.simultaneously(with: magnificationGesture))
+                    .zoomable()
             }
             Section {
                 LabeledContent("ID") {
