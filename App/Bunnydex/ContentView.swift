@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var searchText: String = ""
     @State private var decks: Set<Deck> = []
     @State private var pawns: Set<Pawn> = []
+    @State private var expandState: FilterExpandState = .init()
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -39,7 +40,7 @@ struct ContentView: View {
         }.sheet(isPresented: $showInfo) {
             InfoView()
         }.sheet(isPresented: $showFilters) {
-            FilterView(deckSelection: $decks, pawnSelection: $pawns)
+            FilterView(deckSelection: $decks, pawnSelection: $pawns, expandState: $expandState)
         }
     }
 }

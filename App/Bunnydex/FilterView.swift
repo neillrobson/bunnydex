@@ -13,19 +13,22 @@ extension String {
     }
 }
 
+struct FilterExpandState {
+    var deck = false
+    var pawn = false
+}
+
 struct FilterView: View {
     @Environment(\.dismiss) var dismiss
 
     @Binding var deckSelection: Set<Deck>
     @Binding var pawnSelection: Set<Pawn>
-
-    @State private var deckExpanded = false
-    @State private var pawnExpanded = false
+    @Binding var expandState: FilterExpandState
 
     var body: some View {
         NavigationView {
             List {
-                Section(isExpanded: $deckExpanded) {
+                Section(isExpanded: $expandState.deck) {
                     ForEach(Deck.allCases) { deck in
                         Toggle(isOn: Binding(get: {
                             deckSelection.contains(deck)
@@ -43,7 +46,7 @@ struct FilterView: View {
                     Text("Decks")
                 }
 
-                Section(isExpanded: $pawnExpanded) {
+                Section(isExpanded: $expandState.pawn) {
                     ForEach(Pawn.allCases) { pawn in
                         Toggle(isOn: Binding(get: {
                             pawnSelection.contains(pawn)
@@ -77,6 +80,7 @@ struct FilterView: View {
 #Preview {
     @Previewable @State var deckSelection: Set<Deck> = []
     @Previewable @State var pawnSelection: Set<Pawn> = []
+    @Previewable @State var expandState: FilterExpandState = .init()
 
-    FilterView(deckSelection: $deckSelection, pawnSelection: $pawnSelection)
+    FilterView(deckSelection: $deckSelection, pawnSelection: $pawnSelection, expandState: $expandState)
 }
