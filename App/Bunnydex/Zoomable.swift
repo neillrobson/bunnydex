@@ -31,7 +31,8 @@ struct ZoomableModifier: ViewModifier {
             }
             .animatableTransformEffect(transform)
             .gesture(dragGesture, including: transform == .identity ? .none : .all)
-            .gesture(maginficationGesture) // TODO: double tap gesture
+            .gesture(maginficationGesture)
+            .gesture(doubleTapGesture)
             .frame(maxWidth: .infinity, maxHeight: 200)
             .background(alignment: .topLeading) {
                 GeometryReader { proxy in
@@ -66,6 +67,23 @@ struct ZoomableModifier: ViewModifier {
             }
             .onEnded { _ in
                 onEndGesture()
+            }
+    }
+
+    private var doubleTapGesture: some Gesture {
+        SpatialTapGesture(count: 2)
+            .onEnded { value in
+                let newTransform: CGAffineTransform =
+                if transform.isIdentity {
+                    limitTransform(CGAffineTransform.anchoredScale(scale: doubleTapZoomScale, anchor: value.location))
+                } else {
+                    .identity
+                }
+
+                withAnimation(.linear(duration: 0.15)) {
+                    transform = newTransform
+                    lastTransform = newTransform
+                }
             }
     }
 
