@@ -39,13 +39,13 @@ struct CardDetailView: View {
                     Text(card.id)
                 }
                 LabeledContent("Deck") {
-                    Text(card.deck.description)
+                    Text(card.deck.description.display)
                 }
                 LabeledContent("Card type") {
-                    Text(card.type.rawValue)
+                    Text(card.type.rawValue.display)
                 }
                 LabeledContent("Bunny requirement") {
-                    Text(card.bunnyRequirement.rawValue)
+                    Text(card.bunnyRequirement.rawValue.display)
                 }
                 card.dice.map { dice in
                     LabeledContent("Dice") {
