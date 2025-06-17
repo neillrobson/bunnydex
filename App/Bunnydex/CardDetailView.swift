@@ -42,7 +42,7 @@ struct CardDetailView: View {
                     Text(card.deck.description.display)
                 }
                 LabeledContent("Card type") {
-                    Text(card.type.rawValue.display)
+                    Text(card.type.description.display)
                 }
                 LabeledContent("Bunny requirement") {
                     Text(card.bunnyRequirement.rawValue.display)

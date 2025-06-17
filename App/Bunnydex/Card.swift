@@ -10,29 +10,59 @@ import SwiftData
 import SwiftUI
 import EnumStringConvertible
 
-enum CardType: String, Codable {
-    case run = "RUN",
-    roamingRedRun = "ROAMING_RED_RUN",
-    special = "SPECIAL",
-    verySpecial = "VERY_SPECIAL",
-    playImmediately = "PLAY_IMMEDIATELY",
-    playRightNow = "PLAY_RIGHT_NOW",
-    dolla = "DOLLA",
-    bunnyBuck = "BUNNY_BUCK",
-    starter = "STARTER",
-    carrotSupply = "CARROT_SUPPLY",
-    zodiac = "ZODIAC",
-    chineseZodiac = "CHINESE_ZODIAC",
-    rank = "RANK",
-    mysteriousPlace = "MYSTERIOUS_PLACE",
-    senator = "SENATOR",
-    metal = "METAL",
-    bundergroundStation = "BUNDERGROUND_STATION"
+@enumStringConvertible
+enum CardType: Int, LosslessStringConvertible, CaseIterable {
+    case run,
+         roamingRedRun,
+         special,
+         verySpecial,
+         playImmediately,
+         playRightNow,
+         dolla,
+         bunnyBuck,
+         starter,
+         carrotSupply,
+         zodiac,
+         chineseZodiac,
+         rank,
+         mysteriousPlace,
+         senator,
+         metal,
+         bundergroundStation
+}
+
+extension CardType: Identifiable {
+    var id: Self { self }
 }
 
 @enumStringConvertible
 enum Deck: Int, LosslessStringConvertible, CaseIterable {
-    case blue, yellow, red, violet, orange, green, twilightWhite, stainlessSteel, perfectlyPink, wackyKhaki, ominousOnyx, chocolate, fantastic, caramelSwirl, creatureFeature, pumpkinSpice, conquestBlue, conquestYellow, conquestRed, conquestViolet, kinderSkyBlue, kinderSunshineYellow, laDiDaLondon, cakeBatter, radioactiveRobots, almondCrisp;
+    case blue,
+         yellow,
+         red,
+         violet,
+         orange,
+         green,
+         twilightWhite,
+         stainlessSteel,
+         perfectlyPink,
+         wackyKhaki,
+         ominousOnyx,
+         chocolate,
+         fantastic,
+         caramelSwirl,
+         creatureFeature,
+         pumpkinSpice,
+         conquestBlue,
+         conquestYellow,
+         conquestRed,
+         conquestViolet,
+         kinderSkyBlue,
+         kinderSunshineYellow,
+         laDiDaLondon,
+         cakeBatter,
+         radioactiveRobots,
+         almondCrisp
 
     var isKinder: Bool {
         switch self {
@@ -164,12 +194,16 @@ class Card: Codable {
 
     var id: String
     var title: String
-    var type: CardType
+    var rawType: Int
     var rawDeck: Int
     var rawPawn: Int?
     var bunnyRequirement: BunnyRequirement
     var dice: [Die]?
     var rules: [Rule]?
+
+    var type: CardType {
+        return .init(rawValue: rawType)!
+    }
 
     var deck: Deck {
         return .init(rawValue: rawDeck)!
@@ -179,10 +213,10 @@ class Card: Codable {
         return rawPawn.flatMap { .init(rawValue: $0) }
     }
 
-    init(id: String, title: String, type: CardType, rawDeck: Int, bunnyRequirement: BunnyRequirement, dice: [Die]?, rules: [Rule]?) {
+    init(id: String, title: String, type: Int, rawDeck: Int, bunnyRequirement: BunnyRequirement, dice: [Die]?, rules: [Rule]?) {
         self.id = id
         self.title = title
-        self.type = type
+        self.rawType = type
         self.rawDeck = 0
         self.bunnyRequirement = bunnyRequirement
         self.dice = dice
@@ -193,10 +227,15 @@ class Card: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
-        self.type = try container.decode(CardType.self, forKey: .type)
         self.bunnyRequirement = try container.decodeIfPresent(BunnyRequirement.self, forKey: .bunnyRequirement) ?? .no
         self.dice = try container.decodeIfPresent([Die].self, forKey: .dice)
         self.rules = try container.decodeIfPresent([Rule].self, forKey: .rules)
+
+        let typeId = try container.decode(String.self, forKey: .type)
+        guard let type = CardType.init(typeId) else {
+            fatalError("Type ID \(typeId) not found")
+        }
+        self.rawType = type.rawValue
 
         let deckId = try container.decode(String.self, forKey: .deck)
         guard let deck = Deck.init(deckId) else {
@@ -217,7 +256,7 @@ class Card: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
-        try container.encode(type, forKey: .type)
+        try container.encode(type.description, forKey: .type)
         try container.encode(deck.description, forKey: .deck)
         try container.encode(bunnyRequirement, forKey: .bunnyRequirement)
         try container.encodeIfPresent(dice, forKey: .dice)
@@ -228,7 +267,7 @@ class Card: Codable {
     @MainActor static let placeholder = Card(
         id: "0000",
         title: "Placeholder Card",
-        type: .run,
+        type: CardType.run.rawValue,
         rawDeck: Deck.blue.rawValue,
         bunnyRequirement: .no,
         dice: [.violet, .orange, .green, .yellow, .blue, .pink, .black, .red, .brown, .clear, .violetD10, .orangeD10, .greenD10, .yellowD10, .blueD10, .zodiac, .chineseZodiac],
