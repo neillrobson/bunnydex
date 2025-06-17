@@ -12,14 +12,34 @@ struct CardListView: View {
     @Query private var cards: [Card]
     @Binding var path: NavigationPath
 
-    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], pawns: Set<Pawn> = []) {
+    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = []) {
         let rawDecks = decks.map(\.rawValue)
+        let rawTypes = types.map(\.rawValue)
+        let rawRequirements = requirements.map(\.rawValue)
         let rawPawns = pawns.map(\.rawValue)
 
+        let searchPredicate = #Predicate<Card> { card in
+            searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter
+        }
+        let deckPredicate = #Predicate<Card> { card in
+            rawDecks.isEmpty || rawDecks.contains(card.rawDeck)
+        }
+        let typePredicate = #Predicate<Card> { card in
+            rawTypes.isEmpty || rawTypes.contains(card.rawType)
+        }
+        let requirementPredicate = #Predicate<Card> { card in
+            rawRequirements.isEmpty || rawRequirements.contains(card.rawRequirement)
+        }
+        let pawnPredicate = #Predicate<Card> { card in
+            rawPawns.isEmpty || (card.rawPawn.flatMap { rawPawns.contains($0) } ?? false)
+        }
+
         let predicate = #Predicate<Card> { card in
-            (searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter) &&
-            (rawDecks.isEmpty || rawDecks.contains(card.rawDeck)) &&
-            (rawPawns.isEmpty || (card.rawPawn.flatMap { rawPawns.contains($0) } ?? false))
+            searchPredicate.evaluate(card) &&
+            deckPredicate.evaluate(card) &&
+            typePredicate.evaluate(card) &&
+            requirementPredicate.evaluate(card) &&
+            pawnPredicate.evaluate(card)
         }
 
         _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])

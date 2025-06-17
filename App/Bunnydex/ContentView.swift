@@ -11,15 +11,20 @@ import SwiftData
 struct ContentView: View {
     @State private var showInfo: Bool = false
     @State private var showFilters: Bool = false
+
     @State private var searchText: String = ""
+
     @State private var decks: Set<Deck> = []
+    @State private var cardTypes: Set<CardType> = []
+    @State private var bunnyRequirements: Set<BunnyRequirement> = []
     @State private var pawns: Set<Pawn> = []
+
     @State private var expandState: FilterExpandState = .init()
     @State private var path = NavigationPath()
 
     var body: some View {
         NavigationStack(path: $path) {
-            CardListView(searchFilter: searchText, path: $path, decks: decks, pawns: pawns)
+            CardListView(searchFilter: searchText, path: $path, decks: decks, types: cardTypes, requirements: bunnyRequirements, pawns: pawns)
             .searchable(text: $searchText, prompt: "Search")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -40,7 +45,7 @@ struct ContentView: View {
         }.sheet(isPresented: $showInfo) {
             InfoView()
         }.sheet(isPresented: $showFilters) {
-            FilterView(deckSelection: $decks, pawnSelection: $pawns, expandState: $expandState)
+            FilterView(deckSelection: $decks, typeSelection: $cardTypes, requirementSelection: $bunnyRequirements, pawnSelection: $pawns, expandState: $expandState)
         }
     }
 }

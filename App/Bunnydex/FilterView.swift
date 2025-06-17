@@ -16,12 +16,16 @@ extension String {
 struct FilterExpandState {
     var deck = false
     var pawn = false
+    var cardType = false
+    var bunnyRequirement = false
 }
 
 struct FilterView: View {
     @Environment(\.dismiss) var dismiss
 
     @Binding var deckSelection: Set<Deck>
+    @Binding var typeSelection: Set<CardType>
+    @Binding var requirementSelection: Set<BunnyRequirement>
     @Binding var pawnSelection: Set<Pawn>
     @Binding var expandState: FilterExpandState
 
@@ -44,6 +48,42 @@ struct FilterView: View {
                     }
                 } header: {
                     Text("Decks")
+                }
+
+                Section(isExpanded: $expandState.cardType) {
+                    ForEach(CardType.allCases) { cardType in
+                        Toggle(isOn: Binding(get: {
+                            typeSelection.contains(cardType)
+                        }, set: { value in
+                            if value {
+                                typeSelection.insert(cardType)
+                            } else {
+                                typeSelection.remove(cardType)
+                            }
+                        })) {
+                            Text(cardType.description.display)
+                        }
+                    }
+                } header: {
+                    Text("Card Types")
+                }
+
+                Section(isExpanded: $expandState.bunnyRequirement) {
+                    ForEach(BunnyRequirement.allCases) { bunnyRequirement in
+                        Toggle(isOn: Binding(get: {
+                            requirementSelection.contains(bunnyRequirement)
+                        }, set: { value in
+                            if value {
+                                requirementSelection.insert(bunnyRequirement)
+                            } else {
+                                requirementSelection.remove(bunnyRequirement)
+                            }
+                        })) {
+                            Text(bunnyRequirement.description.display)
+                        }
+                    }
+                } header: {
+                    Text("Bunny Requirements")
                 }
 
                 Section(isExpanded: $expandState.pawn) {
@@ -79,8 +119,10 @@ struct FilterView: View {
 
 #Preview {
     @Previewable @State var deckSelection: Set<Deck> = []
+    @Previewable @State var typeSelection: Set<CardType> = []
+    @Previewable @State var requirementSelection: Set<BunnyRequirement> = []
     @Previewable @State var pawnSelection: Set<Pawn> = []
     @Previewable @State var expandState: FilterExpandState = .init()
 
-    FilterView(deckSelection: $deckSelection, pawnSelection: $pawnSelection, expandState: $expandState)
+    FilterView(deckSelection: $deckSelection, typeSelection: $typeSelection, requirementSelection: $requirementSelection, pawnSelection: $pawnSelection, expandState: $expandState)
 }
