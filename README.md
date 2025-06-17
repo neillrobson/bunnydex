@@ -29,6 +29,16 @@ within the `App/Bunnydex` directory.
 Although inefficient from a source-control perspective,
 the size of the data did not warrant a more robust system (at least for an initial prototype).
 
+To reset the database in previews and debug builds,
+a "Reset Database" button displays on the info screen.
+If the application isn't starting at all,
+run the following command(s) from the console:
+
+```
+sudo xcode-select -s /Applications/Xcode.app
+xcrun simctl --set previews delete all
+```
+
 ## Attributions
 
 > [!IMPORTANT]
