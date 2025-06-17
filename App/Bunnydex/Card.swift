@@ -76,15 +76,16 @@ extension Deck: Identifiable {
     var id: Self { self }
 }
 
-enum BunnyRequirement: String, Codable {
-    case no = "NO",
-         play = "PLAY",
-         playX2 = "PLAY_X2",
-         playAndSave = "PLAY_AND_SAVE"
+@enumStringConvertible
+enum BunnyRequirement: Int, LosslessStringConvertible, CaseIterable {
+    case no,
+         play,
+         playX2,
+         playAndSave
+}
 
-    init(from decoder: any Decoder) throws {
-        self = try BunnyRequirement(rawValue: decoder.singleValueContainer().decode(String.self)) ?? .no
-    }
+extension BunnyRequirement: Identifiable {
+    var id: Self { self }
 }
 
 enum Die: String, Codable {
@@ -197,7 +198,7 @@ class Card: Codable {
     var rawType: Int
     var rawDeck: Int
     var rawPawn: Int?
-    var bunnyRequirement: BunnyRequirement
+    var rawRequirement: Int
     var dice: [Die]?
     var rules: [Rule]?
 
@@ -213,12 +214,16 @@ class Card: Codable {
         return rawPawn.flatMap { .init(rawValue: $0) }
     }
 
-    init(id: String, title: String, type: Int, rawDeck: Int, bunnyRequirement: BunnyRequirement, dice: [Die]?, rules: [Rule]?) {
+    var bunnyRequirement: BunnyRequirement {
+        return .init(rawValue: rawRequirement)!
+    }
+
+    init(id: String, title: String, type: Int, rawDeck: Int, bunnyRequirement: Int, dice: [Die]?, rules: [Rule]?) {
         self.id = id
         self.title = title
         self.rawType = type
         self.rawDeck = 0
-        self.bunnyRequirement = bunnyRequirement
+        self.rawRequirement = bunnyRequirement
         self.dice = dice
         self.rules = rules
     }
@@ -227,7 +232,6 @@ class Card: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
-        self.bunnyRequirement = try container.decodeIfPresent(BunnyRequirement.self, forKey: .bunnyRequirement) ?? .no
         self.dice = try container.decodeIfPresent([Die].self, forKey: .dice)
         self.rules = try container.decodeIfPresent([Rule].self, forKey: .rules)
 
@@ -242,6 +246,16 @@ class Card: Codable {
             fatalError("Deck ID \(deckId) not found")
         }
         self.rawDeck = deck.rawValue
+
+        self.rawRequirement = 0
+        let requirementId = try container.decodeIfPresent(String.self, forKey: .bunnyRequirement)
+        requirementId.map { requirementId in
+            guard let bunnyRequirement = BunnyRequirement.init(requirementId) else {
+                fatalError("Bunny requirement ID \(requirementId) not found")
+            }
+
+            self.rawRequirement = bunnyRequirement.rawValue
+        }
 
         let pawnId = try container.decodeIfPresent(String.self, forKey: .pawn)
         pawnId.map { pawnId in
@@ -258,7 +272,7 @@ class Card: Codable {
         try container.encode(title, forKey: .title)
         try container.encode(type.description, forKey: .type)
         try container.encode(deck.description, forKey: .deck)
-        try container.encode(bunnyRequirement, forKey: .bunnyRequirement)
+        try container.encode(bunnyRequirement.description, forKey: .bunnyRequirement)
         try container.encodeIfPresent(dice, forKey: .dice)
         try container.encodeIfPresent(pawn, forKey: .pawn)
         try container.encodeIfPresent(rules, forKey: .rules)
@@ -269,7 +283,7 @@ class Card: Codable {
         title: "Placeholder Card",
         type: CardType.run.rawValue,
         rawDeck: Deck.blue.rawValue,
-        bunnyRequirement: .no,
+        bunnyRequirement: BunnyRequirement.no.rawValue,
         dice: [.violet, .orange, .green, .yellow, .blue, .pink, .black, .red, .brown, .clear, .violetD10, .orangeD10, .greenD10, .yellowD10, .blueD10, .zodiac, .chineseZodiac],
         rules: []
     )

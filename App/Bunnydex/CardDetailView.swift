@@ -45,7 +45,7 @@ struct CardDetailView: View {
                     Text(card.type.description.display)
                 }
                 LabeledContent("Bunny requirement") {
-                    Text(card.bunnyRequirement.rawValue.display)
+                    Text(card.bunnyRequirement.description.display)
                 }
                 card.dice.map { dice in
                     LabeledContent("Dice") {
