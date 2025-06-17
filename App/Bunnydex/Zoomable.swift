@@ -17,6 +17,7 @@ struct ZoomableModifier: ViewModifier {
     @State private var lastTransform: CGAffineTransform = .identity
     @State private var transform: CGAffineTransform = .identity
     @State private var contentSize: CGSize = .zero
+    @State private var frameSize: CGSize = .zero
 
     func body(content: Content) -> some View {
         content
@@ -30,8 +31,16 @@ struct ZoomableModifier: ViewModifier {
             }
             .animatableTransformEffect(transform)
             .gesture(dragGesture, including: transform == .identity ? .none : .all)
-            .gesture(maginficationGesture)
-        // TODO: double tap gesture
+            .gesture(maginficationGesture) // TODO: double tap gesture
+            .frame(maxWidth: .infinity, maxHeight: 200)
+            .background(alignment: .topLeading) {
+                GeometryReader { proxy in
+                    Color.clear
+                        .onAppear {
+                            frameSize = proxy.size
+                        }
+                }
+            }
     }
 
     private var dragGesture: some Gesture {
@@ -77,8 +86,8 @@ struct ZoomableModifier: ViewModifier {
             return .identity
         }
 
-        let marginX = (322.0 - contentSize.width) / 2
-        let marginY = (200.0 - contentSize.height) / 2
+        let marginX = (frameSize.width - contentSize.width) / 2
+        let marginY = (frameSize.height - contentSize.height) / 2
         let extraMarginX = ((1 - scaleX) * contentSize.width)
         let extraMarginY = ((1 - scaleY) * contentSize.height)
 

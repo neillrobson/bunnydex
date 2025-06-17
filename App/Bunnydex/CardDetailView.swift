@@ -26,33 +26,13 @@ struct CardDetailView: View {
     }
     @Binding var path: NavigationPath
 
-    @State private var imgSize: CGSize = .zero
-    @State private var frameSize: CGSize = .zero
-
     var body: some View {
         List {
             if UIImage(named: imageId) != nil {
                 Image(imageId)
                     .resizable()
                     .scaledToFit()
-                    .background(alignment: .topLeading) {
-                        GeometryReader { proxy in
-                            Color.clear
-                                .onAppear {
-                                    imgSize = proxy.size
-                                }
-                        }
-                    }
                     .zoomable()
-                    .frame(maxWidth: .infinity, maxHeight: 200)
-                    .background(alignment: .topLeading) {
-                        GeometryReader { proxy in
-                            Color.clear
-                                .onAppear {
-                                    frameSize = proxy.size
-                                }
-                        }
-                    }
             }
             Section {
                 LabeledContent("ID") {
