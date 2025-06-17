@@ -26,32 +26,8 @@ struct CardDetailView: View {
     }
     @Binding var path: NavigationPath
 
-    @State private var currentZoom = 0.0
-    @State private var finalZoom = 1.0
-    @State private var currentOffset: CGSize = .zero
-    @State private var finalOffset: CGSize = .zero
-
-    private var dragGesture: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                currentOffset = value.translation
-            }
-            .onEnded({ value in
-                finalOffset += currentOffset
-                currentOffset = .zero
-            })
-    }
-
-    private var magnificationGesture: some Gesture {
-        MagnificationGesture()
-            .onChanged { amount in
-                currentZoom = amount - 1
-            }
-            .onEnded({ amount in
-                finalZoom += currentZoom
-                currentZoom = 0
-            })
-    }
+    @State private var imgSize: CGSize = .zero
+    @State private var frameSize: CGSize = .zero
 
     var body: some View {
         List {
@@ -59,8 +35,26 @@ struct CardDetailView: View {
                 Image(imageId)
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: .infinity, maxHeight: 200)
+                    .background(alignment: .topLeading) {
+                        GeometryReader { proxy in
+                            Color.clear
+                                .onAppear {
+                                    imgSize = proxy.size
+                                    print("imgSize: \(imgSize)")
+                                }
+                        }
+                    }
                     .zoomable()
+                    .frame(maxWidth: .infinity, maxHeight: 200)
+                    .background(alignment: .topLeading) {
+                        GeometryReader { proxy in
+                            Color.clear
+                                .onAppear {
+                                    frameSize = proxy.size
+                                    print("frameSize: \(frameSize)")
+                                }
+                        }
+                    }
             }
             Section {
                 LabeledContent("ID") {
