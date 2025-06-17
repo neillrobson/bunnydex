@@ -40,7 +40,6 @@ struct CardDetailView: View {
                             Color.clear
                                 .onAppear {
                                     imgSize = proxy.size
-                                    print("imgSize: \(imgSize)")
                                 }
                         }
                     }
@@ -51,7 +50,6 @@ struct CardDetailView: View {
                             Color.clear
                                 .onAppear {
                                     frameSize = proxy.size
-                                    print("frameSize: \(frameSize)")
                                 }
                         }
                     }

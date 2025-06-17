@@ -25,7 +25,6 @@ struct ZoomableModifier: ViewModifier {
                     Color.clear
                         .onAppear {
                             contentSize = proxy.size
-                            print("contentSize: \(proxy.size)")
                         }
                 }
             }
@@ -80,13 +79,13 @@ struct ZoomableModifier: ViewModifier {
 
         let marginX = (322.0 - contentSize.width) / 2
         let marginY = (200.0 - contentSize.height) / 2
-        let extraMarginX = ((1 - scaleX) * contentSize.width) / 2
-        let extraMarginY = ((1 - scaleY) * contentSize.height) / 2
+        let extraMarginX = ((1 - scaleX) * contentSize.width)
+        let extraMarginY = ((1 - scaleY) * contentSize.height)
 
-        let minX = -max(marginX, extraMarginX)
-        let minY = -max(marginY, extraMarginY)
-        let maxX = max(boundX, (contentSize.width - 322.0) / 2)
-        let maxY = max(boundY, 0)
+        let minX = min(-marginX, marginX + extraMarginX)
+        let minY = min(-marginY, marginY + extraMarginY)
+        let maxX = max(-marginX, marginX + extraMarginX)
+        let maxY = max(-marginY, marginY + extraMarginY)
 
         if transform.tx > maxX
             || transform.tx < minX
