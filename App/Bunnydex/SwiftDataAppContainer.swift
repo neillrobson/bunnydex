@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-func getCardsFromJSON() -> [Card] {
+func getCardsFromJSON() -> [JSONCard] {
     do {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: "data") else {
             fatalError("No data files found in bundle")
@@ -16,7 +16,7 @@ func getCardsFromJSON() -> [Card] {
 
         return try urls.flatMap { url in
             let data = try Data(contentsOf: url)
-            return try JSONDecoder().decode([Card].self, from: data)
+            return try JSONDecoder().decode([JSONCard].self, from: data)
         }
     } catch {
         fatalError("Failed to read JSON file: \(error)")
@@ -37,15 +37,15 @@ func resetData(_ context: ModelContext) {
         print("Failed to verify dice model: \(error)")
     }
 
-    for card in getCardsFromJSON() {
-        context.insert(card)
+    for json in getCardsFromJSON() {
+        context.insert(Card(json: json))
     }
 }
 
 @MainActor
 let appContainer: ModelContainer = {
     do {
-        let container = try ModelContainer(for: Card.self, NewDie.self)
+        let container = try ModelContainer(for: Card.self, Die.self)
         let hasLoadedData = UserDefaults.standard.bool(forKey: "hasLoadedData")
 
         if !hasLoadedData {

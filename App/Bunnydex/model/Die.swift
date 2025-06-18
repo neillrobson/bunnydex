@@ -7,7 +7,9 @@
 
 import SwiftData
 import SwiftUI
+import EnumStringConvertible
 
+@enumStringConvertible
 enum DieType: Int, CaseIterable {
     case blue,
          yellow,
@@ -68,9 +70,8 @@ enum DieType: Int, CaseIterable {
     }
 }
 
-// TODO: Rename to Die and remove declaration in Card
 @Model
-class NewDie {
+class Die {
     var id: Int
 
     init(type: DieType) {
@@ -83,22 +84,22 @@ class NewDie {
     }
 }
 
-class DiceRepository {
-    @MainActor
+@MainActor
+final class DiceRepository {
     static let shared = DiceRepository()
 
-    private(set) var diceMap: [DieType: NewDie] = [:]
+    private(set) var diceMap: [DieType: Die] = [:]
 
     func ensureDiceExist(in context: ModelContext) throws {
         var didInsert = false
 
         for type in DieType.allCases {
             let id = type.rawValue
-            let fetchDescriptor = FetchDescriptor<NewDie>(predicate: #Predicate { $0.id == id })
+            let fetchDescriptor = FetchDescriptor<Die>(predicate: #Predicate { $0.id == id })
             if let existing = try? context.fetch(fetchDescriptor).first {
                 diceMap[type] = existing
             } else {
-                let newDie = NewDie(type: type)
+                let newDie = Die(type: type)
                 context.insert(newDie)
                 diceMap[type] = newDie
                 didInsert = true
