@@ -150,8 +150,8 @@ class Card {
     var rawRequirement: Int
     var rules: [Rule]
 
-    @Relationship
-    var dice: [Die]
+    @Relationship(inverse: \Die.cards)
+    var rawDice: [Die]
 
     var type: CardType {
         return .init(rawValue: rawType)!
@@ -167,6 +167,10 @@ class Card {
 
     var bunnyRequirement: BunnyRequirement {
         return .init(rawValue: rawRequirement)!
+    }
+
+    var dice: [DieType] {
+        rawDice.map { $0.dieType }
     }
 
     @MainActor
@@ -200,7 +204,7 @@ class Card {
         }
 
         let diceIds = json.dice ?? []
-        self.dice = diceIds.compactMap(DieType.init).compactMap { DiceRepository.shared.diceMap[$0] }
+        self.rawDice = diceIds.compactMap(DieType.init).compactMap { DiceRepository.shared.diceMap[$0] }
     }
 
     @MainActor

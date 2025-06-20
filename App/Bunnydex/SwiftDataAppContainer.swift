@@ -58,3 +58,14 @@ let appContainer: ModelContainer = {
         fatalError("Failed to create container: \(error)")
     }
 }()
+
+@MainActor
+let previewContainer: ModelContainer = {
+    do {
+        let container = try ModelContainer(for: Card.self, Die.self)
+        resetData(container.mainContext)
+        return container
+    } catch {
+        fatalError("Failed to create preview container: \(error)")
+    }
+}()

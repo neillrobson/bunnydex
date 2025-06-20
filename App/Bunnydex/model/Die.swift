@@ -73,6 +73,7 @@ enum DieType: Int, CaseIterable {
 @Model
 class Die {
     var id: Int
+    var cards: [Card] = []
 
     init(type: DieType) {
         self.id = type.rawValue

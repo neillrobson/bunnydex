@@ -47,12 +47,12 @@ struct CardDetailView: View {
                 LabeledContent("Bunny requirement") {
                     Text(card.bunnyRequirement.description.display)
                 }
-                card.dice.map { dice in
+                if !card.rawDice.isEmpty {
                     LabeledContent("Dice") {
                         Grid(alignment: .center, horizontalSpacing: 5, verticalSpacing: 5) {
-                            ForEach (0...dice.count/5, id: \.self) { row in
+                            ForEach (0...card.rawDice.count/5, id: \.self) { row in
                                 let rowStart = row * 5
-                                let offsetEnd = min(dice.count - rowStart, 5)
+                                let offsetEnd = min(card.rawDice.count - rowStart, 5)
                                 let offsetStart = offsetEnd - 5
 
                                 GridRow {
@@ -60,7 +60,7 @@ struct CardDetailView: View {
                                         if offset < 0 {
                                             Color.clear.gridCellUnsizedAxes([.horizontal, .vertical])
                                         } else {
-                                            let die = dice[rowStart + offset]
+                                            let die = card.rawDice[rowStart + offset].dieType
                                             Image(systemName: die.systemImageName)
                                                 .foregroundStyle(die.color)
                                         }
@@ -71,7 +71,7 @@ struct CardDetailView: View {
                     }
                 }
             }
-            ForEach(card.rules ?? [], id: \.title) { rule in
+            ForEach(card.rules, id: \.title) { rule in
                 Section(header: Text(rule.title)) {
                     Text(.init(rule.text))
                 }
@@ -104,11 +104,13 @@ struct CardDetailView: View {
 #Preview {
     @Previewable @State var path = NavigationPath()
 
-    if let card = getCardsFromJSON().first(where: { $0.id == "0066" }) {
+    let fetchDescriptor = FetchDescriptor<Card>(predicate: #Predicate { $0.id == "0066" })
+
+    if let card = try? previewContainer.mainContext.fetch(fetchDescriptor).first {
         NavigationStack(path: $path) {
             CardDetailView(card: card, path: $path)
         }
-        .modelContainer(appContainer)
+        .modelContainer(previewContainer)
     }
 }
 
@@ -118,5 +120,5 @@ struct CardDetailView: View {
     NavigationStack(path: $path) {
         CardDetailView(card: Card.placeholder, path: $path)
     }
-    .modelContainer(appContainer)
+    .modelContainer(previewContainer)
 }
