@@ -70,6 +70,10 @@ enum DieType: Int, CaseIterable {
     }
 }
 
+extension DieType: Identifiable {
+    var id: Self { self }
+}
+
 @Model
 class Die {
     var id: Int

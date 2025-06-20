@@ -12,11 +12,21 @@ struct CardListView: View {
     @Query private var cards: [Card]
     @Binding var path: NavigationPath
 
-    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = []) {
+    private let dice: Set<DieType>
+    var filteredCards: [Card] {
+        guard dice.isEmpty == false else { return cards }
+        return cards.filter { card in
+            dice.isSubset(of: card.dice)
+        }
+    }
+
+    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<DieType> = []) {
         let rawDecks = decks.map(\.rawValue)
         let rawTypes = types.map(\.rawValue)
         let rawRequirements = requirements.map(\.rawValue)
         let rawPawns = pawns.map(\.rawValue)
+
+        self.dice = dice
 
         let searchPredicate = #Predicate<Card> { card in
             searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter
@@ -49,7 +59,7 @@ struct CardListView: View {
 
     var body: some View {
         List {
-            ForEach(cards) { card in
+            ForEach(filteredCards) { card in
                 NavigationLink("\(card.id) — \(card.title)", value: card)
             }
         }
@@ -83,10 +93,10 @@ struct CardListView: View {
 
 #Preview("Filtered") {
     @Previewable @State var path = NavigationPath()
-    let pawns: Set<Pawn> = [.green]
+    let dice: Set<DieType> = [.red]
 
     NavigationStack(path: $path) {
-        CardListView(path: $path, pawns: pawns)
+        CardListView(path: $path, dice: dice)
     }
     .modelContainer(appContainer)
 }

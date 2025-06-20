@@ -18,6 +18,7 @@ struct FilterExpandState {
     var pawn = false
     var cardType = false
     var bunnyRequirement = false
+    var dice = false
 }
 
 struct FilterView: View {
@@ -27,6 +28,7 @@ struct FilterView: View {
     @Binding var typeSelection: Set<CardType>
     @Binding var requirementSelection: Set<BunnyRequirement>
     @Binding var pawnSelection: Set<Pawn>
+    @Binding var diceSelection: Set<DieType>
     @Binding var expandState: FilterExpandState
 
     var body: some View {
@@ -103,6 +105,24 @@ struct FilterView: View {
                 } header: {
                     Text("Pawns")
                 }
+
+                Section(isExpanded: $expandState.dice) {
+                    ForEach(DieType.allCases) { die in
+                        Toggle(isOn: Binding(get: {
+                            diceSelection.contains(die)
+                        }, set: { value in
+                            if value {
+                                diceSelection.insert(die)
+                            } else {
+                                diceSelection.remove(die)
+                            }
+                        })) {
+                            Text(die.description.display)
+                        }
+                    }
+                } header: {
+                    Text("Dice")
+                }
             }
             .listStyle(.sidebar)
             .navigationTitle("Filters")
@@ -122,7 +142,8 @@ struct FilterView: View {
     @Previewable @State var typeSelection: Set<CardType> = []
     @Previewable @State var requirementSelection: Set<BunnyRequirement> = []
     @Previewable @State var pawnSelection: Set<Pawn> = []
+    @Previewable @State var diceSelection: Set<DieType> = []
     @Previewable @State var expandState: FilterExpandState = .init()
 
-    FilterView(deckSelection: $deckSelection, typeSelection: $typeSelection, requirementSelection: $requirementSelection, pawnSelection: $pawnSelection, expandState: $expandState)
+    FilterView(deckSelection: $deckSelection, typeSelection: $typeSelection, requirementSelection: $requirementSelection, pawnSelection: $pawnSelection, diceSelection: $diceSelection, expandState: $expandState)
 }
