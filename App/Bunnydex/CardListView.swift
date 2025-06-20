@@ -13,20 +13,22 @@ struct CardListView: View {
     @Binding var path: NavigationPath
 
     private let dice: Set<Die>
+    private let symbols: Set<Symbol>
     var filteredCards: [Card] {
-        guard dice.isEmpty == false else { return cards }
         return cards.filter { card in
-            dice.isSubset(of: card.dice)
+            dice.isSubset(of: card.dice) &&
+            symbols.isSubset(of: card.symbols)
         }
     }
 
-    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = []) {
+    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) {
         let rawDecks = decks.map(\.rawValue)
         let rawTypes = types.map(\.rawValue)
         let rawRequirements = requirements.map(\.rawValue)
         let rawPawns = pawns.map(\.rawValue)
 
         self.dice = dice
+        self.symbols = symbols
 
         let searchPredicate = #Predicate<Card> { card in
             searchFilter.isEmpty || card.title.localizedStandardContains(searchFilter) || card.id == searchFilter

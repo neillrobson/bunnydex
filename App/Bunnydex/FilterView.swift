@@ -19,6 +19,7 @@ struct FilterExpandState {
     var cardType = false
     var bunnyRequirement = false
     var dice = false
+    var symbols = false
 }
 
 struct FilterView: View {
@@ -29,6 +30,7 @@ struct FilterView: View {
     @Binding var requirementSelection: Set<BunnyRequirement>
     @Binding var pawnSelection: Set<Pawn>
     @Binding var diceSelection: Set<Die>
+    @Binding var symbolSelection: Set<Symbol>
     @Binding var expandState: FilterExpandState
 
     var body: some View {
@@ -123,6 +125,24 @@ struct FilterView: View {
                 } header: {
                     Text("Dice")
                 }
+
+                Section(isExpanded: $expandState.symbols) {
+                    ForEach(Symbol.allCases) { symbol in
+                        Toggle(isOn: Binding(get: {
+                            symbolSelection.contains(symbol)
+                        }, set: { value in
+                            if value {
+                                symbolSelection.insert(symbol)
+                            } else {
+                                symbolSelection.remove(symbol)
+                            }
+                        })) {
+                            Text(symbol.description.display)
+                        }
+                    }
+                } header: {
+                    Text("Symbol")
+                }
             }
             .listStyle(.sidebar)
             .navigationTitle("Filters")
@@ -143,7 +163,8 @@ struct FilterView: View {
     @Previewable @State var requirementSelection: Set<BunnyRequirement> = []
     @Previewable @State var pawnSelection: Set<Pawn> = []
     @Previewable @State var diceSelection: Set<Die> = []
+    @Previewable @State var symbolSelection: Set<Symbol> = []
     @Previewable @State var expandState: FilterExpandState = .init()
 
-    FilterView(deckSelection: $deckSelection, typeSelection: $typeSelection, requirementSelection: $requirementSelection, pawnSelection: $pawnSelection, diceSelection: $diceSelection, expandState: $expandState)
+    FilterView(deckSelection: $deckSelection, typeSelection: $typeSelection, requirementSelection: $requirementSelection, pawnSelection: $pawnSelection, diceSelection: $diceSelection, symbolSelection: $symbolSelection, expandState: $expandState)
 }

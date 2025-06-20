@@ -70,6 +70,11 @@ struct CardDetailView: View {
                         }
                     }
                 }
+                if !card.symbols.isEmpty {
+                    LabeledContent("Symbols") {
+                        Text(card.symbols.map(\.description.display).joined(separator: ", "))
+                    }
+                }
             }
             ForEach(card.rules, id: \.title) { rule in
                 Section(header: Text(rule.title)) {

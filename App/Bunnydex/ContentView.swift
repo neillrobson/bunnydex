@@ -19,13 +19,14 @@ struct ContentView: View {
     @State private var bunnyRequirements: Set<BunnyRequirement> = []
     @State private var pawns: Set<Pawn> = []
     @State private var dice: Set<Die> = []
+    @State private var symbols: Set<Symbol> = []
 
     @State private var expandState: FilterExpandState = .init()
     @State private var path = NavigationPath()
 
     var body: some View {
         NavigationStack(path: $path) {
-            CardListView(searchFilter: searchText, path: $path, decks: decks, types: cardTypes, requirements: bunnyRequirements, pawns: pawns, dice: dice)
+            CardListView(searchFilter: searchText, path: $path, decks: decks, types: cardTypes, requirements: bunnyRequirements, pawns: pawns, dice: dice, symbols: symbols)
             .searchable(text: $searchText, prompt: "Search")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -46,7 +47,7 @@ struct ContentView: View {
         }.sheet(isPresented: $showInfo) {
             InfoView()
         }.sheet(isPresented: $showFilters) {
-            FilterView(deckSelection: $decks, typeSelection: $cardTypes, requirementSelection: $bunnyRequirements, pawnSelection: $pawns, diceSelection: $dice, expandState: $expandState)
+            FilterView(deckSelection: $decks, typeSelection: $cardTypes, requirementSelection: $bunnyRequirements, pawnSelection: $pawns, diceSelection: $dice, symbolSelection: $symbols, expandState: $expandState)
         }
     }
 }

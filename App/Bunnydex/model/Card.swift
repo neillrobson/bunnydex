@@ -141,6 +141,7 @@ class Card {
     var rawPawn: Int?
     var rawRequirement: Int
     var dice: [Die]
+    var symbols: [Symbol]
     var rules: [Rule]
 
     var type: CardType {
@@ -189,6 +190,7 @@ class Card {
         }
 
         self.dice = json.dice?.compactMap(Die.init) ?? []
+        self.symbols = json.symbols?.compactMap(Symbol.init) ?? []
     }
 
     /**
