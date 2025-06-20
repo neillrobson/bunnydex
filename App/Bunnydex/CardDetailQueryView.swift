@@ -23,7 +23,11 @@ struct CardDetailQueryView: View {
     }
 
     var body: some View {
-        CardDetailView(card: cards.first ?? .placeholder, path: $path)
+        if cards.isEmpty {
+            ContentUnavailableView("Card does not exist", systemImage: "questionmark.text.page")
+        } else {
+            CardDetailView(card: cards.first!, path: $path)
+        }
     }
 }
 
@@ -33,5 +37,14 @@ struct CardDetailQueryView: View {
     NavigationStack(path: $path) {
         CardDetailQueryView(id: "0005", path: $path)
     }
-    .modelContainer(appContainer)
+    .modelContainer(previewContainer)
+}
+
+#Preview("Empty state") {
+    @Previewable @State var path = NavigationPath()
+
+    NavigationStack(path: $path) {
+        CardDetailQueryView(id: "INVALID", path: $path)
+    }
+    .modelContainer(previewContainer)
 }

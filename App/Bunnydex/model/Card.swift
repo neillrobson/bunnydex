@@ -130,14 +130,6 @@ struct JSONCard: Codable {
     var pawn: String?
     var symbols: [String]?
     var rules: [Rule]?
-
-    static let placeholder = JSONCard(
-        id: "0000",
-        title: "Placeholder Card",
-        type: CardType.run.description,
-        deck: Deck.blue.description,
-        bunnyRequirement: BunnyRequirement.no.description
-    )
 }
 
 @Model
@@ -206,7 +198,4 @@ class Card {
         let diceIds = json.dice ?? []
         self.rawDice = diceIds.compactMap(DieType.init).compactMap { DiceRepository.shared.diceMap[$0] }
     }
-
-    @MainActor
-    static let placeholder = Card(json: JSONCard.placeholder)
 }

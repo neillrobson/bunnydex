@@ -113,12 +113,3 @@ struct CardDetailView: View {
         .modelContainer(previewContainer)
     }
 }
-
-#Preview("Placeholder") {
-    @Previewable @State var path = NavigationPath()
-
-    NavigationStack(path: $path) {
-        CardDetailView(card: Card.placeholder, path: $path)
-    }
-    .modelContainer(previewContainer)
-}
