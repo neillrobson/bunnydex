@@ -92,8 +92,6 @@ final class DiceRepository {
     private(set) var diceMap: [DieType: Die] = [:]
 
     func ensureDiceExist(in context: ModelContext) throws {
-        var didInsert = false
-
         for type in DieType.allCases {
             let id = type.rawValue
             let fetchDescriptor = FetchDescriptor<Die>(predicate: #Predicate { $0.id == id })
@@ -103,12 +101,7 @@ final class DiceRepository {
                 let newDie = Die(type: type)
                 context.insert(newDie)
                 diceMap[type] = newDie
-                didInsert = true
             }
-        }
-
-        if didInsert {
-            try context.save()
         }
     }
 }

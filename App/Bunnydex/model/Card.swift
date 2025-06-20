@@ -143,7 +143,7 @@ class Card {
     var rules: [Rule]
 
     @Relationship(inverse: \Die.cards)
-    var rawDice: [Die]
+    var rawDice: [Die] = []
 
     var type: CardType {
         return .init(rawValue: rawType)!
@@ -165,7 +165,6 @@ class Card {
         rawDice.map { $0.dieType }
     }
 
-    @MainActor
     init(json: JSONCard) {
         id = json.id
         title = json.title
@@ -194,8 +193,20 @@ class Card {
 
             return pawn.rawValue
         }
+    }
+
+    /**
+     Handles initializing, inserting, and defining relationships for a new Card model object.
+     */
+    @discardableResult
+    @MainActor
+    static func create(json: JSONCard, context: ModelContext) -> Card {
+        let card = Card(json: json)
+        context.insert(card)
 
         let diceIds = json.dice ?? []
-        self.rawDice = diceIds.compactMap(DieType.init).compactMap { DiceRepository.shared.diceMap[$0] }
+        card.rawDice = diceIds.compactMap(DieType.init).compactMap { DiceRepository.shared.diceMap[$0] }
+
+        return card
     }
 }

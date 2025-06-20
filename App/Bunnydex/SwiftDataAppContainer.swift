@@ -28,7 +28,7 @@ func resetData(_ context: ModelContext) {
     do {
         try context.delete(model: Card.self)
     } catch {
-        print("Failed to delete existing data: \(error)")
+        print("Failed to delete existing cards: \(error)")
     }
 
     do {
@@ -38,7 +38,7 @@ func resetData(_ context: ModelContext) {
     }
 
     for json in getCardsFromJSON() {
-        context.insert(Card(json: json))
+        Card.create(json: json, context: context)
     }
 }
 
