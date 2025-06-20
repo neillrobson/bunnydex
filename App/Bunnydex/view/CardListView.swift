@@ -12,6 +12,7 @@ struct CardListView: View {
     @Query private var cards: [Card]
     @Binding var path: NavigationPath
 
+    private let searchFilter: String
     private let dice: Set<Die>
     private let symbols: Set<Symbol>
     var filteredCards: [Card] {
@@ -27,6 +28,7 @@ struct CardListView: View {
         let rawRequirements = requirements.map(\.rawValue)
         let rawPawns = pawns.map(\.rawValue)
 
+        self.searchFilter = searchFilter
         self.dice = dice
         self.symbols = symbols
 
@@ -72,6 +74,15 @@ struct CardListView: View {
         .navigationDestination(for: String.self) { id in
             CardDetailQueryView(id: id, path: $path)
         }
+        .overlay {
+            if filteredCards.isEmpty {
+                if searchFilter.isEmpty {
+                    ContentUnavailableView("No Cards found", systemImage: "magnifyingglass", description: Text("Try adjusting your filters."))
+                } else {
+                    ContentUnavailableView.search(text: searchFilter)
+                }
+            }
+        }
     }
 }
 
@@ -81,7 +92,7 @@ struct CardListView: View {
     NavigationStack(path: $path) {
         CardListView(path: $path)
     }
-    .modelContainer(appContainer)
+    .modelContainer(previewContainer)
 }
 
 #Preview("Search") {
@@ -90,7 +101,16 @@ struct CardListView: View {
     NavigationStack(path: $path) {
         CardListView(searchFilter: "carrot", path: $path)
     }
-    .modelContainer(appContainer)
+    .modelContainer(previewContainer)
+}
+
+#Preview("Empty search") {
+    @Previewable @State var path = NavigationPath()
+
+    NavigationStack(path: $path) {
+        CardListView(searchFilter: "does not exist", path: $path)
+    }
+    .modelContainer(previewContainer)
 }
 
 #Preview("Filtered") {
@@ -100,5 +120,15 @@ struct CardListView: View {
     NavigationStack(path: $path) {
         CardListView(path: $path, dice: dice)
     }
-    .modelContainer(appContainer)
+    .modelContainer(previewContainer)
+}
+
+#Preview("Empty filtered") {
+    @Previewable @State var path = NavigationPath()
+    let dice: Set<Die> = [.red, .blueD10, .chineseZodiac]
+
+    NavigationStack(path: $path) {
+        CardListView(path: $path, dice: dice)
+    }
+    .modelContainer(previewContainer)
 }
