@@ -28,7 +28,7 @@ struct FilterView: View {
     @Binding var typeSelection: Set<CardType>
     @Binding var requirementSelection: Set<BunnyRequirement>
     @Binding var pawnSelection: Set<Pawn>
-    @Binding var diceSelection: Set<DieType>
+    @Binding var diceSelection: Set<Die>
     @Binding var expandState: FilterExpandState
 
     var body: some View {
@@ -107,7 +107,7 @@ struct FilterView: View {
                 }
 
                 Section(isExpanded: $expandState.dice) {
-                    ForEach(DieType.allCases) { die in
+                    ForEach(Die.allCases) { die in
                         Toggle(isOn: Binding(get: {
                             diceSelection.contains(die)
                         }, set: { value in
@@ -142,7 +142,7 @@ struct FilterView: View {
     @Previewable @State var typeSelection: Set<CardType> = []
     @Previewable @State var requirementSelection: Set<BunnyRequirement> = []
     @Previewable @State var pawnSelection: Set<Pawn> = []
-    @Previewable @State var diceSelection: Set<DieType> = []
+    @Previewable @State var diceSelection: Set<Die> = []
     @Previewable @State var expandState: FilterExpandState = .init()
 
     FilterView(deckSelection: $deckSelection, typeSelection: $typeSelection, requirementSelection: $requirementSelection, pawnSelection: $pawnSelection, diceSelection: $diceSelection, expandState: $expandState)

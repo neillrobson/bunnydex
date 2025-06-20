@@ -12,7 +12,7 @@ struct CardListView: View {
     @Query private var cards: [Card]
     @Binding var path: NavigationPath
 
-    private let dice: Set<DieType>
+    private let dice: Set<Die>
     var filteredCards: [Card] {
         guard dice.isEmpty == false else { return cards }
         return cards.filter { card in
@@ -20,7 +20,7 @@ struct CardListView: View {
         }
     }
 
-    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<DieType> = []) {
+    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = []) {
         let rawDecks = decks.map(\.rawValue)
         let rawTypes = types.map(\.rawValue)
         let rawRequirements = requirements.map(\.rawValue)
@@ -93,7 +93,7 @@ struct CardListView: View {
 
 #Preview("Filtered") {
     @Previewable @State var path = NavigationPath()
-    let dice: Set<DieType> = [.red]
+    let dice: Set<Die> = [.red]
 
     NavigationStack(path: $path) {
         CardListView(path: $path, dice: dice)

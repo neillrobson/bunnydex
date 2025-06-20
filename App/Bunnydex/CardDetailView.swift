@@ -47,12 +47,12 @@ struct CardDetailView: View {
                 LabeledContent("Bunny requirement") {
                     Text(card.bunnyRequirement.description.display)
                 }
-                if !card.rawDice.isEmpty {
+                if !card.dice.isEmpty {
                     LabeledContent("Dice") {
                         Grid(alignment: .center, horizontalSpacing: 5, verticalSpacing: 5) {
-                            ForEach (0...card.rawDice.count/5, id: \.self) { row in
+                            ForEach (0...card.dice.count/5, id: \.self) { row in
                                 let rowStart = row * 5
-                                let offsetEnd = min(card.rawDice.count - rowStart, 5)
+                                let offsetEnd = min(card.dice.count - rowStart, 5)
                                 let offsetStart = offsetEnd - 5
 
                                 GridRow {
@@ -60,7 +60,7 @@ struct CardDetailView: View {
                                         if offset < 0 {
                                             Color.clear.gridCellUnsizedAxes([.horizontal, .vertical])
                                         } else {
-                                            let die = card.rawDice[rowStart + offset].dieType
+                                            let die = card.dice[rowStart + offset]
                                             Image(systemName: die.systemImageName)
                                                 .foregroundStyle(die.color)
                                         }

@@ -10,7 +10,7 @@ import SwiftUI
 import EnumStringConvertible
 
 @enumStringConvertible
-enum DieType: Int, CaseIterable {
+enum Die: Int, Codable, CaseIterable {
     case blue,
          yellow,
          violet,
@@ -70,42 +70,6 @@ enum DieType: Int, CaseIterable {
     }
 }
 
-extension DieType: Identifiable {
+extension Die: Identifiable {
     var id: Self { self }
-}
-
-@Model
-class Die {
-    var id: Int
-    var cards: [Card] = []
-
-    init(type: DieType) {
-        self.id = type.rawValue
-    }
-
-    var dieType: DieType {
-        get { DieType(rawValue: id)! }
-        set { id = newValue.rawValue }
-    }
-}
-
-@MainActor
-final class DiceRepository {
-    static let shared = DiceRepository()
-
-    private(set) var diceMap: [DieType: Die] = [:]
-
-    func ensureDiceExist(in context: ModelContext) throws {
-        for type in DieType.allCases {
-            let id = type.rawValue
-            let fetchDescriptor = FetchDescriptor<Die>(predicate: #Predicate { $0.id == id })
-            if let existing = try? context.fetch(fetchDescriptor).first {
-                diceMap[type] = existing
-            } else {
-                let newDie = Die(type: type)
-                context.insert(newDie)
-                diceMap[type] = newDie
-            }
-        }
-    }
 }

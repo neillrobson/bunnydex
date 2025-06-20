@@ -18,7 +18,7 @@ struct ContentView: View {
     @State private var cardTypes: Set<CardType> = []
     @State private var bunnyRequirements: Set<BunnyRequirement> = []
     @State private var pawns: Set<Pawn> = []
-    @State private var dice: Set<DieType> = []
+    @State private var dice: Set<Die> = []
 
     @State private var expandState: FilterExpandState = .init()
     @State private var path = NavigationPath()

@@ -140,10 +140,8 @@ class Card {
     var rawDeck: Int
     var rawPawn: Int?
     var rawRequirement: Int
+    var dice: [Die]
     var rules: [Rule]
-
-    @Relationship(inverse: \Die.cards)
-    var rawDice: [Die] = []
 
     var type: CardType {
         return .init(rawValue: rawType)!
@@ -159,10 +157,6 @@ class Card {
 
     var bunnyRequirement: BunnyRequirement {
         return .init(rawValue: rawRequirement)!
-    }
-
-    var dice: [DieType] {
-        rawDice.map { $0.dieType }
     }
 
     init(json: JSONCard) {
@@ -193,10 +187,14 @@ class Card {
 
             return pawn.rawValue
         }
+
+        self.dice = json.dice?.compactMap(Die.init) ?? []
     }
 
     /**
      Handles initializing, inserting, and defining relationships for a new Card model object.
+
+     Although no relationships are currently used in the Card model, they should be initialized after the model's insertion into the database.
      */
     @discardableResult
     @MainActor
@@ -204,8 +202,7 @@ class Card {
         let card = Card(json: json)
         context.insert(card)
 
-        let diceIds = json.dice ?? []
-        card.rawDice = diceIds.compactMap(DieType.init).compactMap { DiceRepository.shared.diceMap[$0] }
+        // Define relationships here (post-insertion), as necessary
 
         return card
     }

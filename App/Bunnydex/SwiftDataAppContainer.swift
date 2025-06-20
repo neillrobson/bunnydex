@@ -31,12 +31,6 @@ func resetData(_ context: ModelContext) {
         print("Failed to delete existing cards: \(error)")
     }
 
-    do {
-        try DiceRepository.shared.ensureDiceExist(in: context)
-    } catch {
-        print("Failed to verify dice model: \(error)")
-    }
-
     for json in getCardsFromJSON() {
         Card.create(json: json, context: context)
     }
@@ -45,7 +39,7 @@ func resetData(_ context: ModelContext) {
 @MainActor
 let appContainer: ModelContainer = {
     do {
-        let container = try ModelContainer(for: Card.self, Die.self)
+        let container = try ModelContainer(for: Card.self)
         let hasLoadedData = UserDefaults.standard.bool(forKey: "hasLoadedData")
 
         if !hasLoadedData {
@@ -62,7 +56,7 @@ let appContainer: ModelContainer = {
 @MainActor
 let previewContainer: ModelContainer = {
     do {
-        let container = try ModelContainer(for: Card.self, Die.self)
+        let container = try ModelContainer(for: Card.self)
         resetData(container.mainContext)
         return container
     } catch {
