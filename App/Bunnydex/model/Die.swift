@@ -28,6 +28,17 @@ enum Die: Int, Codable, CaseIterable {
          zodiac,
          chineseZodiac
 
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let str = try container.decode(String.self)
+        self = .init(str)!
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(description)
+    }
+
     var systemImageName: String {
         switch self {
         case .clear:
