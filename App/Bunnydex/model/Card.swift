@@ -41,7 +41,7 @@ extension CardType: Identifiable {
 }
 
 @enumStringConvertible
-enum Deck: Int, LosslessStringConvertible, CaseIterable {
+enum Deck: Int, Codable, CaseIterable {
     case blue,
          yellow,
          red,
@@ -68,6 +68,11 @@ enum Deck: Int, LosslessStringConvertible, CaseIterable {
          cakeBatter,
          radioactiveRobots,
          almondCrisp
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self = try .init(container.decode(String.self))!
+    }
 
     var isKinder: Bool {
         switch self {
@@ -134,7 +139,7 @@ struct JSONCard: Codable, Sendable {
     let id: String
     let title: String
     let type: CardType
-    let deck: String
+    let deck: Deck
     let bunnyRequirement: String?
     let dice: [String]?
     let pawn: Pawn?
@@ -176,11 +181,7 @@ class Card {
         rules = json.rules ?? []
 
         rawType = json.type.rawValue
-
-        guard let deck = Deck.init(json.deck) else {
-            fatalError("Deck ID \(json.deck) not found")
-        }
-        self.rawDeck = deck.rawValue
+        rawDeck = json.deck.rawValue
 
         let requirementString = json.bunnyRequirement ?? "NO"
         guard let bunnyRequirement = BunnyRequirement.init(requirementString) else {
