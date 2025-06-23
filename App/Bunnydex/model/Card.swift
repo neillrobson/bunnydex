@@ -148,7 +148,7 @@ struct JSONCard: Codable, Sendable {
     let bunnyRequirement: BunnyRequirement?
     let dice: [Die]?
     let pawn: Pawn?
-    let symbols: [String]?
+    let symbols: [Symbol]?
     let rules: [Rule]?
 }
 
@@ -189,9 +189,9 @@ class Card {
         rawDeck = json.deck.rawValue
         rawRequirement = json.bunnyRequirement?.rawValue ?? BunnyRequirement.no.rawValue
 
-        self.rawPawn = json.pawn.map(\.rawValue)
-        self.dice = json.dice ?? []
-        self.symbols = json.symbols?.compactMap(Symbol.init) ?? []
+        rawPawn = json.pawn.map(\.rawValue)
+        dice = json.dice ?? []
+        symbols = json.symbols ?? []
     }
 
     /**
