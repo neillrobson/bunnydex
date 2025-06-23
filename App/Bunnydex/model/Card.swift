@@ -87,11 +87,16 @@ extension Deck: Identifiable {
 }
 
 @enumStringConvertible
-enum BunnyRequirement: Int, LosslessStringConvertible, CaseIterable {
+enum BunnyRequirement: Int, Codable, CaseIterable {
     case no,
          play,
          playX2,
          playAndSave
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self = try .init(container.decode(String.self))!
+    }
 }
 
 extension BunnyRequirement: Identifiable {
@@ -140,7 +145,7 @@ struct JSONCard: Codable, Sendable {
     let title: String
     let type: CardType
     let deck: Deck
-    let bunnyRequirement: String?
+    let bunnyRequirement: BunnyRequirement?
     let dice: [String]?
     let pawn: Pawn?
     let symbols: [String]?
@@ -182,12 +187,7 @@ class Card {
 
         rawType = json.type.rawValue
         rawDeck = json.deck.rawValue
-
-        let requirementString = json.bunnyRequirement ?? "NO"
-        guard let bunnyRequirement = BunnyRequirement.init(requirementString) else {
-            fatalError("Bunny requirement ID \(requirementString) not found")
-        }
-        self.rawRequirement = bunnyRequirement.rawValue
+        rawRequirement = json.bunnyRequirement?.rawValue ?? BunnyRequirement.no.rawValue
 
         self.rawPawn = json.pawn.map(\.rawValue)
         self.dice = json.dice?.compactMap(Die.init) ?? []
