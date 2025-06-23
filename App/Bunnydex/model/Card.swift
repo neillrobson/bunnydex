@@ -91,6 +91,11 @@ extension BunnyRequirement: Identifiable {
 @enumStringConvertible
 enum Pawn: Int, Codable, CaseIterable {
     case blue, yellow, violet, orange, green, red, pink, black, brown
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self = try Pawn.init(container.decode(String.self))!
+    }
 }
 
 extension Pawn: Identifiable {
@@ -120,16 +125,16 @@ struct Rule: Codable {
     }
 }
 
-struct JSONCard: Codable {
-    var id: String
-    var title: String
-    var type: String
-    var deck: String
-    var bunnyRequirement: String?
-    var dice: [String]?
-    var pawn: String?
-    var symbols: [String]?
-    var rules: [Rule]?
+struct JSONCard: Codable, Sendable {
+    let id: String
+    let title: String
+    let type: String
+    let deck: String
+    let bunnyRequirement: String?
+    let dice: [String]?
+    let pawn: Pawn?
+    let symbols: [String]?
+    let rules: [Rule]?
 }
 
 @Model
@@ -181,14 +186,7 @@ class Card {
         }
         self.rawRequirement = bunnyRequirement.rawValue
 
-        self.rawPawn = json.pawn.map { pawnId in
-            guard let pawn = Pawn.init(pawnId) else {
-                fatalError("Pawn ID \(pawnId) not found")
-            }
-
-            return pawn.rawValue
-        }
-
+        self.rawPawn = json.pawn.map(\.rawValue)
         self.dice = json.dice?.compactMap(Die.init) ?? []
         self.symbols = json.symbols?.compactMap(Symbol.init) ?? []
     }
