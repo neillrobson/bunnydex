@@ -11,7 +11,7 @@ import SwiftUI
 import EnumStringConvertible
 
 @enumStringConvertible
-enum CardType: Int, LosslessStringConvertible, CaseIterable {
+enum CardType: Int, Codable, CaseIterable {
     case run,
          roamingRedRun,
          special,
@@ -29,6 +29,11 @@ enum CardType: Int, LosslessStringConvertible, CaseIterable {
          senator,
          metal,
          bundergroundStation
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self = try .init(container.decode(String.self))!
+    }
 }
 
 extension CardType: Identifiable {
@@ -128,7 +133,7 @@ struct Rule: Codable {
 struct JSONCard: Codable, Sendable {
     let id: String
     let title: String
-    let type: String
+    let type: CardType
     let deck: String
     let bunnyRequirement: String?
     let dice: [String]?
@@ -170,10 +175,7 @@ class Card {
         title = json.title
         rules = json.rules ?? []
 
-        guard let type = CardType.init(json.type) else {
-            fatalError("Type ID \(json.type) not found")
-        }
-        self.rawType = type.rawValue
+        rawType = json.type.rawValue
 
         guard let deck = Deck.init(json.deck) else {
             fatalError("Deck ID \(json.deck) not found")
