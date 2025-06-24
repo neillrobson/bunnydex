@@ -117,7 +117,7 @@ extension Pawn: Identifiable {
     var id: Self { self }
 }
 
-struct Rule: Codable {
+struct Rule: Codable, Hashable {
     var title: String
     var text: String
 
@@ -140,7 +140,7 @@ struct Rule: Codable {
     }
 }
 
-struct JSONCard: Codable, Sendable {
+struct JSONCard: Codable, Sendable, Hashable, Identifiable {
     let id: String
     let title: String
     let type: CardType
@@ -150,6 +150,18 @@ struct JSONCard: Codable, Sendable {
     let pawn: Pawn?
     let symbols: [Symbol]?
     let rules: [Rule]?
+
+    init(_ card: Card) {
+        id = card.id
+        title = card.title
+        type = card.type
+        deck = card.deck
+        bunnyRequirement = card.bunnyRequirement
+        dice = card.dice
+        pawn = card.pawn
+        symbols = card.symbols
+        rules = card.rules
+    }
 }
 
 @Model

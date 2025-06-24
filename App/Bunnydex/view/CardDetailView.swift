@@ -20,7 +20,7 @@ extension CGSize {
 }
 
 struct CardDetailView: View {
-    let card: Card
+    let card: JSONCard
     var imageId: String {
         "01x\(card.deck.isKinder ? "K" : "Q")\(card.id)"
     }
@@ -44,15 +44,17 @@ struct CardDetailView: View {
                 LabeledContent("Card type") {
                     Text(card.type.description.display)
                 }
-                LabeledContent("Bunny requirement") {
-                    Text(card.bunnyRequirement.description.display)
+                if let requirement = card.bunnyRequirement {
+                    LabeledContent("Bunny requirement") {
+                        Text(requirement.description.display)
+                    }
                 }
-                if !card.dice.isEmpty {
+                if let dice = card.dice, !dice.isEmpty {
                     LabeledContent("Dice") {
                         Grid(alignment: .center, horizontalSpacing: 5, verticalSpacing: 5) {
-                            ForEach (0...card.dice.count/5, id: \.self) { row in
+                            ForEach (0...dice.count/5, id: \.self) { row in
                                 let rowStart = row * 5
-                                let offsetEnd = min(card.dice.count - rowStart, 5)
+                                let offsetEnd = min(dice.count - rowStart, 5)
                                 let offsetStart = offsetEnd - 5
 
                                 GridRow {
@@ -60,7 +62,7 @@ struct CardDetailView: View {
                                         if offset < 0 {
                                             Color.clear.gridCellUnsizedAxes([.horizontal, .vertical])
                                         } else {
-                                            let die = card.dice[rowStart + offset]
+                                            let die = dice[rowStart + offset]
                                             Image(systemName: die.systemImageName)
                                                 .foregroundStyle(die.color)
                                         }
@@ -70,13 +72,13 @@ struct CardDetailView: View {
                         }
                     }
                 }
-                if !card.symbols.isEmpty {
+                if let symbols = card.symbols, !symbols.isEmpty {
                     LabeledContent("Symbols") {
-                        Text(card.symbols.map(\.description.display).joined(separator: ", "))
+                        Text(symbols.map(\.description.display).joined(separator: ", "))
                     }
                 }
             }
-            ForEach(card.rules, id: \.title) { rule in
+            ForEach(card.rules ?? [], id: \.title) { rule in
                 Section(header: Text(rule.title)) {
                     Text(.init(rule.text))
                 }
@@ -113,7 +115,7 @@ struct CardDetailView: View {
 
     if let card = try? previewContainer.mainContext.fetch(fetchDescriptor).first {
         NavigationStack(path: $path) {
-            CardDetailView(card: card, path: $path)
+            CardDetailView(card: JSONCard(card), path: $path)
         }
         .modelContainer(previewContainer)
     }

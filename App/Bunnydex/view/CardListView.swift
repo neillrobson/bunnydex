@@ -15,12 +15,16 @@ struct CardListView: View {
     private let searchFilter: String
     private let dice: Set<Die>
     private let symbols: Set<Symbol>
-    var filteredCards: [Card] {
-        return cards.filter { card in
-            dice.isSubset(of: card.dice) &&
-            symbols.isSubset(of: card.symbols)
+    @State private var fetchedCards: [JSONCard] = []
+    var filteredCards: [JSONCard] {
+        return fetchedCards.filter { card in
+            dice.isSubset(of: card.dice ?? []) &&
+            symbols.isSubset(of: card.symbols ?? [])
         }
     }
+
+    @Environment(\.modelContext) private var context
+    @State var isFetchingCards = false
 
     init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) {
         let rawDecks = decks.map(\.rawValue)
@@ -63,12 +67,21 @@ struct CardListView: View {
 
     var body: some View {
         List {
+            Button("Reload cards") {
+                isFetchingCards = true
+                Task {
+                    let fetcher = ThreadsafeBackgroundActor(modelContainer: context.container)
+                    fetchedCards = try await fetcher.fetchData()
+                    isFetchingCards = false
+                }
+            }
+            .disabled(isFetchingCards)
             ForEach(filteredCards) { card in
                 NavigationLink("\(card.id) — \(card.title)", value: card)
             }
         }
         .navigationTitle("Cards")
-        .navigationDestination(for: Card.self) { card in
+        .navigationDestination(for: JSONCard.self) { card in
             CardDetailView(card: card, path: $path)
         }
         .navigationDestination(for: String.self) { id in

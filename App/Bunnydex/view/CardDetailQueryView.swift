@@ -26,7 +26,7 @@ struct CardDetailQueryView: View {
         if cards.isEmpty {
             ContentUnavailableView("Card does not exist", systemImage: "questionmark.text.page")
         } else {
-            CardDetailView(card: cards.first!, path: $path)
+            CardDetailView(card: JSONCard(cards.first!), path: $path)
         }
     }
 }
