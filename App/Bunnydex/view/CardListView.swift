@@ -8,6 +8,61 @@
 import SwiftUI
 import SwiftData
 
+func predicateBuilder(searchFilter: String = "", decks: Set<Deck> = []) -> Predicate<Card> {
+    func buildConjunction(lhs: some StandardPredicateExpression<Bool>, rhs: some StandardPredicateExpression<Bool>) -> any StandardPredicateExpression<Bool> {
+        PredicateExpressions.Conjunction(lhs: lhs, rhs: rhs)
+    }
+
+    let rawDecks = decks.map(\.rawValue)
+
+    return Predicate<Card> { card in
+        var conditions: [any StandardPredicateExpression<Bool>] = []
+
+        if !searchFilter.isEmpty {
+            conditions.append(
+                PredicateExpressions.build_Disjunction(
+                    lhs: PredicateExpressions.build_localizedStandardContains(
+                        PredicateExpressions.build_KeyPath(
+                            root: PredicateExpressions.build_Arg(card),
+                            keyPath: \.title
+                        ),
+                        PredicateExpressions.build_Arg(searchFilter)
+                    ),
+                    rhs: PredicateExpressions.build_Equal(
+                        lhs: PredicateExpressions.build_KeyPath(
+                            root: PredicateExpressions.build_Arg(card),
+                            keyPath: \.id
+                        ),
+                        rhs: PredicateExpressions.build_Arg(searchFilter)
+                    )
+                )
+            )
+        }
+
+        if !decks.isEmpty {
+            conditions.append(
+                PredicateExpressions.build_contains(
+                    PredicateExpressions.build_Arg(rawDecks),
+                    PredicateExpressions.build_KeyPath(
+                        root: PredicateExpressions.build_Arg(card),
+                        keyPath: \.rawDeck
+                    )
+                )
+            )
+        }
+
+        guard let first = conditions.first else {
+            return PredicateExpressions.Value(true)
+        }
+
+        let closure: (any StandardPredicateExpression<Bool>, any StandardPredicateExpression<Bool>) -> any StandardPredicateExpression<Bool> = {
+            buildConjunction(lhs: $0, rhs: $1)
+        }
+
+        return conditions.dropFirst().reduce(first, closure)
+    }
+}
+
 struct CardListView: View {
     @Query private var cards: [Card]
     @Binding var path: NavigationPath
@@ -17,7 +72,7 @@ struct CardListView: View {
     private let symbols: Set<Symbol>
     @State private var fetchedCards: [JSONCard] = []
     var filteredCards: [JSONCard] {
-        return fetchedCards.filter { card in
+        return cards.map(JSONCard.init).filter { card in
             dice.isSubset(of: card.dice ?? []) &&
             symbols.isSubset(of: card.symbols ?? [])
         }
@@ -60,7 +115,9 @@ struct CardListView: View {
             pawnPredicate.evaluate(card)
         }
 
-        _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+        let myPred = predicateBuilder(searchFilter: searchFilter, decks: decks)
+
+        _cards = Query(filter: myPred, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
 
         _path = path
     }
