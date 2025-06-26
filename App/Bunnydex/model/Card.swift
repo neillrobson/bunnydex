@@ -175,6 +175,7 @@ class Card {
     var dice: [Die]
     var symbols: [Symbol]
     var rules: [Rule]
+    var rawDice: [Int]
 
     var type: CardType {
         return .init(rawValue: rawType)!
@@ -204,6 +205,8 @@ class Card {
         rawPawn = json.pawn.map(\.rawValue)
         dice = json.dice ?? []
         symbols = json.symbols ?? []
+
+        rawDice = json.dice?.map(\.rawValue) ?? []
     }
 
     /**

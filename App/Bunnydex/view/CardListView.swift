@@ -33,7 +33,11 @@ struct CardListView: View {
 
         let predicate = predicateBuilder(searchFilter: searchFilter, decks: decks, types: types, requirements: requirements, pawns: pawns, dice: dice, symbols: symbols)
 
-        _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+        let tempPred = #Predicate<Card> { card in
+            card.rawDice.contains(0)
+        }
+
+        _cards = Query(filter: tempPred, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
 
         _path = path
     }
