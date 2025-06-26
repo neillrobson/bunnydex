@@ -24,28 +24,9 @@ func getCardsFromJSON() -> [JSONCard] {
 }
 
 @MainActor
-func resetData(_ context: ModelContext) {
-    do {
-        try context.delete(model: Card.self)
-    } catch {
-        print("Failed to delete existing cards: \(error)")
-    }
-
-    for json in getCardsFromJSON() {
-        Card.create(json: json, context: context)
-    }
-}
-
-@MainActor
 let appContainer: ModelContainer = {
     do {
         let container = try ModelContainer(for: Card.self)
-        let hasLoadedData = UserDefaults.standard.bool(forKey: "hasLoadedData")
-
-        if !hasLoadedData {
-            resetData(container.mainContext)
-            UserDefaults.standard.set(true, forKey: "hasLoadedData")
-        }
 
         return container
     } catch {
@@ -57,7 +38,7 @@ let appContainer: ModelContainer = {
 let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(for: Card.self)
-        resetData(container.mainContext)
+
         return container
     } catch {
         fatalError("Failed to create preview container: \(error)")

@@ -34,7 +34,7 @@ struct InfoView: View {
 
                 #if DEBUG
                 Button("Reset database") {
-                    resetData(context)
+                    print("TODO: Implement reset with background actor")
                 }
                 #endif
             }

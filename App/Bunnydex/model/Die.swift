@@ -5,6 +5,7 @@
 //  Created by Neill Robson on 6/18/25.
 //
 
+import SwiftData
 import SwiftUI
 import EnumStringConvertible
 
@@ -82,4 +83,32 @@ enum Die: Int, Codable, CaseIterable {
 
 extension Die: Identifiable {
     var id: Self { self }
+}
+
+@Model
+class DieModel {
+    var id: Int
+    var cards: [Card] = []
+
+    init(_ die: Die) {
+        id = die.rawValue
+    }
+
+    var die: Die {
+        .init(rawValue: id)!
+    }
+}
+
+func dieMap(in context: ModelContext) -> [Die: DieModel] {
+    Die.allCases.reduce(into: [Die: DieModel]()) {
+        let id = $1.rawValue
+        let fetchDescriptor = FetchDescriptor<DieModel>(predicate: #Predicate { $0.id == id })
+        if let model = try? context.fetch(fetchDescriptor).first {
+            $0[$1] = model
+        } else {
+            let newModel = DieModel($1)
+            context.insert(newModel)
+            $0[$1] = newModel
+        }
+    }
 }

@@ -157,7 +157,7 @@ struct JSONCard: Codable, Sendable, Hashable, Identifiable {
         type = card.type
         deck = card.deck
         bunnyRequirement = card.bunnyRequirement
-        dice = card.dice
+        dice = card.dice.map(\.die)
         pawn = card.pawn
         symbols = card.symbols
         rules = card.rules
@@ -172,10 +172,11 @@ class Card {
     var rawDeck: Int
     var rawPawn: Int?
     var rawRequirement: Int
-    var dice: [Die]
+
+    @Relationship(inverse: \DieModel.cards)
+    var dice: [DieModel] = []
     var symbols: [Symbol]
     var rules: [Rule]
-    var rawDice: [Int]
 
     var type: CardType {
         return .init(rawValue: rawType)!
@@ -203,24 +204,18 @@ class Card {
         rawRequirement = json.bunnyRequirement?.rawValue ?? BunnyRequirement.no.rawValue
 
         rawPawn = json.pawn.map(\.rawValue)
-        dice = json.dice ?? []
         symbols = json.symbols ?? []
-
-        rawDice = json.dice?.map(\.rawValue) ?? []
     }
 
     /**
      Handles initializing, inserting, and defining relationships for a new Card model object.
-
-     Although no relationships are currently used in the Card model, they should be initialized after the model's insertion into the database.
      */
     @discardableResult
-    @MainActor
-    static func create(json: JSONCard, context: ModelContext) -> Card {
+    static func create(json: JSONCard, context: ModelContext, dice: [Die: DieModel]) -> Card {
         let card = Card(json: json)
         context.insert(card)
 
-        // Define relationships here (post-insertion), as necessary
+        card.dice = json.dice?.compactMap { dice[$0] } ?? []
 
         return card
     }

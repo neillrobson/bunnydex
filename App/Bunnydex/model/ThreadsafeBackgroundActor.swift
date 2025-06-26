@@ -12,9 +12,31 @@ import Foundation
 actor ThreadsafeBackgroundActor: Sendable {
     private var context: ModelContext { modelExecutor.modelContext }
 
-    func fetchData() async throws -> [JSONCard] {
+    func fetchData() throws -> [JSONCard] {
         let descriptor = FetchDescriptor<Card>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
         let cards = try context.fetch(descriptor)
         return cards.map(JSONCard.init)
+    }
+
+    func initializeDatabase() {
+        let dice = dieMap(in: context)
+
+        // TODO: Consider how to intelligently persist data.
+        // For now, just purge and recreate every time.
+        do {
+            try context.delete(model: Card.self)
+        } catch {
+            print("Error deleting cards: \(error)")
+        }
+
+        for json in getCardsFromJSON() {
+            Card.create(json: json, context: context, dice: dice)
+        }
+
+        do {
+            try context.save()
+        } catch {
+            print("Error saving database: \(error)")
+        }
     }
 }

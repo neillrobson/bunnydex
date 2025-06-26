@@ -24,23 +24,31 @@ struct ContentView: View {
     @State private var expandState: FilterExpandState = .init()
     @State private var path = NavigationPath()
 
+    @State private var isCreatingDatabase = true
+
+    @Environment(\.modelContext) private var context
+
     var body: some View {
         NavigationStack(path: $path) {
-            CardListView(searchFilter: searchText, path: $path, decks: decks, types: cardTypes, requirements: bunnyRequirements, pawns: pawns, dice: dice, symbols: symbols)
-            .searchable(text: $searchText, prompt: "Search")
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        showInfo.toggle()
-                    } label: {
-                        Image(systemName: "info.circle")
+            if isCreatingDatabase {
+                ProgressView("Creating database")
+            } else {
+                CardListView(searchFilter: searchText, path: $path, decks: decks, types: cardTypes, requirements: bunnyRequirements, pawns: pawns, dice: dice, symbols: symbols)
+                .searchable(text: $searchText, prompt: "Search")
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            showInfo.toggle()
+                        } label: {
+                            Image(systemName: "info.circle")
+                        }
                     }
-                }
-                ToolbarItem {
-                    Button {
-                        showFilters.toggle()
-                    } label: {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
+                    ToolbarItem {
+                        Button {
+                            showFilters.toggle()
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                        }
                     }
                 }
             }
@@ -48,6 +56,11 @@ struct ContentView: View {
             InfoView()
         }.sheet(isPresented: $showFilters) {
             FilterView(deckSelection: $decks, typeSelection: $cardTypes, requirementSelection: $bunnyRequirements, pawnSelection: $pawns, diceSelection: $dice, symbolSelection: $symbols, expandState: $expandState)
+        }.task {
+            isCreatingDatabase = true
+            let fetcher = ThreadsafeBackgroundActor(modelContainer: context.container)
+            await fetcher.initializeDatabase()
+            isCreatingDatabase = false
         }
     }
 }
