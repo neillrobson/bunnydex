@@ -12,8 +12,12 @@ import Foundation
 actor ThreadsafeBackgroundActor: Sendable {
     private var context: ModelContext { modelExecutor.modelContext }
 
-    func fetchData() throws -> [JSONCard] {
-        let descriptor = FetchDescriptor<Card>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+    func fetchData(_ predicate: Predicate<Card>? = nil) throws -> [JSONCard] {
+        let descriptor = if let p = predicate {
+            FetchDescriptor<Card>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+        } else {
+            FetchDescriptor<Card>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+        }
         let cards = try context.fetch(descriptor)
         return cards.map(JSONCard.init)
     }

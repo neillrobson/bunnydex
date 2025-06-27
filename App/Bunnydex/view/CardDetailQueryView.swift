@@ -8,25 +8,47 @@
 import SwiftUI
 import SwiftData
 
+enum CardDetailError: Error {
+    case notFound
+}
+
 struct CardDetailQueryView: View {
-    @Query private var cards: [Card]
+    let id: String
     @Binding var path: NavigationPath
 
+    @State private var result: Result<JSONCard, Error>?
+
+    @Environment(\.modelContext) private var context
+
     init(id: String, path: Binding<NavigationPath>) {
-        let predicate = #Predicate<Card> { card in
-            card.id == id
-        }
-
-        _cards = Query(filter: predicate, sort: \Card.id)
-
+        self.id = id
         self._path = path
     }
 
     var body: some View {
-        if cards.isEmpty {
+        switch result {
+        case .success(let card):
+            CardDetailView(card: card, path: $path)
+        case .failure:
             ContentUnavailableView("Card does not exist", systemImage: "questionmark.text.page")
-        } else {
-            CardDetailView(card: JSONCard(cards.first!), path: $path)
+        case nil:
+            ProgressView()
+                .task {
+                    let fetcher = ThreadsafeBackgroundActor(modelContainer: context.container)
+                    let results: [JSONCard]
+                    do {
+                        results = try await fetcher.fetchData(#Predicate { $0.id == id })
+                    } catch {
+                        result = .failure(error)
+                        return
+                    }
+
+                    result = if let first = results.first {
+                        .success(first)
+                    } else {
+                        .failure(CardDetailError.notFound)
+                    }
+                }
         }
     }
 }
