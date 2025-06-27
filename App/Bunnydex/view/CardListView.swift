@@ -13,17 +13,9 @@ struct CardListView: View {
     @Binding var path: NavigationPath
 
     private let searchFilter: String
-    private let dice: Set<Die>
-    private let symbols: Set<Symbol>
-    @State private var fetchedCards: [JSONCard] = []
-
-    @Environment(\.modelContext) private var context
-    @State var isFetchingCards = false
 
     init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) {
         self.searchFilter = searchFilter
-        self.dice = dice
-        self.symbols = symbols
 
         let predicate = predicateBuilder(searchFilter: searchFilter, decks: decks, types: types, requirements: requirements, pawns: pawns, dice: dice, symbols: symbols)
 
@@ -34,15 +26,6 @@ struct CardListView: View {
 
     var body: some View {
         List {
-            Button("Reload cards") {
-                isFetchingCards = true
-                Task {
-                    let fetcher = ThreadsafeBackgroundActor(modelContainer: context.container)
-                    fetchedCards = try await fetcher.fetchData()
-                    isFetchingCards = false
-                }
-            }
-            .disabled(isFetchingCards)
             ForEach(cards) { card in
                 NavigationLink("\(card.id) — \(card.title)", value: JSONCard(card))
             }
