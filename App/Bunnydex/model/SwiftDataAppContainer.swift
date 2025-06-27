@@ -23,7 +23,6 @@ func getCardsFromJSON() -> [JSONCard] {
     }
 }
 
-@MainActor
 let appContainer: ModelContainer = {
     do {
         let container = try ModelContainer(for: Card.self)
@@ -34,10 +33,14 @@ let appContainer: ModelContainer = {
     }
 }()
 
-@MainActor
 let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(for: Card.self)
+
+        Task {
+            let fetcher = ThreadsafeBackgroundActor(modelContainer: container)
+            await fetcher.initializeDatabase()
+        }
 
         return container
     } catch {

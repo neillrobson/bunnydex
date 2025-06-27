@@ -17,6 +17,8 @@ func predicateBuilder(searchFilter: String = "", decks: Set<Deck> = [], types: S
     let rawTypes = types.map(\.rawValue)
     let rawRequirements = requirements.map(\.rawValue)
     let rawPawns = pawns.map(\.rawValue)
+    let rawDice = dice.map(\.rawValue)
+//    let rawSymbols = symbols.map(\.rawValue)
 
     return Predicate<Card> { card in
         var conditions: [any StandardPredicateExpression<Bool>] = []
@@ -89,6 +91,46 @@ func predicateBuilder(searchFilter: String = "", decks: Set<Deck> = [], types: S
                 )
             )
         }
+
+        for dieID in rawDice {
+            conditions.append(
+                PredicateExpressions.build_contains(
+                    PredicateExpressions.build_KeyPath(
+                        root: PredicateExpressions.build_Arg(card),
+                        keyPath: \.dice
+                    ),
+                    where: {
+                        PredicateExpressions.build_Equal(
+                            lhs: PredicateExpressions.build_KeyPath(
+                                root: PredicateExpressions.build_Arg($0),
+                                keyPath: \.id
+                            ),
+                            rhs: PredicateExpressions.build_Arg(dieID)
+                        )
+                    }
+                )
+            )
+        }
+
+//        for symbolID in rawSymbols {
+//            conditions.append(
+//                PredicateExpressions.build_contains(
+//                    PredicateExpressions.build_KeyPath(
+//                        root: PredicateExpressions.build_Arg(card),
+//                        keyPath: \.symbols
+//                    ),
+//                    where: {
+//                        PredicateExpressions.build_Equal(
+//                            lhs: PredicateExpressions.build_KeyPath(
+//                                root: PredicateExpressions.build_Arg($0),
+//                                keyPath: \.id
+//                            ),
+//                            rhs: PredicateExpressions.build_Arg(symbolID)
+//                        )
+//                    }
+//                )
+//            )
+//        }
 
         guard let first = conditions.first else {
             return PredicateExpressions.Value(true)

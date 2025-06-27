@@ -16,12 +16,6 @@ struct CardListView: View {
     private let dice: Set<Die>
     private let symbols: Set<Symbol>
     @State private var fetchedCards: [JSONCard] = []
-    var filteredCards: [JSONCard] {
-        return cards.map(JSONCard.init).filter { card in
-            dice.isSubset(of: card.dice ?? []) &&
-            symbols.isSubset(of: card.symbols ?? [])
-        }
-    }
 
     @Environment(\.modelContext) private var context
     @State var isFetchingCards = false
@@ -33,12 +27,7 @@ struct CardListView: View {
 
         let predicate = predicateBuilder(searchFilter: searchFilter, decks: decks, types: types, requirements: requirements, pawns: pawns, dice: dice, symbols: symbols)
 
-        let red = Die.red.rawValue
-        let tempPred = #Predicate<Card> { card in
-            card.dice.contains(where: { $0.id == red })
-        }
-
-        _cards = Query(filter: tempPred, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+        _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
 
         _path = path
     }
@@ -54,8 +43,8 @@ struct CardListView: View {
                 }
             }
             .disabled(isFetchingCards)
-            ForEach(filteredCards) { card in
-                NavigationLink("\(card.id) — \(card.title)", value: card)
+            ForEach(cards) { card in
+                NavigationLink("\(card.id) — \(card.title)", value: JSONCard(card))
             }
         }
         .navigationTitle("Cards")
@@ -66,7 +55,7 @@ struct CardListView: View {
             CardDetailQueryView(id: id, path: $path)
         }
         .overlay {
-            if filteredCards.isEmpty {
+            if cards.isEmpty {
                 if searchFilter.isEmpty {
                     ContentUnavailableView("No Cards found", systemImage: "magnifyingglass", description: Text("Try adjusting your filters."))
                 } else {
