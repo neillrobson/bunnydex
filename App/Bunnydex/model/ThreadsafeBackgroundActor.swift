@@ -20,6 +20,7 @@ actor ThreadsafeBackgroundActor: Sendable {
 
     func initializeDatabase() {
         let dice = dieMap(in: context)
+        let symbols = symbolMap(in: context)
 
         // TODO: Consider how to intelligently persist data.
         // For now, just purge and recreate every time.
@@ -30,7 +31,7 @@ actor ThreadsafeBackgroundActor: Sendable {
         }
 
         for json in getCardsFromJSON() {
-            Card.create(json: json, context: context, dice: dice)
+            Card.create(json: json, context: context, dice: dice, symbols: symbols)
         }
 
         do {
