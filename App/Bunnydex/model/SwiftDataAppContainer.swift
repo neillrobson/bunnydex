@@ -39,7 +39,7 @@ let previewContainer: ModelContainer = {
 
         Task {
             let fetcher = ThreadsafeBackgroundActor(modelContainer: container)
-            await fetcher.initializeDatabase()
+            await fetcher.resetDatabase()
         }
 
         return container

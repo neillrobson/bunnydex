@@ -19,11 +19,17 @@ actor ThreadsafeBackgroundActor: Sendable {
     }
 
     func initializeDatabase() {
+        let descriptor = FetchDescriptor<Card>()
+        let count = (try? context.fetchCount(descriptor)) ?? 0
+        if count == 0 {
+            resetDatabase()
+        }
+    }
+
+    func resetDatabase() {
         let dice = dieMap(in: context)
         let symbols = symbolMap(in: context)
 
-        // TODO: Consider how to intelligently persist data.
-        // For now, just purge and recreate every time.
         do {
             try context.delete(model: Card.self)
         } catch {
