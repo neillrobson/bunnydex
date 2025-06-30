@@ -8,15 +8,6 @@
 import SwiftUI
 import SwiftData
 
-func getString(_ raw: String) throws -> AttributedString {
-    let myFont: UIFont = .systemFont(ofSize: UIFont.labelFontSize)
-
-    let nsAttributedString = raw.htmlToAttributedString(font: myFont, underlinedLinks: false, linkColor: .link, boldLinks: false)
-    let attributedString = try AttributedString(nsAttributedString, including: \.uiKit)
-
-    return attributedString
-}
-
 struct CardDetailView: View {
     let card: JSONCard
     var imageId: String {
@@ -79,10 +70,8 @@ struct CardDetailView: View {
             Section(header: Text("HTML test")) {
                 let html = "The winnings from Carrot Top Casino may be stolen using <a href=\"bunnypedia://cards/0716\">Bunny's Eleven</a>"
 
-                if let attStr = try? getString(html) {
-                    Text(attStr)
-                        .lineSpacing(2)
-                }
+                Text(html.htmlToAttributedString(font: .systemFont(ofSize: UIFont.labelFontSize), underlinedLinks: false, linkColor: .link, boldLinks: false))
+                    .lineSpacing(2)
 
                 Text(html)
             }
