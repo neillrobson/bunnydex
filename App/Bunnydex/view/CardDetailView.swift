@@ -8,12 +8,57 @@
 import SwiftUI
 import SwiftData
 
+struct CustomTextControllerRepresentable: UIViewControllerRepresentable {
+    var attributedText: NSAttributedString
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let controller = UIViewController()
+
+        let textView = UITextView()
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.textContainer.lineFragmentPadding = 0
+        textView.textContainerInset = .zero
+        controller.view = textView
+
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        guard let textView = uiViewController.view as? UITextView else { return }
+
+        textView.attributedText = attributedText
+    }
+
+    func sizeThatFits(_ proposal: ProposedViewSize, uiViewController: UIViewController, context: Context) -> CGSize? {
+        let dimensions = proposal.replacingUnspecifiedDimensions(
+            by: .init(width: 0, height: CGFloat.greatestFiniteMagnitude)
+        )
+
+        let calculatedHeight = calculateTextViewHeight(containerSize: dimensions, attributedString: attributedText)
+
+        return .init(
+            width: dimensions.width,
+            height: calculatedHeight
+        )
+    }
+
+    private func calculateTextViewHeight(containerSize: CGSize, attributedString: NSAttributedString) -> CGFloat {
+        let boundingRect = attributedString.boundingRect(
+            with: .init(width: containerSize.width, height: .greatestFiniteMagnitude),
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            context: nil
+        )
+
+        return boundingRect.height
+    }
+}
+
 struct CustomText: UIViewRepresentable {
     var attributedText: NSAttributedString
 
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
-        textView.delegate = context.coordinator
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.textContainer.lineFragmentPadding = 0
@@ -24,10 +69,6 @@ struct CustomText: UIViewRepresentable {
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
         uiView.attributedText = attributedText
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
     }
 
     func sizeThatFits(_ proposal: ProposedViewSize, uiView: UITextView, context: Context) -> CGSize? {
@@ -51,18 +92,6 @@ struct CustomText: UIViewRepresentable {
         )
 
         return boundingRect.height
-    }
-
-    class Coordinator: NSObject, UITextViewDelegate {
-        var parent: CustomText
-
-        init(_ parent: CustomText) {
-            self.parent = parent
-        }
-
-        func textViewDidChange(_ textView: UITextView) {
-            parent.attributedText = textView.attributedText
-        }
     }
 }
 
@@ -143,7 +172,7 @@ struct CardDetailView: View {
             }
             ForEach(displayRules, id: \.title) { rule in
                 Section(header: Text(rule.title)) {
-                    CustomText(attributedText: rule.text)
+                    CustomTextControllerRepresentable(attributedText: rule.text)
                 }
             }
             .environment(\.openURL, OpenURLAction(handler: { URL in
