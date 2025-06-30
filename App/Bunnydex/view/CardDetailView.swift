@@ -15,6 +15,20 @@ struct CardDetailView: View {
     }
     @Binding var path: NavigationPath
 
+    let displayRules: [( title: String, text: AttributedString )]
+
+    init(card: JSONCard, path: Binding<NavigationPath>) {
+        self.card = card
+        self._path = path
+
+        displayRules = card.rules?.map { rule in
+            return (
+                title: rule.title,
+                text: rule.text.htmlToAttributedString(font: UIFont.systemFont(ofSize: UIFont.labelFontSize), underlinedLinks: false, linkColor: .link, boldLinks: false)
+            )
+        } ?? []
+    }
+
     var body: some View {
         List {
             if UIImage(named: imageId) != nil {
@@ -67,17 +81,10 @@ struct CardDetailView: View {
                     }
                 }
             }
-            Section(header: Text("HTML test")) {
-                let html = "The winnings from Carrot Top Casino may be stolen using <a href=\"bunnypedia://cards/0716\">Bunny's Eleven</a>"
-
-                Text(html.htmlToAttributedString(font: .systemFont(ofSize: UIFont.labelFontSize), underlinedLinks: false, linkColor: .link, boldLinks: false))
-                    .lineSpacing(2)
-
-                Text(html)
-            }
-            ForEach(card.rules ?? [], id: \.title) { rule in
+            ForEach(displayRules, id: \.title) { rule in
                 Section(header: Text(rule.title)) {
-                    Text(.init(rule.text))
+                    Text(rule.text)
+                        .lineSpacing(2)
                 }
             }
             .environment(\.openURL, OpenURLAction(handler: { URL in
