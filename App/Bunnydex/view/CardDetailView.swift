@@ -8,15 +8,13 @@
 import SwiftUI
 import SwiftData
 
-extension CGSize {
-    static func +(lhs: Self, rhs: Self) -> Self {
-        Self(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
-    }
+func getString(_ raw: String) throws -> AttributedString {
+    let myFont: UIFont = .systemFont(ofSize: UIFont.labelFontSize)
 
-    static func +=(lhs: inout Self, rhs: Self) {
-        lhs.width += rhs.width
-        lhs.height += rhs.height
-    }
+    let nsAttributedString = raw.htmlToAttributedString(font: myFont, underlinedLinks: false, linkColor: .link, boldLinks: false)
+    let attributedString = try AttributedString(nsAttributedString, including: \.uiKit)
+
+    return attributedString
 }
 
 struct CardDetailView: View {
@@ -77,6 +75,16 @@ struct CardDetailView: View {
                         Text(symbols.map(\.description.display).joined(separator: ", "))
                     }
                 }
+            }
+            Section(header: Text("HTML test")) {
+                let html = "The winnings from Carrot Top Casino may be stolen using <a href=\"bunnypedia://cards/0716\">Bunny's Eleven</a>"
+
+                if let attStr = try? getString(html) {
+                    Text(attStr)
+                        .lineSpacing(2)
+                }
+
+                Text(html)
             }
             ForEach(card.rules ?? [], id: \.title) { rule in
                 Section(header: Text(rule.title)) {
