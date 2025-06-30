@@ -13,7 +13,7 @@ extension String {
         underlinedLinks: Bool,
         linkColor: UIColor,
         boldLinks: Bool,
-    ) -> AttributedString {
+    ) -> NSAttributedString {
         guard
             let data = self.data(using: .utf8),
             let attributedString = try? NSMutableAttributedString(
@@ -37,11 +37,7 @@ extension String {
             font: font
         )
 
-        if let ret = try? AttributedString(attributedString, including: \.uiKit) {
-            return ret
-        } else {
-            return .init()
-        }
+        return attributedString
     }
 }
 
