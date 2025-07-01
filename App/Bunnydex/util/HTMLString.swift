@@ -36,6 +36,7 @@ extension String {
             isBold: boldLinks,
             font: font
         )
+        attributedString.setLineHeightMultiple(1.1)
 
         return attributedString
     }
@@ -105,6 +106,16 @@ extension NSMutableAttributedString {
                         range: range
                     )
                 }
+            }
+        }
+    }
+
+    func setLineHeightMultiple(_ lineHeightMultiple: CGFloat) {
+        enumerateAttribute(.paragraphStyle, in: NSRange(location: .zero, length: self.length)) { value, range, _ in
+            if let paragraphStyle = value as? NSMutableParagraphStyle {
+                paragraphStyle.lineHeightMultiple = lineHeightMultiple
+                removeAttribute(.paragraphStyle, range: range)
+                addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
             }
         }
     }
