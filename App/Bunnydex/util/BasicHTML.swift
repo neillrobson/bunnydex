@@ -29,8 +29,16 @@ public class BasicHTML: HTML {
             markdown += "(\(href))"
 
             return
+        } else if node.nodeName() == "br" {
+            markdown += "\n"
+
+            return
         } else if node.nodeName() == "ul" {
             try makeUnorderedList(node.getChildNodes())
+
+            return
+        } else if node.nodeName() == "ol" {
+            try makeOrderedList(node.getChildNodes())
 
             return
         }
@@ -46,7 +54,20 @@ public class BasicHTML: HTML {
 
     private func makeUnorderedList(_ nodes: [Node]) throws {
         for node in nodes {
-            markdown += "\n\n- "
+            if (node.nodeName() == "li") {
+                markdown += "\n\n- "
+            }
+            try convertNode(node)
+        }
+    }
+
+    private func makeOrderedList(_ nodes: [Node]) throws {
+        var count = 0
+        for node in nodes {
+            if (node.nodeName() == "li") {
+                count += 1
+                markdown += "\n\n\(count). "
+            }
             try convertNode(node)
         }
     }
