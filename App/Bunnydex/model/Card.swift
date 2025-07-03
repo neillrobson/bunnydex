@@ -118,43 +118,20 @@ extension Pawn: Identifiable {
 }
 
 struct Rule: Codable, Hashable {
-    enum CodingKeys: CodingKey {
-        case title
-        case text
-    }
-
-    let title: String
-    let text: String
-
-    private let html: String
-
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        title = try container.decode(String.self, forKey: .title)
-        html = try container.decode(String.self, forKey: .text)
-
-        var doc = BasicHTML(rawHTML: html)
-        try doc.parse()
-        text = try doc.asMarkdown().trim()
-    }
-
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.title, forKey: .title)
-        try container.encode(self.html, forKey: .text)
-    }
+    var title: String
+    var text: String
 }
 
 struct JSONCard: Codable, Sendable, Hashable, Identifiable {
-    let id: String
-    let title: String
-    let type: CardType
-    let deck: Deck
-    let bunnyRequirement: BunnyRequirement?
-    let dice: [Die]?
-    let pawn: Pawn?
-    let symbols: [Symbol]?
-    let rules: [Rule]?
+    var id: String
+    var title: String
+    var type: CardType
+    var deck: Deck
+    var bunnyRequirement: BunnyRequirement?
+    var dice: [Die]?
+    var pawn: Pawn?
+    var symbols: [Symbol]?
+    var rules: [Rule]?
 
     init(_ card: Card) {
         id = card.id

@@ -16,7 +16,18 @@ func getCardsFromJSON() -> [JSONCard] {
 
         return try urls.flatMap { url in
             let data = try Data(contentsOf: url)
-            return try JSONDecoder().decode([JSONCard].self, from: data)
+            var cards = try JSONDecoder().decode([JSONCard].self, from: data)
+
+            for c in cards.indices {
+                guard let rules = cards[c].rules else { continue }
+                for r in rules.indices {
+                    var doc = BasicHTML(rawHTML: rules[r].text)
+                    try doc.parse()
+                    cards[c].rules![r].text = try doc.asMarkdown().trim()
+                }
+            }
+
+            return cards
         }
     } catch {
         fatalError("Failed to read JSON file: \(error)")
