@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F766FD72E16ADFA007DBC5F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 6F766FD62E16ADFA007DBC5F /* SwiftSoup */; };
 		989E37FE2DF11F3A0017185B /* EnumStringConvertible in Frameworks */ = {isa = PBXBuildFile; productRef = 989E37FD2DF11F3A0017185B /* EnumStringConvertible */; };
 /* End PBXBuildFile section */
 
@@ -31,16 +32,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				989E37FE2DF11F3A0017185B /* EnumStringConvertible in Frameworks */,
+				6F766FD72E16ADFA007DBC5F /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F766FD52E16ADFA007DBC5F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6FA131DF2DC946270093D27F = {
 			isa = PBXGroup;
 			children = (
 				6FA131EA2DC946270093D27F /* Bunnydex */,
+				6F766FD52E16ADFA007DBC5F /* Frameworks */,
 				6FA131E92DC946270093D27F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,6 +84,7 @@
 			name = Bunnydex;
 			packageProductDependencies = (
 				989E37FD2DF11F3A0017185B /* EnumStringConvertible */,
+				6F766FD62E16ADFA007DBC5F /* SwiftSoup */,
 			);
 			productName = Bunnydex;
 			productReference = 6FA131E82DC946270093D27F /* Bunnydex.app */;
@@ -105,6 +116,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				989E37FC2DF11F3A0017185B /* XCLocalSwiftPackageReference "../EnumStringConvertible" */,
+				6F52934F2E16AB57005A8265 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6FA131E92DC946270093D27F /* Products */;
@@ -344,7 +356,23 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		6F52934F2E16AB57005A8265 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		6F766FD62E16ADFA007DBC5F /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F52934F2E16AB57005A8265 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
 		989E37FD2DF11F3A0017185B /* EnumStringConvertible */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EnumStringConvertible;
