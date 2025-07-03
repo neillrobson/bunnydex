@@ -29,6 +29,10 @@ public class BasicHTML: HTML {
             markdown += "(\(href))"
 
             return
+        } else if node.nodeName() == "ul" {
+            try makeUnorderedList(node.getChildNodes())
+
+            return
         }
 
         if node.nodeName() == "#text" && node.description != " " {
@@ -36,6 +40,13 @@ public class BasicHTML: HTML {
         }
 
         for node in node.getChildNodes() {
+            try convertNode(node)
+        }
+    }
+
+    private func makeUnorderedList(_ nodes: [Node]) throws {
+        for node in nodes {
+            markdown += "\n\n- "
             try convertNode(node)
         }
     }
