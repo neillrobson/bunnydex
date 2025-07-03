@@ -15,20 +15,9 @@ struct CardDetailView: View {
     }
     @Binding var path: NavigationPath
 
-    let displayRules: [( title: String, text: NSAttributedString )]
-
     init(card: JSONCard, path: Binding<NavigationPath>) {
         self.card = card
         self._path = path
-
-        displayRules = card.rules?.map { rule in
-            let text = rule.text.htmlToAttributedString(font: UIFont.systemFont(ofSize: UIFont.labelFontSize), underlinedLinks: false, linkColor: .link, boldLinks: false)
-
-            return (
-                title: rule.title,
-                text: text
-            )
-        } ?? []
     }
 
     var body: some View {
@@ -83,9 +72,9 @@ struct CardDetailView: View {
                     }
                 }
             }
-            ForEach(displayRules, id: \.title) { rule in
+            ForEach(card.rules ?? [], id: \.title) { rule in
                 Section(header: Text(rule.title)) {
-                    CustomText(attributedText: rule.text)
+                    Text(.init(rule.text))
                 }
             }
             .environment(\.openURL, OpenURLAction(handler: { URL in
@@ -116,7 +105,7 @@ struct CardDetailView: View {
 #Preview {
     @Previewable @State var path = NavigationPath()
 
-    let fetchDescriptor = FetchDescriptor<Card>(predicate: #Predicate { $0.id == "0066" })
+    let fetchDescriptor = FetchDescriptor<Card>(predicate: #Predicate { $0.id == "0185" })
 
     if let card = try? previewContainer.mainContext.fetch(fetchDescriptor).first {
         NavigationStack(path: $path) {
