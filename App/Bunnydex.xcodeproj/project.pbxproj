@@ -11,11 +11,27 @@
 		989E37FE2DF11F3A0017185B /* EnumStringConvertible in Frameworks */ = {isa = PBXBuildFile; productRef = 989E37FD2DF11F3A0017185B /* EnumStringConvertible */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6F766FE22E16B1F8007DBC5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FA131E02DC946270093D27F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FA131E72DC946270093D27F;
+			remoteInfo = Bunnydex;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6F766FDE2E16B1F8007DBC5F /* BunnydexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BunnydexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA131E82DC946270093D27F /* Bunnydex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bunnydex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6F766FDF2E16B1F8007DBC5F /* BunnydexTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = BunnydexTests;
+			sourceTree = "<group>";
+		};
 		6FA131EA2DC946270093D27F /* Bunnydex */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			explicitFolders = (
@@ -27,6 +43,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6F766FDB2E16B1F8007DBC5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FA131E52DC946270093D27F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -50,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				6FA131EA2DC946270093D27F /* Bunnydex */,
+				6F766FDF2E16B1F8007DBC5F /* BunnydexTests */,
 				6F766FD52E16ADFA007DBC5F /* Frameworks */,
 				6FA131E92DC946270093D27F /* Products */,
 			);
@@ -59,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				6FA131E82DC946270093D27F /* Bunnydex.app */,
+				6F766FDE2E16B1F8007DBC5F /* BunnydexTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +91,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6F766FDD2E16B1F8007DBC5F /* BunnydexTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F766FE42E16B1F8007DBC5F /* Build configuration list for PBXNativeTarget "BunnydexTests" */;
+			buildPhases = (
+				6F766FDA2E16B1F8007DBC5F /* Sources */,
+				6F766FDB2E16B1F8007DBC5F /* Frameworks */,
+				6F766FDC2E16B1F8007DBC5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F766FE32E16B1F8007DBC5F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6F766FDF2E16B1F8007DBC5F /* BunnydexTests */,
+			);
+			name = BunnydexTests;
+			packageProductDependencies = (
+			);
+			productName = BunnydexTests;
+			productReference = 6F766FDE2E16B1F8007DBC5F /* BunnydexTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6FA131E72DC946270093D27F /* Bunnydex */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FA131F32DC946280093D27F /* Build configuration list for PBXNativeTarget "Bunnydex" */;
@@ -97,9 +145,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1630;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					6F766FDD2E16B1F8007DBC5F = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 6FA131E72DC946270093D27F;
+					};
 					6FA131E72DC946270093D27F = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -124,11 +176,19 @@
 			projectRoot = "";
 			targets = (
 				6FA131E72DC946270093D27F /* Bunnydex */,
+				6F766FDD2E16B1F8007DBC5F /* BunnydexTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6F766FDC2E16B1F8007DBC5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FA131E62DC946270093D27F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -139,6 +199,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6F766FDA2E16B1F8007DBC5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FA131E42DC946270093D27F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,7 +215,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6F766FE32E16B1F8007DBC5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FA131E72DC946270093D27F /* Bunnydex */;
+			targetProxy = 6F766FE22E16B1F8007DBC5F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6F766FE52E16B1F8007DBC5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5VS4L8HPMU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neillrobson.BunnydexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bunnydex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bunnydex";
+			};
+			name = Debug;
+		};
+		6F766FE62E16B1F8007DBC5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5VS4L8HPMU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neillrobson.BunnydexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bunnydex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bunnydex";
+			};
+			name = Release;
+		};
 		6FA131F12DC946280093D27F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -285,6 +398,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,6 +427,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,6 +444,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6F766FE42E16B1F8007DBC5F /* Build configuration list for PBXNativeTarget "BunnydexTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F766FE52E16B1F8007DBC5F /* Debug */,
+				6F766FE62E16B1F8007DBC5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6FA131E32DC946270093D27F /* Build configuration list for PBXProject "Bunnydex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
