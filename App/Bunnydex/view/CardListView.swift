@@ -27,13 +27,10 @@ struct CardListView: View {
     var body: some View {
         List {
             ForEach(cards) { card in
-                NavigationLink("\(card.id) — \(card.title)", value: JSONCard(card))
+                NavigationLink("\(card.id) — \(card.title)", value: card.id)
             }
         }
         .navigationTitle("Cards")
-        .navigationDestination(for: JSONCard.self) { card in
-            CardDetailView(card: card, path: $path)
-        }
         .navigationDestination(for: String.self) { id in
             CardDetailQueryView(id: id, path: $path)
         }
