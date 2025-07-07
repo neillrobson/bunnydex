@@ -21,6 +21,10 @@ struct ContentView: View {
     @State private var dice: Set<Die> = []
     @State private var symbols: Set<Symbol> = []
 
+    private var predicate: Predicate<Card> {
+        predicateBuilder(searchFilter: searchText, decks: decks, types: cardTypes, requirements: bunnyRequirements, pawns: pawns, dice: dice, symbols: symbols)
+    }
+
     @State private var expandState: FilterExpandState = .init()
     @State private var path = NavigationPath()
 
@@ -33,7 +37,7 @@ struct ContentView: View {
             if isCreatingDatabase {
                 ProgressView("Creating database")
             } else {
-                CardListView(searchFilter: searchText, path: $path, decks: decks, types: cardTypes, requirements: bunnyRequirements, pawns: pawns, dice: dice, symbols: symbols)
+                CardListView(searchFilter: searchText, path: $path, predicate: predicate)
                 .searchable(text: $searchText, prompt: "Search")
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {

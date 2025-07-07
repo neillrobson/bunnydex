@@ -14,10 +14,8 @@ struct CardListView: View {
 
     private let searchFilter: String
 
-    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) {
+    init(searchFilter: String = "", path: Binding<NavigationPath>, predicate: Predicate<Card> = .true) {
         self.searchFilter = searchFilter
-
-        let predicate = predicateBuilder(searchFilter: searchFilter, decks: decks, types: types, requirements: requirements, pawns: pawns, dice: dice, symbols: symbols)
 
         _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
 
@@ -55,20 +53,11 @@ struct CardListView: View {
     .modelContainer(previewContainer)
 }
 
-#Preview("Search") {
-    @Previewable @State var path = NavigationPath()
-
-    NavigationStack(path: $path) {
-        CardListView(searchFilter: "carrot", path: $path)
-    }
-    .modelContainer(previewContainer)
-}
-
 #Preview("Empty search") {
     @Previewable @State var path = NavigationPath()
 
     NavigationStack(path: $path) {
-        CardListView(searchFilter: "does not exist", path: $path)
+        CardListView(searchFilter: "does not exist", path: $path, predicate: .false)
     }
     .modelContainer(previewContainer)
 }
@@ -76,19 +65,19 @@ struct CardListView: View {
 #Preview("Filtered") {
     @Previewable @State var path = NavigationPath()
     let dice: Set<Die> = [.red]
+    let predicate = predicateBuilder(dice: dice)
 
     NavigationStack(path: $path) {
-        CardListView(path: $path, dice: dice)
+        CardListView(path: $path, predicate: predicate)
     }
     .modelContainer(previewContainer)
 }
 
 #Preview("Empty filtered") {
     @Previewable @State var path = NavigationPath()
-    let dice: Set<Die> = [.red, .blueD10, .chineseZodiac]
 
     NavigationStack(path: $path) {
-        CardListView(path: $path, dice: dice)
+        CardListView(path: $path, predicate: .false)
     }
     .modelContainer(previewContainer)
 }
