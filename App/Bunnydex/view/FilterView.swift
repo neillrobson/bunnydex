@@ -25,12 +25,8 @@ struct FilterExpandState {
 struct FilterView: View {
     @Environment(\.dismiss) var dismiss
 
-    @Binding var deckSelection: Set<Deck>
-    @Binding var typeSelection: Set<CardType>
-    @Binding var requirementSelection: Set<BunnyRequirement>
-    @Binding var pawnSelection: Set<Pawn>
-    @Binding var diceSelection: Set<Die>
-    @Binding var symbolSelection: Set<Symbol>
+    @ObservedObject var cardFilter: CardPredicate
+
     @Binding var expandState: FilterExpandState
 
     var body: some View {
@@ -39,12 +35,12 @@ struct FilterView: View {
                 Section(isExpanded: $expandState.deck) {
                     ForEach(Deck.allCases) { deck in
                         Toggle(isOn: Binding(get: {
-                            deckSelection.contains(deck)
+                            cardFilter.decks.contains(deck)
                         }, set: { value in
                             if value {
-                                deckSelection.insert(deck)
+                                cardFilter.decks.insert(deck)
                             } else {
-                                deckSelection.remove(deck)
+                                cardFilter.decks.remove(deck)
                             }
                         })) {
                             Text(deck.description.display)
@@ -57,12 +53,12 @@ struct FilterView: View {
                 Section(isExpanded: $expandState.cardType) {
                     ForEach(CardType.allCases) { cardType in
                         Toggle(isOn: Binding(get: {
-                            typeSelection.contains(cardType)
+                            cardFilter.types.contains(cardType)
                         }, set: { value in
                             if value {
-                                typeSelection.insert(cardType)
+                                cardFilter.types.insert(cardType)
                             } else {
-                                typeSelection.remove(cardType)
+                                cardFilter.types.remove(cardType)
                             }
                         })) {
                             Text(cardType.description.display)
@@ -75,12 +71,12 @@ struct FilterView: View {
                 Section(isExpanded: $expandState.bunnyRequirement) {
                     ForEach(BunnyRequirement.allCases) { bunnyRequirement in
                         Toggle(isOn: Binding(get: {
-                            requirementSelection.contains(bunnyRequirement)
+                            cardFilter.requirements.contains(bunnyRequirement)
                         }, set: { value in
                             if value {
-                                requirementSelection.insert(bunnyRequirement)
+                                cardFilter.requirements.insert(bunnyRequirement)
                             } else {
-                                requirementSelection.remove(bunnyRequirement)
+                                cardFilter.requirements.remove(bunnyRequirement)
                             }
                         })) {
                             Text(bunnyRequirement.description.display)
@@ -93,12 +89,12 @@ struct FilterView: View {
                 Section(isExpanded: $expandState.pawn) {
                     ForEach(Pawn.allCases) { pawn in
                         Toggle(isOn: Binding(get: {
-                            pawnSelection.contains(pawn)
+                            cardFilter.pawns.contains(pawn)
                         }, set: { value in
                             if value {
-                                pawnSelection.insert(pawn)
+                                cardFilter.pawns.insert(pawn)
                             } else {
-                                pawnSelection.remove(pawn)
+                                cardFilter.pawns.remove(pawn)
                             }
                         })) {
                             Text(pawn.description.display)
@@ -111,12 +107,12 @@ struct FilterView: View {
                 Section(isExpanded: $expandState.dice) {
                     ForEach(Die.allCases) { die in
                         Toggle(isOn: Binding(get: {
-                            diceSelection.contains(die)
+                            cardFilter.dice.contains(die)
                         }, set: { value in
                             if value {
-                                diceSelection.insert(die)
+                                cardFilter.dice.insert(die)
                             } else {
-                                diceSelection.remove(die)
+                                cardFilter.dice.remove(die)
                             }
                         })) {
                             Text(die.description.display)
@@ -129,12 +125,12 @@ struct FilterView: View {
                 Section(isExpanded: $expandState.symbols) {
                     ForEach(Symbol.allCases) { symbol in
                         Toggle(isOn: Binding(get: {
-                            symbolSelection.contains(symbol)
+                            cardFilter.symbols.contains(symbol)
                         }, set: { value in
                             if value {
-                                symbolSelection.insert(symbol)
+                                cardFilter.symbols.insert(symbol)
                             } else {
-                                symbolSelection.remove(symbol)
+                                cardFilter.symbols.remove(symbol)
                             }
                         })) {
                             Text(symbol.description.display)
@@ -158,13 +154,8 @@ struct FilterView: View {
 }
 
 #Preview {
-    @Previewable @State var deckSelection: Set<Deck> = []
-    @Previewable @State var typeSelection: Set<CardType> = []
-    @Previewable @State var requirementSelection: Set<BunnyRequirement> = []
-    @Previewable @State var pawnSelection: Set<Pawn> = []
-    @Previewable @State var diceSelection: Set<Die> = []
-    @Previewable @State var symbolSelection: Set<Symbol> = []
+    @Previewable @StateObject var cardFilter = CardPredicate()
     @Previewable @State var expandState: FilterExpandState = .init()
 
-    FilterView(deckSelection: $deckSelection, typeSelection: $typeSelection, requirementSelection: $requirementSelection, pawnSelection: $pawnSelection, diceSelection: $diceSelection, symbolSelection: $symbolSelection, expandState: $expandState)
+    FilterView(cardFilter: cardFilter, expandState: $expandState)
 }
