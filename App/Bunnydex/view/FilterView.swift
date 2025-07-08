@@ -25,8 +25,7 @@ struct FilterExpandState {
 struct FilterView: View {
     @Environment(\.dismiss) var dismiss
 
-    @ObservedObject var cardFilter: CardPredicate
-
+    @Binding var cardFilter: CardPredicate
     @Binding var expandState: FilterExpandState
 
     var body: some View {
@@ -154,8 +153,8 @@ struct FilterView: View {
 }
 
 #Preview {
-    @Previewable @StateObject var cardFilter = CardPredicate()
+    @Previewable @State var cardFilter = CardPredicate()
     @Previewable @State var expandState: FilterExpandState = .init()
 
-    FilterView(cardFilter: cardFilter, expandState: $expandState)
+    FilterView(cardFilter: $cardFilter, expandState: $expandState)
 }

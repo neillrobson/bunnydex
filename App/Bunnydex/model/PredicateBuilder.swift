@@ -8,27 +8,17 @@
 import SwiftUI
 import SwiftData
 
-class CardPredicate: ObservableObject {
-    @Published var searchFilter: String = ""
-    @Published var decks: Set<Deck> = []
-    @Published var types: Set<CardType> = []
-    @Published var requirements: Set<BunnyRequirement> = []
-    @Published var pawns: Set<Pawn> = []
-    @Published var dice: Set<Die> = []
-    @Published var symbols: Set<Symbol> = []
+struct CardPredicate: Equatable {
+    var searchFilter: String = ""
+    var decks: Set<Deck> = []
+    var types: Set<CardType> = []
+    var requirements: Set<BunnyRequirement> = []
+    var pawns: Set<Pawn> = []
+    var dice: Set<Die> = []
+    var symbols: Set<Symbol> = []
 
     var predicate: Predicate<Card> {
         return predicateBuilder(searchFilter: searchFilter, decks: decks, types: types, requirements: requirements, pawns: pawns, dice: dice, symbols: symbols)
-    }
-
-    init(searchFilter: String = "", decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) {
-        self.searchFilter = searchFilter
-        self.decks = decks
-        self.types = types
-        self.requirements = requirements
-        self.pawns = pawns
-        self.dice = dice
-        self.symbols = symbols
     }
 }
 

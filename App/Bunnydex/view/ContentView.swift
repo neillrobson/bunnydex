@@ -12,9 +12,8 @@ struct ContentView: View {
     @State private var showInfo: Bool = false
     @State private var showFilters: Bool = false
 
-    @StateObject private var cardPredicate = CardPredicate()
-
-    @State private var expandState: FilterExpandState = .init()
+    @State private var cardPredicate = CardPredicate()
+    @State private var expandState = FilterExpandState()
     @State private var path = NavigationPath()
 
     @State private var isCreatingDatabase = true
@@ -26,7 +25,7 @@ struct ContentView: View {
             if isCreatingDatabase {
                 ProgressView("Creating database")
             } else {
-                CardListView(path: $path, cardFilter: cardPredicate)
+                CardListView(path: $path, cardFilter: $cardPredicate)
                     .searchable(text: $cardPredicate.searchFilter, prompt: "Search")
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -48,7 +47,7 @@ struct ContentView: View {
         }.sheet(isPresented: $showInfo) {
             InfoView()
         }.sheet(isPresented: $showFilters) {
-            FilterView(cardFilter: cardPredicate, expandState: $expandState)
+            FilterView(cardFilter: $cardPredicate, expandState: $expandState)
         }.task {
             isCreatingDatabase = true
             let fetcher = ThreadsafeBackgroundActor(modelContainer: context.container)

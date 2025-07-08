@@ -26,12 +26,11 @@ struct CardListView: View {
     @State private var viewModel = CardListViewModel()
     @Environment(\.modelContext) private var context
     @Binding var path: NavigationPath
-    @ObservedObject var cardFilter: CardPredicate
+    @Binding var cardFilter: CardPredicate
 
-    init(path: Binding<NavigationPath>, cardFilter: CardPredicate = .init()) {
-        self.cardFilter = cardFilter
-
+    init(path: Binding<NavigationPath>, cardFilter: Binding<CardPredicate> = .constant(.init())) {
         _path = path
+        _cardFilter = cardFilter
     }
 
     var body: some View {
@@ -53,13 +52,8 @@ struct CardListView: View {
                 }
             }
         }
-        .task {
+        .task(id: cardFilter) {
             await viewModel.load(container: context.container, filter: cardFilter.predicate)
-        }
-        .onReceive(cardFilter.objectWillChange) {
-            Task {
-                await viewModel.load(container: context.container, filter: cardFilter.predicate)
-            }
         }
     }
 }
@@ -75,30 +69,30 @@ struct CardListView: View {
 
 #Preview("Empty search") {
     @Previewable @State var path = NavigationPath()
-    @Previewable @StateObject var cardFilter = CardPredicate(searchFilter: "does not exist")
+    @Previewable @State var cardFilter = CardPredicate(searchFilter: "does not exist")
 
     NavigationStack(path: $path) {
-        CardListView(path: $path, cardFilter: cardFilter)
+        CardListView(path: $path, cardFilter: $cardFilter)
     }
     .modelContainer(previewContainer)
 }
 
 #Preview("Filtered") {
     @Previewable @State var path = NavigationPath()
-    @Previewable @StateObject var cardFilter = CardPredicate(dice: [.red])
+    @Previewable @State var cardFilter = CardPredicate(dice: [.red])
 
     NavigationStack(path: $path) {
-        CardListView(path: $path, cardFilter: cardFilter)
+        CardListView(path: $path, cardFilter: $cardFilter)
     }
     .modelContainer(previewContainer)
 }
 
 #Preview("Empty filtered") {
     @Previewable @State var path = NavigationPath()
-    @Previewable @StateObject var cardFilter = CardPredicate(dice: [.red, .blueD10, .chineseZodiac])
+    @Previewable @State var cardFilter = CardPredicate(dice: [.red, .blueD10, .chineseZodiac])
 
     NavigationStack(path: $path) {
-        CardListView(path: $path, cardFilter: cardFilter)
+        CardListView(path: $path, cardFilter: $cardFilter)
     }
     .modelContainer(previewContainer)
 }
