@@ -8,43 +8,52 @@
 import SwiftUI
 import SwiftData
 
+@MainActor @Observable
+class CardListViewModel {
+    var cards: [JSONCard] = []
+
+    func load(container: ModelContainer, filter: Predicate<Card>) async {
+        cards = (try? await fetchData(container: container, filter: filter)) ?? []
+    }
+
+    nonisolated func fetchData(container: ModelContainer, filter: Predicate<Card>) async throws -> [JSONCard] {
+        let service = ThreadsafeBackgroundActor(modelContainer: container)
+        return try await service.fetchData(filter)
+    }
+}
+
 struct CardListView: View {
-    @Query private var cards: [Card]
+    @State private var viewModel = CardListViewModel()
+    @Environment(\.modelContext) private var context
     @Binding var path: NavigationPath
+    @Binding var cardFilter: CardPredicate
 
-    private let searchFilter: String
-
-    init(searchFilter: String = "", path: Binding<NavigationPath>, decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) {
-        self.searchFilter = searchFilter
-
-        let predicate = predicateBuilder(searchFilter: searchFilter, decks: decks, types: types, requirements: requirements, pawns: pawns, dice: dice, symbols: symbols)
-
-        _cards = Query(filter: predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
-
+    init(path: Binding<NavigationPath>, cardFilter: Binding<CardPredicate> = .constant(.init())) {
         _path = path
+        _cardFilter = cardFilter
     }
 
     var body: some View {
         List {
-            ForEach(cards) { card in
-                NavigationLink("\(card.id) — \(card.title)", value: JSONCard(card))
+            ForEach(viewModel.cards) { card in
+                NavigationLink("\(card.id) — \(card.title)", value: card.id)
             }
         }
         .navigationTitle("Cards")
-        .navigationDestination(for: JSONCard.self) { card in
-            CardDetailView(card: card, path: $path)
-        }
         .navigationDestination(for: String.self) { id in
             CardDetailQueryView(id: id, path: $path)
         }
         .overlay {
-            if cards.isEmpty {
-                if searchFilter.isEmpty {
+            if viewModel.cards.isEmpty {
+                if cardFilter.searchFilter.isEmpty {
                     ContentUnavailableView("No Cards found", systemImage: "magnifyingglass", description: Text("Try adjusting your filters."))
                 } else {
-                    ContentUnavailableView.search(text: searchFilter)
+                    ContentUnavailableView.search(text: cardFilter.searchFilter)
                 }
             }
+        }
+        .task(id: cardFilter) {
+            await viewModel.load(container: context.container, filter: cardFilter.predicate)
         }
     }
 }
@@ -58,40 +67,32 @@ struct CardListView: View {
     .modelContainer(previewContainer)
 }
 
-#Preview("Search") {
-    @Previewable @State var path = NavigationPath()
-
-    NavigationStack(path: $path) {
-        CardListView(searchFilter: "carrot", path: $path)
-    }
-    .modelContainer(previewContainer)
-}
-
 #Preview("Empty search") {
     @Previewable @State var path = NavigationPath()
+    @Previewable @State var cardFilter = CardPredicate(searchFilter: "does not exist")
 
     NavigationStack(path: $path) {
-        CardListView(searchFilter: "does not exist", path: $path)
+        CardListView(path: $path, cardFilter: $cardFilter)
     }
     .modelContainer(previewContainer)
 }
 
 #Preview("Filtered") {
     @Previewable @State var path = NavigationPath()
-    let dice: Set<Die> = [.red]
+    @Previewable @State var cardFilter = CardPredicate(dice: [.red])
 
     NavigationStack(path: $path) {
-        CardListView(path: $path, dice: dice)
+        CardListView(path: $path, cardFilter: $cardFilter)
     }
     .modelContainer(previewContainer)
 }
 
 #Preview("Empty filtered") {
     @Previewable @State var path = NavigationPath()
-    let dice: Set<Die> = [.red, .blueD10, .chineseZodiac]
+    @Previewable @State var cardFilter = CardPredicate(dice: [.red, .blueD10, .chineseZodiac])
 
     NavigationStack(path: $path) {
-        CardListView(path: $path, dice: dice)
+        CardListView(path: $path, cardFilter: $cardFilter)
     }
     .modelContainer(previewContainer)
 }

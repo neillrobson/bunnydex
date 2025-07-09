@@ -8,6 +8,20 @@
 import SwiftUI
 import SwiftData
 
+struct CardPredicate: Equatable {
+    var searchFilter: String = ""
+    var decks: Set<Deck> = []
+    var types: Set<CardType> = []
+    var requirements: Set<BunnyRequirement> = []
+    var pawns: Set<Pawn> = []
+    var dice: Set<Die> = []
+    var symbols: Set<Symbol> = []
+
+    var predicate: Predicate<Card> {
+        return predicateBuilder(searchFilter: searchFilter, decks: decks, types: types, requirements: requirements, pawns: pawns, dice: dice, symbols: symbols)
+    }
+}
+
 func predicateBuilder(searchFilter: String = "", decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) -> Predicate<Card> {
     func buildConjunction(lhs: some StandardPredicateExpression<Bool>, rhs: some StandardPredicateExpression<Bool>) -> any StandardPredicateExpression<Bool> {
         PredicateExpressions.Conjunction(lhs: lhs, rhs: rhs)
