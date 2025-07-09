@@ -22,6 +22,8 @@ struct InfoView: View {
     @Environment(\.dismiss) var dismiss
     #if DEBUG
     @Environment(\.modelContext) var context
+    @State private var loadingTask: Task<Void, Never>?
+    private var isLoading: Bool { loadingTask != nil }
     #endif
 
     var body: some View {
@@ -34,8 +36,18 @@ struct InfoView: View {
 
                 #if DEBUG
                 Button("Reset database") {
-                    print("TODO: Implement reset with background actor")
+                    guard loadingTask == nil else { return }
+
+                    loadingTask = Task {
+                        let fetcher = ThreadsafeBackgroundActor(modelContainer: context.container)
+                        await fetcher.resetDatabase()
+
+                        await MainActor.run {
+                            loadingTask = nil
+                        }
+                    }
                 }
+                .disabled(isLoading)
                 #endif
             }
             .toolbar {
@@ -51,5 +63,5 @@ struct InfoView: View {
 
 #Preview {
     InfoView()
-        .modelContainer(appContainer)
+        .modelContainer(previewContainer)
 }
