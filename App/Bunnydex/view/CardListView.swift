@@ -10,15 +10,32 @@ import SwiftData
 
 @MainActor @Observable
 class CardListViewModel {
-    var cards: [JSONCard] = []
-
-    func load(container: ModelContainer, filter: Predicate<Card>) async {
-        cards = (try? await fetchData(container: container, filter: filter)) ?? []
+    enum State {
+        case idle
+        case loading
+        case failed(Error)
+        case loaded([JSONCard])
     }
 
-    nonisolated func fetchData(container: ModelContainer, filter: Predicate<Card>) async throws -> [JSONCard] {
+    private(set) var state = State.idle
+
+    func load(container: ModelContainer, filter: CardPredicate) async {
+        state = .loading
+
+        do {
+            try await Task.sleep(nanoseconds: 250_000_000)
+            let cards = try await fetchData(container: container, predicate: filter.predicate)
+            state = .loaded(cards)
+        } catch is CancellationError {
+            state = .idle
+        } catch {
+            state = .failed(error)
+        }
+    }
+
+    nonisolated func fetchData(container: ModelContainer, predicate: Predicate<Card>) async throws -> [JSONCard] {
         let service = ThreadsafeBackgroundActor(modelContainer: container)
-        return try await service.fetchData(filter)
+        return try await service.fetchData(predicate)
     }
 }
 
@@ -34,26 +51,37 @@ struct CardListView: View {
     }
 
     var body: some View {
-        List {
-            ForEach(viewModel.cards) { card in
-                NavigationLink("\(card.id) — \(card.title)", value: card.id)
+        Group {
+            switch viewModel.state {
+            case .idle:
+                EmptyView()
+            case .loading:
+                ProgressView("Loading cards")
+            case .failed(let error):
+                Text("Error: \(error)")
+            case .loaded(let cards):
+                List {
+                    ForEach(cards) { card in
+                        NavigationLink("\(card.id) — \(card.title)", value: card.id)
+                    }
+                }
+                .overlay {
+                    if cards.isEmpty {
+                        if cardFilter.searchFilter.isEmpty {
+                            ContentUnavailableView("No Cards found", systemImage: "magnifyingglass", description: Text("Try adjusting your filters."))
+                        } else {
+                            ContentUnavailableView.search(text: cardFilter.searchFilter)
+                        }
+                    }
+                }
             }
         }
         .navigationTitle("Cards")
         .navigationDestination(for: String.self) { id in
             CardDetailQueryView(id: id, path: $path)
         }
-        .overlay {
-            if viewModel.cards.isEmpty {
-                if cardFilter.searchFilter.isEmpty {
-                    ContentUnavailableView("No Cards found", systemImage: "magnifyingglass", description: Text("Try adjusting your filters."))
-                } else {
-                    ContentUnavailableView.search(text: cardFilter.searchFilter)
-                }
-            }
-        }
         .task(id: cardFilter) {
-            await viewModel.load(container: context.container, filter: cardFilter.predicate)
+            await viewModel.load(container: context.container, filter: cardFilter)
         }
     }
 }
