@@ -47,6 +47,14 @@ struct FilterView: View {
                     }
                 } header: {
                     Text("Decks")
+                    if !cardFilter.decks.isEmpty {
+                        Button {
+                            cardFilter.decks.removeAll()
+                        } label: {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .imageScale(.small)
+                        }
+                    }
                 }
 
                 Section(isExpanded: $expandState.cardType) {
@@ -65,6 +73,14 @@ struct FilterView: View {
                     }
                 } header: {
                     Text("Card Types")
+                    if !cardFilter.types.isEmpty {
+                        Button {
+                            cardFilter.types.removeAll()
+                        } label: {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .imageScale(.small)
+                        }
+                    }
                 }
 
                 Section(isExpanded: $expandState.bunnyRequirement) {
@@ -83,6 +99,14 @@ struct FilterView: View {
                     }
                 } header: {
                     Text("Bunny Requirements")
+                    if !cardFilter.requirements.isEmpty {
+                        Button {
+                            cardFilter.requirements.removeAll()
+                        } label: {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .imageScale(.small)
+                        }
+                    }
                 }
 
                 Section(isExpanded: $expandState.pawn) {
@@ -101,6 +125,14 @@ struct FilterView: View {
                     }
                 } header: {
                     Text("Pawns")
+                    if !cardFilter.pawns.isEmpty {
+                        Button {
+                            cardFilter.pawns.removeAll()
+                        } label: {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .imageScale(.small)
+                        }
+                    }
                 }
 
                 Section(isExpanded: $expandState.dice) {
@@ -119,6 +151,14 @@ struct FilterView: View {
                     }
                 } header: {
                     Text("Dice")
+                    if !cardFilter.dice.isEmpty {
+                        Button {
+                            cardFilter.dice.removeAll()
+                        } label: {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .imageScale(.small)
+                        }
+                    }
                 }
 
                 Section(isExpanded: $expandState.symbols) {
@@ -136,7 +176,15 @@ struct FilterView: View {
                         }
                     }
                 } header: {
-                    Text("Symbol")
+                    Text("Symbols")
+                    if !cardFilter.symbols.isEmpty {
+                        Button {
+                            cardFilter.symbols.removeAll()
+                        } label: {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .imageScale(.small)
+                        }
+                    }
                 }
             }
             .listStyle(.sidebar)
