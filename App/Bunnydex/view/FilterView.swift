@@ -190,6 +190,24 @@ struct FilterView: View {
             .listStyle(.sidebar)
             .navigationTitle("Filters")
             .toolbar {
+                if !cardFilter.decks.isEmpty
+                    || !cardFilter.types.isEmpty
+                    || !cardFilter.requirements.isEmpty
+                    || !cardFilter.pawns.isEmpty
+                    || !cardFilter.dice.isEmpty
+                    || !cardFilter.symbols.isEmpty
+                {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("Reset") {
+                            cardFilter.decks.removeAll()
+                            cardFilter.types.removeAll()
+                            cardFilter.requirements.removeAll()
+                            cardFilter.pawns.removeAll()
+                            cardFilter.dice.removeAll()
+                            cardFilter.symbols.removeAll()
+                        }
+                    }
+                }
                 ToolbarItem {
                     Button("Done") {
                         dismiss()
