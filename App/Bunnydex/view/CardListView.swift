@@ -18,13 +18,19 @@ class CardListViewModel {
     }
 
     private(set) var state = State.idle
+    private var lastFilter: CardPredicate?
 
     func load(container: ModelContainer, filter: CardPredicate) async {
+        if let lastFilter = lastFilter, lastFilter == filter {
+            return
+        }
+
         state = .loading
 
         do {
             try await Task.sleep(nanoseconds: 250_000_000)
             let cards = try await fetchData(container: container, predicate: filter.predicate)
+            lastFilter = filter
             state = .loaded(cards)
         } catch is CancellationError {
             state = .idle
