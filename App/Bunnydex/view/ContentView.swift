@@ -35,6 +35,26 @@ struct ContentView: View {
                             Image(systemName: "info.circle")
                         }
                     }
+                    if !cardPredicate.decks.isEmpty
+                        || !cardPredicate.types.isEmpty
+                        || !cardPredicate.requirements.isEmpty
+                        || !cardPredicate.pawns.isEmpty
+                        || !cardPredicate.dice.isEmpty
+                        || !cardPredicate.symbols.isEmpty
+                    {
+                        ToolbarItem {
+                            Button {
+                                cardPredicate.decks.removeAll()
+                                cardPredicate.types.removeAll()
+                                cardPredicate.requirements.removeAll()
+                                cardPredicate.pawns.removeAll()
+                                cardPredicate.dice.removeAll()
+                                cardPredicate.symbols.removeAll()
+                            } label: {
+                                Image(systemName: "arrow.triangle.2.circlepath.circle")
+                            }
+                        }
+                    }
                     ToolbarItem {
                         Button {
                             showFilters.toggle()
