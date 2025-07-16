@@ -30,7 +30,7 @@ enum CardSchemaV1: VersionedSchema {
 
         var rules: [Rule]
 
-        init(json: JSONCard) {
+        init(json: Card) {
             id = json.id
             title = json.title
             rules = json.rules ?? []

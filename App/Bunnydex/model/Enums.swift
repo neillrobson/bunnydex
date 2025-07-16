@@ -1,13 +1,10 @@
 //
-//  Card.swift
+//  Enums.swift
 //  Bunnydex
 //
 //  Created by Neill Robson on 5/5/25.
 //
 
-import Foundation
-import SwiftData
-import SwiftUI
 import EnumStringConvertible
 
 @enumStringConvertible
@@ -120,28 +117,4 @@ extension Pawn: Identifiable {
 struct Rule: Codable, Hashable {
     var title: String
     var text: String
-}
-
-struct JSONCard: Codable, Sendable, Hashable, Identifiable {
-    var id: String
-    var title: String
-    var type: CardType
-    var deck: Deck
-    var bunnyRequirement: BunnyRequirement?
-    var dice: [Die]?
-    var pawn: Pawn?
-    var symbols: [Symbol]?
-    var rules: [Rule]?
-
-    init(_ card: CardModel) {
-        id = card.id
-        title = card.title
-        type = card.type
-        deck = card.deck
-        bunnyRequirement = card.bunnyRequirement
-        dice = card.dice.map(\.die)
-        pawn = card.pawn
-        symbols = card.symbols.map(\.symbol)
-        rules = card.rules
-    }
 }

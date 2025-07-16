@@ -14,7 +14,7 @@ class CardListViewModel {
         case idle
         case loading
         case failed(Error)
-        case loaded([JSONCard])
+        case loaded([Card])
     }
 
     private(set) var state = State.idle
@@ -39,7 +39,7 @@ class CardListViewModel {
         }
     }
 
-    nonisolated func fetchData(container: ModelContainer, predicate: Predicate<CardModel>) async throws -> [JSONCard] {
+    nonisolated func fetchData(container: ModelContainer, predicate: Predicate<CardModel>) async throws -> [Card] {
         let service = ThreadsafeBackgroundActor(modelContainer: container)
         return try await service.fetchData(predicate)
     }

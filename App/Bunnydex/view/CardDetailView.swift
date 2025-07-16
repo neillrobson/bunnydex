@@ -9,13 +9,13 @@ import SwiftUI
 import SwiftData
 
 struct CardDetailView: View {
-    let card: JSONCard
+    let card: Card
     var imageId: String {
         "01x\(card.deck.isKinder ? "K" : "Q")\(card.id)"
     }
     @Binding var path: NavigationPath
 
-    init(card: JSONCard, path: Binding<NavigationPath>) {
+    init(card: Card, path: Binding<NavigationPath>) {
         self.card = card
         self._path = path
     }
@@ -109,7 +109,7 @@ struct CardDetailView: View {
 
     if let card = try? previewContainer.mainContext.fetch(fetchDescriptor).first {
         NavigationStack(path: $path) {
-            CardDetailView(card: JSONCard(card), path: $path)
+            CardDetailView(card: Card(card), path: $path)
         }
         .modelContainer(previewContainer)
     }

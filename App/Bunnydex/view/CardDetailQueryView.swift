@@ -16,7 +16,7 @@ struct CardDetailQueryView: View {
     let id: String
     @Binding var path: NavigationPath
 
-    @State private var result: Result<JSONCard, Error>?
+    @State private var result: Result<Card, Error>?
 
     @Environment(\.modelContext) private var context
 
@@ -35,7 +35,7 @@ struct CardDetailQueryView: View {
             ProgressView()
                 .task {
                     let fetcher = ThreadsafeBackgroundActor(modelContainer: context.container)
-                    let results: [JSONCard]
+                    let results: [Card]
                     do {
                         results = try await fetcher.fetchData(#Predicate { $0.id == id })
                     } catch {
