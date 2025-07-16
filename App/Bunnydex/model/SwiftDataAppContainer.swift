@@ -36,7 +36,7 @@ func getCardsFromJSON() -> [JSONCard] {
 
 let appContainer: ModelContainer = {
     do {
-        let container = try ModelContainer(for: Card.self)
+        let container = try ModelContainer(for: CardModel.self)
 
         return container
     } catch {
@@ -46,7 +46,7 @@ let appContainer: ModelContainer = {
 
 let previewContainer: ModelContainer = {
     do {
-        let container = try ModelContainer(for: Card.self)
+        let container = try ModelContainer(for: CardModel.self)
 
         Task {
             let fetcher = ThreadsafeBackgroundActor(modelContainer: container)

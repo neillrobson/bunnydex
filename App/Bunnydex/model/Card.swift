@@ -133,7 +133,7 @@ struct JSONCard: Codable, Sendable, Hashable, Identifiable {
     var symbols: [Symbol]?
     var rules: [Rule]?
 
-    init(_ card: Card) {
+    init(_ card: CardModel) {
         id = card.id
         title = card.title
         type = card.type
@@ -143,64 +143,5 @@ struct JSONCard: Codable, Sendable, Hashable, Identifiable {
         pawn = card.pawn
         symbols = card.symbols.map(\.symbol)
         rules = card.rules
-    }
-}
-
-@Model
-class Card {
-    var id: String
-    var title: String
-    var rawType: Int
-    var rawDeck: Int
-    var rawPawn: Int?
-    var rawRequirement: Int
-
-    @Relationship(inverse: \DieModel.cards)
-    var dice: [DieModel] = []
-    @Relationship(inverse: \SymbolModel.cards)
-    var symbols: [SymbolModel] = []
-
-    var rules: [Rule]
-
-    var type: CardType {
-        return .init(rawValue: rawType)!
-    }
-
-    var deck: Deck {
-        return .init(rawValue: rawDeck)!
-    }
-
-    var pawn: Pawn? {
-        return rawPawn.flatMap { .init(rawValue: $0) }
-    }
-
-    var bunnyRequirement: BunnyRequirement {
-        return .init(rawValue: rawRequirement)!
-    }
-
-    init(json: JSONCard) {
-        id = json.id
-        title = json.title
-        rules = json.rules ?? []
-
-        rawType = json.type.rawValue
-        rawDeck = json.deck.rawValue
-        rawRequirement = json.bunnyRequirement?.rawValue ?? BunnyRequirement.no.rawValue
-
-        rawPawn = json.pawn.map(\.rawValue)
-    }
-
-    /**
-     Handles initializing, inserting, and defining relationships for a new Card model object.
-     */
-    @discardableResult
-    static func create(json: JSONCard, context: ModelContext, dice: [Die: DieModel], symbols: [Symbol: SymbolModel]) -> Card {
-        let card = Card(json: json)
-        context.insert(card)
-
-        card.dice = json.dice?.compactMap { dice[$0] } ?? []
-        card.symbols = json.symbols?.compactMap { symbols[$0] } ?? []
-
-        return card
     }
 }

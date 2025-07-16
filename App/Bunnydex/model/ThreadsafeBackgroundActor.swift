@@ -12,18 +12,18 @@ import Foundation
 actor ThreadsafeBackgroundActor: Sendable {
     private var context: ModelContext { modelExecutor.modelContext }
 
-    func fetchData(_ predicate: Predicate<Card>? = nil) throws -> [JSONCard] {
+    func fetchData(_ predicate: Predicate<CardModel>? = nil) throws -> [JSONCard] {
         let descriptor = if let p = predicate {
-            FetchDescriptor<Card>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+            FetchDescriptor<CardModel>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
         } else {
-            FetchDescriptor<Card>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+            FetchDescriptor<CardModel>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
         }
         let cards = try context.fetch(descriptor)
         return cards.map(JSONCard.init)
     }
 
     func initializeDatabase() {
-        let descriptor = FetchDescriptor<Card>()
+        let descriptor = FetchDescriptor<CardModel>()
         let count = (try? context.fetchCount(descriptor)) ?? 0
         if count == 0 {
             resetDatabase()
@@ -35,13 +35,13 @@ actor ThreadsafeBackgroundActor: Sendable {
         let symbols = symbolMap(in: context)
 
         do {
-            try context.delete(model: Card.self)
+            try context.delete(model: CardModel.self)
         } catch {
             print("Error deleting cards: \(error)")
         }
 
         for json in getCardsFromJSON() {
-            Card.create(json: json, context: context, dice: dice, symbols: symbols)
+            CardModel.create(json: json, context: context, dice: dice, symbols: symbols)
         }
 
         do {

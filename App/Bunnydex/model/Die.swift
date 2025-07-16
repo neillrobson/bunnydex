@@ -88,7 +88,7 @@ extension Die: Identifiable {
 @Model
 class DieModel {
     var id: Int
-    var cards: [Card] = []
+    var cards: [CardModel] = []
 
     init(_ die: Die) {
         id = die.rawValue

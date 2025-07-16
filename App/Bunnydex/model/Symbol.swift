@@ -33,7 +33,7 @@ extension Symbol: Identifiable {
 @Model
 class SymbolModel {
     var id: Int
-    var cards: [Card] = []
+    var cards: [CardModel] = []
 
     init(_ symbol: Symbol) {
         id = symbol.rawValue

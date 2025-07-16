@@ -17,12 +17,12 @@ struct CardPredicate: Equatable {
     var dice: Set<Die> = []
     var symbols: Set<Symbol> = []
 
-    var predicate: Predicate<Card> {
+    var predicate: Predicate<CardModel> {
         return predicateBuilder(searchFilter: searchFilter, decks: decks, types: types, requirements: requirements, pawns: pawns, dice: dice, symbols: symbols)
     }
 }
 
-func predicateBuilder(searchFilter: String = "", decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) -> Predicate<Card> {
+func predicateBuilder(searchFilter: String = "", decks: Set<Deck> = [], types: Set<CardType> = [], requirements: Set<BunnyRequirement> = [], pawns: Set<Pawn> = [], dice: Set<Die> = [], symbols: Set<Symbol> = []) -> Predicate<CardModel> {
     func buildConjunction(lhs: some StandardPredicateExpression<Bool>, rhs: some StandardPredicateExpression<Bool>) -> any StandardPredicateExpression<Bool> {
         PredicateExpressions.Conjunction(lhs: lhs, rhs: rhs)
     }
@@ -34,7 +34,7 @@ func predicateBuilder(searchFilter: String = "", decks: Set<Deck> = [], types: S
     let rawDice = dice.map(\.rawValue)
     let rawSymbols = symbols.map(\.rawValue)
 
-    return Predicate<Card> { card in
+    return Predicate<CardModel> { card in
         var conditions: [any StandardPredicateExpression<Bool>] = []
 
         if !searchFilter.isEmpty {

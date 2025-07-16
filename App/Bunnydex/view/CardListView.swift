@@ -39,7 +39,7 @@ class CardListViewModel {
         }
     }
 
-    nonisolated func fetchData(container: ModelContainer, predicate: Predicate<Card>) async throws -> [JSONCard] {
+    nonisolated func fetchData(container: ModelContainer, predicate: Predicate<CardModel>) async throws -> [JSONCard] {
         let service = ThreadsafeBackgroundActor(modelContainer: container)
         return try await service.fetchData(predicate)
     }

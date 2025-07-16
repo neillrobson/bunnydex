@@ -105,7 +105,7 @@ struct CardDetailView: View {
 #Preview {
     @Previewable @State var path = NavigationPath()
 
-    let fetchDescriptor = FetchDescriptor<Card>(predicate: #Predicate { $0.id == "0185" })
+    let fetchDescriptor = FetchDescriptor<CardModel>(predicate: #Predicate { $0.id == "0185" })
 
     if let card = try? previewContainer.mainContext.fetch(fetchDescriptor).first {
         NavigationStack(path: $path) {
