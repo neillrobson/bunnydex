@@ -31,23 +31,27 @@ actor ThreadsafeBackgroundActor: Sendable {
     }
 
     func resetDatabase() {
-        let dice = dieMap(in: context)
-        let symbols = symbolMap(in: context)
+        resetDatabaseWith(context)
+    }
+}
 
-        do {
-            try context.delete(model: CardModel.self)
-        } catch {
-            print("Error deleting cards: \(error)")
-        }
+func resetDatabaseWith(_ context: ModelContext) {
+    let dice = dieMap(in: context)
+    let symbols = symbolMap(in: context)
 
-        for json in getCardsFromJSON() {
-            CardModel.create(json: json, context: context, dice: dice, symbols: symbols)
-        }
+    do {
+        try context.delete(model: CardModel.self)
+    } catch {
+        print("Error deleting cards: \(error)")
+    }
 
-        do {
-            try context.save()
-        } catch {
-            print("Error saving database: \(error)")
-        }
+    for json in getCardsFromJSON() {
+        CardModel.create(json: json, context: context, dice: dice, symbols: symbols)
+    }
+
+    do {
+        try context.save()
+    } catch {
+        print("Error saving database: \(error)")
     }
 }

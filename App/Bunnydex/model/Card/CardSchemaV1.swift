@@ -41,5 +41,17 @@ enum CardSchemaV1: VersionedSchema {
 
             rawPawn = json.pawn.map(\.rawValue)
         }
+
+        init() {
+            id = "0000"
+            title = "Placeholder"
+            rules = []
+
+            rawType = 0
+            rawDeck = 0
+            rawRequirement = 0
+
+            rawPawn = nil
+        }
     }
 }

@@ -44,14 +44,12 @@ let appContainer: ModelContainer = {
     }
 }()
 
+@MainActor
 let previewContainer: ModelContainer = {
     do {
-        let container = try ModelContainer(for: CardModel.self, migrationPlan: CardMigrationPlan.self)
-
-        Task {
-            let fetcher = ThreadsafeBackgroundActor(modelContainer: container)
-            await fetcher.resetDatabase()
-        }
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: CardModel.self, migrationPlan: CardMigrationPlan.self, configurations: config)
+        resetDatabaseWith(container.mainContext)
 
         return container
     } catch {
