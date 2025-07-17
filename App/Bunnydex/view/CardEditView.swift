@@ -12,7 +12,33 @@ struct CardEditView: View {
     @Bindable var card: CardModel
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            LabeledContent("ID") {
+                TextField("0000", text: $card.id)
+                    .multilineTextAlignment(.trailing)
+            }
+            LabeledContent("Title") {
+                TextField("Choose A Carrot", text: $card.title)
+                    .multilineTextAlignment(.trailing)
+            }
+            Picker("Deck", selection: $card.rawDeck) {
+                ForEach(Deck.allCases) { deck in
+                    Text(deck.description.display).tag(deck.rawValue)
+                }
+            }
+            Picker("Card type", selection: $card.rawType) {
+                ForEach(CardType.allCases) { type in
+                    Text(type.description.display).tag(type.rawValue)
+                }
+            }
+            Picker("Bunny requirement", selection: $card.rawRequirement) {
+                ForEach(BunnyRequirement.allCases) { requirement in
+                    Text(requirement.description.display).tag(requirement.rawValue)
+                }
+            }
+        }
+        .navigationTitle("Edit card")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -20,7 +46,9 @@ struct CardEditView: View {
     let fetchDescriptor = FetchDescriptor<CardModel>(predicate: #Predicate { $0.id == "0185" })
 
     if let card = try? previewContainer.mainContext.fetch(fetchDescriptor).first {
-        CardEditView(card: card)
-            .modelContainer(previewContainer)
+        NavigationStack {
+            CardEditView(card: card)
+                .modelContainer(previewContainer)
+        }
     }
 }
