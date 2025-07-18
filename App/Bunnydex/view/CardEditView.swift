@@ -16,7 +16,7 @@ struct CardEditView: View {
 
     var body: some View {
         Form {
-            Section("Fundamentals") {
+            Section("Required Fields") {
                 LabeledContent("ID") {
                     TextField("0000", text: $card.id)
                         .multilineTextAlignment(.trailing)
@@ -42,7 +42,7 @@ struct CardEditView: View {
                 }
             }
 
-            Section("Optionals") {
+            Section("Optional Fields") {
                 Picker("Pawn", selection: $card.rawPawn) {
                     Text("None").tag(Int?(nil))
                     ForEach(Pawn.allCases) { pawn in
@@ -52,9 +52,20 @@ struct CardEditView: View {
                 MultiPicker(label: Text("Dice"), options: dice, optionToString: \.die.description.display, selected: $card.dice)
                 MultiPicker(label: Text("Symbols"), options: symbols, optionToString: \.symbol.description.display, selected: $card.symbols)
             }
+
+            Section("Bunny Bits") {
+                ForEach($card.rules, id: \.self) { rule in
+                    NavigationLink {
+                        MarkdownEditor(rule: rule)
+                            .navigationTitle("Edit Rule")
+                            .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        Text(rule.wrappedValue.title)
+                    }
+                }
+            }
         }
-        .navigationTitle("Edit card")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Edit Card")
     }
 }
 
