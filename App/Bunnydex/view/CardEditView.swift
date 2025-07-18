@@ -9,6 +9,8 @@ import SwiftData
 import SwiftUI
 
 struct CardEditView: View {
+    @Query var dice: [DieModel]
+
     @Bindable var card: CardModel
 
     var body: some View {
@@ -46,6 +48,7 @@ struct CardEditView: View {
                         Text(pawn.description.display).tag(pawn.rawValue)
                     }
                 }
+                MultiPicker<Text, DieModel>(label: Text("Dice"), options: dice, optionToString: \.die.description.display, selected: $card.dice)
             }
         }
         .navigationTitle("Edit card")

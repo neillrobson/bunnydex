@@ -11,7 +11,7 @@ struct MultiPicker<LabelView: View, Selectable: Identifiable & Hashable>: View {
     let label: LabelView
     let options: [Selectable]
     let optionToString: (Selectable) -> String
-    var selected: Binding<Set<Selectable>>
+    var selected: Binding<[Selectable]>
 
     private var formattedSelectedListString: String {
         ListFormatter.localizedString(byJoining: selected.wrappedValue.map(optionToString))
@@ -38,7 +38,7 @@ struct MultiPickerView<Selectable: Identifiable & Hashable>: View {
     let options: [Selectable]
     let optionToString: (Selectable) -> String
 
-    @Binding var selected: Set<Selectable>
+    @Binding var selected: [Selectable]
 
     var body: some View {
         List {
@@ -60,13 +60,13 @@ struct MultiPickerView<Selectable: Identifiable & Hashable>: View {
         if let existingIndex = selected.firstIndex(where: { $0.id == selectable.id }) {
             selected.remove(at: existingIndex)
         } else {
-            selected.insert(selectable)
+            selected.append(selectable)
         }
     }
 }
 
 #Preview {
-    @Previewable @State var selectedDice: Set<Die> = [.red, .blue, .chineseZodiac]
+    @Previewable @State var selectedDice: [Die] = [.red, .blue, .chineseZodiac]
 
     NavigationView {
         Form {
