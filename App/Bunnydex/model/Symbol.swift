@@ -30,6 +30,10 @@ extension Symbol: Identifiable {
     var id: Self { self }
 }
 
+extension Symbol: Hashable {
+    var hashValue: Int { rawValue }
+}
+
 @Model
 class SymbolModel {
     var id: Int
@@ -42,6 +46,10 @@ class SymbolModel {
     var symbol: Symbol {
         .init(rawValue: id)!
     }
+}
+
+extension SymbolModel: Hashable {
+    var hashValue: Int { id }
 }
 
 func symbolMap(in context: ModelContext) -> [Symbol: SymbolModel] {

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CardEditView: View {
     @Query var dice: [DieModel]
+    @Query var symbols: [SymbolModel]
 
     @Bindable var card: CardModel
 
@@ -48,7 +49,8 @@ struct CardEditView: View {
                         Text(pawn.description.display).tag(pawn.rawValue)
                     }
                 }
-                MultiPicker<Text, DieModel>(label: Text("Dice"), options: dice, optionToString: \.die.description.display, selected: $card.dice)
+                MultiPicker(label: Text("Dice"), options: dice, optionToString: \.die.description.display, selected: $card.dice)
+                MultiPicker(label: Text("Symbols"), options: symbols, optionToString: \.symbol.description.display, selected: $card.symbols)
             }
         }
         .navigationTitle("Edit card")
