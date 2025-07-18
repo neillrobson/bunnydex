@@ -14,7 +14,9 @@ struct MultiPicker<LabelView: View, Selectable: Identifiable & Hashable>: View {
     var selected: Binding<[Selectable]>
 
     private var formattedSelectedListString: String {
-        ListFormatter.localizedString(byJoining: selected.wrappedValue.map(optionToString))
+        ListFormatter.localizedString(byJoining: selected.wrappedValue.sorted {
+            $0.hashValue < $1.hashValue
+        }.map(optionToString))
     }
 
     var body: some View {
@@ -42,7 +44,7 @@ struct MultiPickerView<Selectable: Identifiable & Hashable>: View {
 
     var body: some View {
         List {
-            ForEach(options) { selectable in
+            ForEach(options.sorted { $0.hashValue < $1.hashValue }) { selectable in
                 Button(action: { toggleSelection(selectable: selectable) }) {
                     HStack {
                         Text(optionToString(selectable)).foregroundColor(.primary)

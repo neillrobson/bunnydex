@@ -85,6 +85,10 @@ extension Die: Identifiable {
     var id: Self { self }
 }
 
+extension Die: Hashable {
+    var hashValue: Int { rawValue }
+}
+
 @Model
 class DieModel {
     var id: Int
@@ -97,6 +101,10 @@ class DieModel {
     var die: Die {
         .init(rawValue: id)!
     }
+}
+
+extension DieModel: Hashable {
+    var hashValue: Int { id }
 }
 
 func dieMap(in context: ModelContext) -> [Die: DieModel] {
