@@ -11,6 +11,6 @@ enum SchemaV1: VersionedSchema {
     static var versionIdentifier: Schema.Version { .init(1, 0, 0) }
 
     static var models: [any PersistentModel.Type] {
-        [SchemaV1.CardModel.self]
+        [CardModel.self]
     }
 }

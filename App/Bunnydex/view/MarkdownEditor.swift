@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MarkdownEditor: View {
-    @Binding var rule: Rule
+    @Binding var rule: RuleModel
 
     var body: some View {
         Form {
@@ -32,7 +32,7 @@ struct MarkdownEditor: View {
 }
 
 #Preview {
-    @Previewable @State var rule: Rule = .init(title: "Card Title", text: "Here is some _italic_ text, **bold** text, and a [link](bunnypedia://cards/1234).")
+    @Previewable @State var rule: RuleModel = .init(title: "Card Title", text: "Here is some _italic_ text, **bold** text, and a [link](bunnypedia://cards/1234).")
 
     MarkdownEditor(rule: $rule)
 }

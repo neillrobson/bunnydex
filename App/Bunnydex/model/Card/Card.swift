@@ -7,7 +7,7 @@
 
 import SwiftData
 
-typealias CardModel = SchemaV1_1.CardModel
+typealias CardModel = SchemaV2.CardModel
 
 extension CardModel {
     var type: CardType {
@@ -61,6 +61,6 @@ struct Card: Codable, Sendable, Hashable, Identifiable {
         dice = card.dice.map(\.die)
         pawn = card.pawn
         symbols = card.symbols.map(\.symbol)
-        rules = card.newRules.map(\.rule)
+        rules = card.rules.map(\.rule)
     }
 }
