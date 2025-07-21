@@ -69,13 +69,10 @@ struct CardEditView: View {
     }
 }
 
-#Preview {
-    let fetchDescriptor = FetchDescriptor<CardModel>(predicate: #Predicate { $0.id == "0185" })
+#Preview(traits: .modifier(SampleData())) {
+    @Previewable @Query(filter: #Predicate<CardModel> { $0.id == "0185" }) var cards: [CardModel]
 
-    if let card = try? previewContainer.mainContext.fetch(fetchDescriptor).first {
-        NavigationStack {
-            CardEditView(card: card)
-                .modelContainer(previewContainer)
-        }
+    NavigationStack {
+        CardEditView(card: cards[0])
     }
 }

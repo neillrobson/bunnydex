@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 func getCardsFromJSON() -> [Card] {
     do {
@@ -56,3 +57,13 @@ let previewContainer: ModelContainer = {
         fatalError("Failed to create preview container: \(error)")
     }
 }()
+
+struct SampleData: PreviewModifier {
+    static func makeSharedContext() async throws -> ModelContainer {
+        return previewContainer
+    }
+
+    func body(content: Content, context: ModelContainer) -> some View {
+        content.modelContainer(context)
+    }
+}
