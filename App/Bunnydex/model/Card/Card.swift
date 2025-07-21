@@ -1,5 +1,5 @@
 //
-//  Index.swift
+//  Card.swift
 //  Bunnydex
 //
 //  Created by Neill Robson on 7/16/25.
@@ -7,7 +7,7 @@
 
 import SwiftData
 
-typealias CardModel = CardSchemaV1.CardModel
+typealias CardModel = SchemaV1_1.CardModel
 
 extension CardModel {
     var type: CardType {
@@ -61,6 +61,6 @@ struct Card: Codable, Sendable, Hashable, Identifiable {
         dice = card.dice.map(\.die)
         pawn = card.pawn
         symbols = card.symbols.map(\.symbol)
-        rules = card.rules
+        rules = card.newRules.map(\.rule)
     }
 }

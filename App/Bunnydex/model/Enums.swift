@@ -113,8 +113,3 @@ enum Pawn: Int, Codable, CaseIterable {
 extension Pawn: Identifiable {
     var id: Self { self }
 }
-
-struct Rule: Codable, Hashable {
-    var title: String
-    var text: String
-}
