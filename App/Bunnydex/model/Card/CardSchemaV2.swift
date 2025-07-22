@@ -27,13 +27,14 @@ extension SchemaV2 {
         init(json: Card) {
             id = json.id
             title = json.title
-            rules = json.rules?.map(RuleModel.init) ?? []
 
             rawType = json.type.rawValue
             rawDeck = json.deck.rawValue
             rawRequirement = json.bunnyRequirement?.rawValue ?? BunnyRequirement.no.rawValue
 
             rawPawn = json.pawn.map(\.rawValue)
+
+            orderedRules = json.rules?.map(RuleModel.init) ?? []
         }
 
         init() {

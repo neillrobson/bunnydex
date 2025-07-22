@@ -12,6 +12,7 @@ extension SchemaV2 {
     final class RuleModel {
         var title: String
         var text: String
+        var order: Int = 0
 
         var card: CardModel?
 

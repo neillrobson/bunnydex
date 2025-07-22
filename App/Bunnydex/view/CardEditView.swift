@@ -54,7 +54,7 @@ struct CardEditView: View {
             }
 
             Section("Bunny Bits") {
-                ForEach($card.rules, id: \.self) { rule in
+                ForEach($card.orderedRules, id: \.self) { rule in
                     NavigationLink {
                         MarkdownEditor(rule: rule)
                             .navigationTitle("Edit Rule")
