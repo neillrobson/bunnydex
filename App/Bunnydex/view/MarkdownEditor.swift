@@ -21,7 +21,7 @@ struct MarkdownEditor: View {
             } header: {
                 Text("Rule Text")
             } footer: {
-                Text("Inline markdown is supported. Lists and multiline formatting must be entered manually.\n\nLinks to other cards can be written as \\[display text](bunnypedia://cards/1234), where 1234 is the Card ID.")
+                Text("Inline markdown is supported. Lists and multiline formatting must be entered manually.\n\nLinks to other cards can be written as \\[display text](bunnydex://cards/1234), where 1234 is the Card ID.")
             }
             Section("Markdown Preview") {
                 Text(.init(rule.text))
@@ -32,7 +32,7 @@ struct MarkdownEditor: View {
 }
 
 #Preview {
-    @Previewable @State var rule: RuleModel = .init(title: "Card Title", text: "Here is some _italic_ text, **bold** text, and a [link](bunnypedia://cards/1234).")
+    @Previewable @State var rule: RuleModel = .init(title: "Card Title", text: "Here is some _italic_ text, **bold** text, and a [link](bunnydex://cards/1234).")
 
     MarkdownEditor(rule: $rule)
 }

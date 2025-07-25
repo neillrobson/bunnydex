@@ -83,7 +83,7 @@ struct CardDetailView: View {
                 }
             }
             .environment(\.openURL, OpenURLAction(handler: { URL in
-                if URL.scheme == "bunnypedia" {
+                if URL.scheme == "bunnypedia" || URL.scheme == "bunnydex" {
                     let id = URL.lastPathComponent
                     path.append(id)
 
