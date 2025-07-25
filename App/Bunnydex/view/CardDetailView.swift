@@ -113,6 +113,7 @@ struct CardDetailView: View {
         .sheet(isPresented: $showEditor) {
             NavigationStack {
                 CardEditView(card: card)
+                    .navigationTitle("Edit Card")
             }
         }
     }

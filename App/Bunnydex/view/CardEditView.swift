@@ -72,7 +72,6 @@ struct CardEditView: View {
                 Text("Touch and hold to reorder. Swipe left to delete.")
             }
         }
-        .navigationTitle("Edit Card")
     }
 }
 
@@ -81,5 +80,6 @@ struct CardEditView: View {
 
     NavigationStack {
         CardEditView(card: cards[0])
+            .navigationTitle("Edit Card")
     }
 }
