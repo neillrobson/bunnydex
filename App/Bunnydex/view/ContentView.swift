@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var showInfo: Bool = false
     @State private var showFilters: Bool = false
 
     @State private var cardPredicate = CardPredicate()
@@ -28,11 +27,18 @@ struct ContentView: View {
                 CardListView(path: $path, cardFilter: $cardPredicate)
                     .searchable(text: $cardPredicate.searchFilter, prompt: "Search")
                 .toolbar {
+                    ToolbarItem {
+                        Button {
+                            print("Add card")
+                        } label: {
+                            Image(systemName: "plus.circle")
+                        }
+                    }
                     ToolbarItem(placement: .topBarLeading) {
                         Button {
-                            showInfo.toggle()
+                            showFilters.toggle()
                         } label: {
-                            Image(systemName: "info.circle")
+                            Image(systemName: "line.3.horizontal.decrease.circle")
                         }
                     }
                     if !cardPredicate.decks.isEmpty
@@ -42,7 +48,7 @@ struct ContentView: View {
                         || !cardPredicate.dice.isEmpty
                         || !cardPredicate.symbols.isEmpty
                     {
-                        ToolbarItem {
+                        ToolbarItem(placement: .topBarLeading) {
                             Button {
                                 cardPredicate.decks.removeAll()
                                 cardPredicate.types.removeAll()
@@ -55,17 +61,8 @@ struct ContentView: View {
                             }
                         }
                     }
-                    ToolbarItem {
-                        Button {
-                            showFilters.toggle()
-                        } label: {
-                            Image(systemName: "line.3.horizontal.decrease.circle")
-                        }
-                    }
                 }
             }
-        }.sheet(isPresented: $showInfo) {
-            InfoView()
         }.sheet(isPresented: $showFilters) {
             FilterView(cardFilter: $cardPredicate, expandState: $expandState)
         }.task {

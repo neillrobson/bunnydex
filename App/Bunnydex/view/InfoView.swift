@@ -19,7 +19,6 @@ let infoText = """
                 """
 
 struct InfoView: View {
-    @Environment(\.dismiss) var dismiss
     #if DEBUG
     @Environment(\.modelContext) var context
     @State private var loadingTask: Task<Void, Never>?
@@ -49,13 +48,6 @@ struct InfoView: View {
                 }
                 .disabled(isLoading)
                 #endif
-            }
-            .toolbar {
-                ToolbarItem {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
             }
         }
     }
