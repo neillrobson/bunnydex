@@ -13,42 +13,22 @@ enum CardDetailError: Error {
 }
 
 struct CardDetailQueryView: View {
-    let id: String
     @Binding var path: NavigationPath
 
-    @State private var result: Result<Card, Error>?
-
-    @Environment(\.modelContext) private var context
+    @Query private var cards: [CardModel]
 
     init(id: String, path: Binding<NavigationPath>) {
-        self.id = id
         self._path = path
+
+        let predicate = #Predicate<CardModel> { $0.id == id }
+        _cards = Query(filter: predicate)
     }
 
     var body: some View {
-        switch result {
-        case .success(let card):
+        if let card = cards.first {
             CardDetailView(card: card, path: $path)
-        case .failure:
+        } else {
             ContentUnavailableView("Card does not exist", systemImage: "questionmark.text.page")
-        case nil:
-            ProgressView()
-                .task {
-                    let fetcher = ThreadsafeBackgroundActor(modelContainer: context.container)
-                    let results: [Card]
-                    do {
-                        results = try await fetcher.fetchData(#Predicate { $0.id == id })
-                    } catch {
-                        result = .failure(error)
-                        return
-                    }
-
-                    result = if let first = results.first {
-                        .success(first)
-                    } else {
-                        .failure(CardDetailError.notFound)
-                    }
-                }
         }
     }
 }

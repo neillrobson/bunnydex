@@ -9,13 +9,13 @@ import SwiftUI
 import SwiftData
 
 struct CardDetailView: View {
-    let card: Card
+    let card: CardModel
     var imageId: String {
         "01x\(card.deck.isKinder ? "K" : "Q")\(card.id)"
     }
     @Binding var path: NavigationPath
 
-    init(card: Card, path: Binding<NavigationPath>) {
+    init(card: CardModel, path: Binding<NavigationPath>) {
         self.card = card
         self._path = path
     }
@@ -38,17 +38,15 @@ struct CardDetailView: View {
                 LabeledContent("Card type") {
                     Text(card.type.description.display)
                 }
-                if let requirement = card.bunnyRequirement {
-                    LabeledContent("Bunny requirement") {
-                        Text(requirement.description.display)
-                    }
+                LabeledContent("Bunny requirement") {
+                    Text(card.bunnyRequirement.description.display)
                 }
-                if let dice = card.dice, !dice.isEmpty {
+                if !card.dice.isEmpty {
                     LabeledContent("Dice") {
                         Grid(alignment: .center, horizontalSpacing: 5, verticalSpacing: 5) {
-                            ForEach (0...dice.count/5, id: \.self) { row in
+                            ForEach (0...card.dice.count/5, id: \.self) { row in
                                 let rowStart = row * 5
-                                let offsetEnd = min(dice.count - rowStart, 5)
+                                let offsetEnd = min(card.dice.count - rowStart, 5)
                                 let offsetStart = offsetEnd - 5
 
                                 GridRow {
@@ -56,7 +54,7 @@ struct CardDetailView: View {
                                         if offset < 0 {
                                             Color.clear.gridCellUnsizedAxes([.horizontal, .vertical])
                                         } else {
-                                            let die = dice[rowStart + offset]
+                                            let die = card.dice[rowStart + offset].die
                                             Image(systemName: die.systemImageName)
                                                 .foregroundStyle(die.color)
                                         }
@@ -66,13 +64,13 @@ struct CardDetailView: View {
                         }
                     }
                 }
-                if let symbols = card.symbols, !symbols.isEmpty {
+                if !card.symbols.isEmpty {
                     LabeledContent("Symbols") {
-                        Text(symbols.map(\.description.display).joined(separator: ", "))
+                        Text(card.symbols.map(\.symbol.description.display).joined(separator: ", "))
                     }
                 }
             }
-            ForEach(card.rules ?? [], id: \.title) { rule in
+            ForEach(card.orderedRules, id: \.title) { rule in
                 Section(header: Text(rule.title)) {
                     Text(.init(rule.text))
                 }
@@ -102,15 +100,11 @@ struct CardDetailView: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(SampleData())) {
+    @Previewable @Query(filter: #Predicate<CardModel> { $0.id == "0185" }) var cards: [CardModel]
     @Previewable @State var path = NavigationPath()
 
-    let fetchDescriptor = FetchDescriptor<CardModel>(predicate: #Predicate { $0.id == "0185" })
-
-    if let card = try? previewContainer.mainContext.fetch(fetchDescriptor).first {
-        NavigationStack(path: $path) {
-            CardDetailView(card: Card(card), path: $path)
-        }
-        .modelContainer(previewContainer)
+    NavigationStack(path: $path) {
+        CardDetailView(card: cards[0], path: $path)
     }
 }
