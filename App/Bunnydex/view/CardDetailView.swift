@@ -15,6 +15,8 @@ struct CardDetailView: View {
     }
     @Binding var path: NavigationPath
 
+    @State private var showEditor = false
+
     init(card: CardModel, path: Binding<NavigationPath>) {
         self.card = card
         self._path = path
@@ -40,6 +42,11 @@ struct CardDetailView: View {
                 }
                 LabeledContent("Bunny requirement") {
                     Text(card.bunnyRequirement.description.display)
+                }
+                if let pawn = card.pawn {
+                    LabeledContent("Pawn") {
+                        Text(pawn.description.display)
+                    }
                 }
                 if !card.dice.isEmpty {
                     LabeledContent("Dice") {
@@ -96,6 +103,17 @@ struct CardDetailView: View {
                     Image(systemName: "house.circle")
                 }
             }
+
+            Button {
+                showEditor = true
+            } label: {
+                Image(systemName: "pencil.circle")
+            }
+        }
+        .sheet(isPresented: $showEditor) {
+            NavigationStack {
+                CardEditView(card: card)
+            }
         }
     }
 }
@@ -106,5 +124,14 @@ struct CardDetailView: View {
 
     NavigationStack(path: $path) {
         CardDetailView(card: cards[0], path: $path)
+    }
+}
+
+#Preview("Home Button", traits: .modifier(SampleData())) {
+    @Previewable @Query(filter: #Predicate<CardModel> { $0.id == "0185" }) var cards: [CardModel]
+    @Previewable @State var path = NavigationPath()
+
+    NavigationStack(path: $path) {
+        CardDetailView(card: cards[0], path: .constant(NavigationPath("stuff")))
     }
 }
