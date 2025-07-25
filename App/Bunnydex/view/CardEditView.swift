@@ -53,7 +53,7 @@ struct CardEditView: View {
                 MultiPicker(label: Text("Symbols"), options: symbols, optionToString: \.symbol.description.display, selected: $card.symbols)
             }
 
-            Section("Bunny Bits") {
+            Section {
                 List($card.orderedRules, id: \.self, editActions: .all) { $rule in
                     NavigationLink {
                         MarkdownEditor(rule: $rule)
@@ -63,6 +63,13 @@ struct CardEditView: View {
                         Text(rule.title)
                     }
                 }
+                Button("Add Rule") {
+                    card.orderedRules.append(RuleModel(title: "New Rule", text: ""))
+                }
+            } header: {
+                Text("Bunny Bits")
+            } footer: {
+                Text("Touch and hold to reorder. Swipe left to delete.")
             }
         }
         .navigationTitle("Edit Card")
