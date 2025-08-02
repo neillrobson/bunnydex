@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var showAddCard: Bool = false
+    @State private var addedModel: CardModel?
     @State private var showFilters: Bool = false
 
     @State private var cardPredicate = CardPredicate()
@@ -30,7 +30,9 @@ struct ContentView: View {
                 .toolbar {
                     ToolbarItem {
                         Button {
-                            showAddCard.toggle()
+                            let newCard = CardModel()
+                            context.insert(newCard)
+                            addedModel = newCard
                         } label: {
                             Image(systemName: "plus.circle")
                         }
@@ -64,9 +66,9 @@ struct ContentView: View {
                     }
                 }
             }
-        }.sheet(isPresented: $showAddCard) {
+        }.sheet(item: $addedModel) { card in
             NavigationStack {
-                CardEditView(card: .init())
+                CardEditView(card: card)
                     .navigationTitle("Add Card")
             }
         }.sheet(isPresented: $showFilters) {
