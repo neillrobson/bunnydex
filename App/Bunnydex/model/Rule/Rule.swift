@@ -7,7 +7,7 @@
 
 import SwiftData
 
-typealias RuleModel = SchemaV2.RuleModel
+typealias RuleModel = SchemaV3.RuleModel
 
 struct Rule: Codable, Hashable {
     var title: String

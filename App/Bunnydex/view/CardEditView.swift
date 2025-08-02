@@ -18,7 +18,7 @@ struct CardEditView: View {
         Form {
             Section("Required Fields") {
                 LabeledContent("ID") {
-                    TextField("0000", text: $card.id)
+                    TextField("0000", text: $card.cardId)
                         .multilineTextAlignment(.trailing)
                 }
                 LabeledContent("Title") {
@@ -76,7 +76,7 @@ struct CardEditView: View {
 }
 
 #Preview(traits: .modifier(SampleData())) {
-    @Previewable @Query(filter: #Predicate<CardModel> { $0.id == "0185" }) var cards: [CardModel]
+    @Previewable @Query(filter: #Predicate<CardModel> { $0.cardId == "0185" }) var cards: [CardModel]
 
     NavigationStack {
         CardEditView(card: cards[0])

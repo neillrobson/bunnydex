@@ -1,17 +1,22 @@
 //
-//  CardSchemaV2.swift
+//  CardSchemaV3.swift
 //  Bunnydex
 //
-//  Created by Neill Robson on 7/21/25.
+//  Created by Neill Robson on 8/2/25.
 //
 
 import Foundation
 import SwiftData
 
-extension SchemaV2 {
+extension SchemaV3 {
     @Model
     final class CardModel {
-        var id: String
+        var id: ObjectIdentifier {
+            ObjectIdentifier(self)
+        }
+
+        @Attribute(originalName: "id")
+        var cardId: String
         var title: String
         var rawType: Int
         var rawDeck: Int
@@ -22,11 +27,11 @@ extension SchemaV2 {
         var dice: [DieModel] = []
         @Relationship(inverse: \SymbolModel.cards)
         var symbols: [SymbolModel] = []
-        @Relationship(deleteRule: .cascade, originalName: "newRules", inverse: \RuleModel.card)
+        @Relationship(deleteRule: .cascade, inverse: \RuleModel.card)
         var rules: [RuleModel] = []
 
         init(json: Card) {
-            id = json.id
+            cardId = json.id
             title = json.title
 
             rawType = json.type.rawValue
@@ -39,7 +44,7 @@ extension SchemaV2 {
         }
 
         init() {
-            id = "0000"
+            cardId = "0000"
             title = "Placeholder"
 
             rawType = 0

@@ -50,7 +50,7 @@ func predicateBuilder(searchFilter: String = "", decks: Set<Deck> = [], types: S
                     rhs: PredicateExpressions.build_Equal(
                         lhs: PredicateExpressions.build_KeyPath(
                             root: PredicateExpressions.build_Arg(card),
-                            keyPath: \.id
+                            keyPath: \.cardId
                         ),
                         rhs: PredicateExpressions.build_Arg(searchFilter)
                     )

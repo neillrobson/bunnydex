@@ -14,9 +14,9 @@ actor ThreadsafeBackgroundActor: Sendable {
 
     func fetchData(_ predicate: Predicate<CardModel>? = nil) throws -> [Card] {
         let descriptor = if let p = predicate {
-            FetchDescriptor<CardModel>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+            FetchDescriptor<CardModel>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])
         } else {
-            FetchDescriptor<CardModel>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.id)])
+            FetchDescriptor<CardModel>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])
         }
         let cards = try context.fetch(descriptor)
         return cards.map(Card.init)

@@ -12,9 +12,9 @@ import SwiftData
 extension MigrationStage: @unchecked @retroactive Sendable { }
 
 enum CardMigrationPlan: SchemaMigrationPlan {
-    static var schemas: [any VersionedSchema.Type] { [SchemaV1.self, SchemaV1_1.self, SchemaV2.self] }
+    static var schemas: [any VersionedSchema.Type] { [SchemaV1.self, SchemaV1_1.self, SchemaV2.self, SchemaV3.self] }
 
-    static var stages: [MigrationStage] { [migrateV1ToV1_1, migrateV1_1ToV2] }
+    static var stages: [MigrationStage] { [migrateV1ToV1_1, migrateV1_1ToV2, migrateV2ToV3] }
 
     static let migrateV1ToV1_1 = MigrationStage.custom(
         fromVersion: SchemaV1.self,
@@ -36,5 +36,10 @@ enum CardMigrationPlan: SchemaMigrationPlan {
     static let migrateV1_1ToV2 = MigrationStage.lightweight(
         fromVersion: SchemaV1_1.self,
         toVersion: SchemaV2.self
+    )
+
+    static let migrateV2ToV3 = MigrationStage.lightweight(
+        fromVersion: SchemaV2.self,
+        toVersion: SchemaV3.self
     )
 }

@@ -11,7 +11,7 @@ import SwiftData
 struct CardDetailView: View {
     let card: CardModel
     var imageId: String {
-        "01x\(card.deck.isKinder ? "K" : "Q")\(card.id)"
+        "01x\(card.deck.isKinder ? "K" : "Q")\(card.cardId)"
     }
     @Binding var path: NavigationPath
 
@@ -32,7 +32,7 @@ struct CardDetailView: View {
             }
             Section {
                 LabeledContent("ID") {
-                    Text(card.id)
+                    Text(card.cardId)
                 }
                 LabeledContent("Deck") {
                     Text(card.deck.description.display)
@@ -120,7 +120,7 @@ struct CardDetailView: View {
 }
 
 #Preview(traits: .modifier(SampleData())) {
-    @Previewable @Query(filter: #Predicate<CardModel> { $0.id == "0185" }) var cards: [CardModel]
+    @Previewable @Query(filter: #Predicate<CardModel> { $0.cardId == "0185" }) var cards: [CardModel]
     @Previewable @State var path = NavigationPath()
 
     NavigationStack(path: $path) {
@@ -129,7 +129,7 @@ struct CardDetailView: View {
 }
 
 #Preview("Home Button", traits: .modifier(SampleData())) {
-    @Previewable @Query(filter: #Predicate<CardModel> { $0.id == "0185" }) var cards: [CardModel]
+    @Previewable @Query(filter: #Predicate<CardModel> { $0.cardId == "0185" }) var cards: [CardModel]
     @Previewable @State var path = NavigationPath()
 
     NavigationStack(path: $path) {

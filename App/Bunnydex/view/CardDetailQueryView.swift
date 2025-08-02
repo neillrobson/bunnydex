@@ -20,7 +20,7 @@ struct CardDetailQueryView: View {
     init(id: String, path: Binding<NavigationPath>) {
         self._path = path
 
-        let predicate = #Predicate<CardModel> { $0.id == id }
+        let predicate = #Predicate<CardModel> { $0.cardId == id }
         _cards = Query(filter: predicate)
     }
 
