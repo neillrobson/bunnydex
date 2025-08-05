@@ -74,7 +74,25 @@ struct ContentView: View {
             NavigationStack {
                 CardEditView(card: card)
                     .navigationTitle("Add Card")
+                    .toolbar {
+                        ToolbarItem {
+                            Button {
+                                addedModel = nil
+                            } label: {
+                                Text("Save")
+                            }
+                        }
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                context.delete(addedModel!)
+                                addedModel = nil
+                            } label: {
+                                Text("Cancel")
+                            }
+                        }
+                    }
             }
+            .interactiveDismissDisabled()
         }.sheet(isPresented: $showFilters) {
             FilterView(cardFilter: $cardPredicate, expandState: $expandState)
         }.task {
