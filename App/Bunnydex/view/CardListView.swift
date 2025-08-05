@@ -20,8 +20,8 @@ class CardListViewModel {
     private(set) var state = State.idle
     private var lastFilter: CardPredicate?
 
-    func load(container: ModelContainer, filter: CardPredicate) async {
-        if let lastFilter = lastFilter, lastFilter == filter {
+    func load(container: ModelContainer, filter: CardPredicate, force: Bool = false) async {
+        if let lastFilter = lastFilter, lastFilter == filter && !force {
             return
         }
 
@@ -50,10 +50,12 @@ struct CardListView: View {
     @Environment(\.modelContext) private var context
     @Binding var path: NavigationPath
     @Binding var cardFilter: CardPredicate
+    @Binding var forceReload: Int
 
-    init(path: Binding<NavigationPath>, cardFilter: Binding<CardPredicate> = .constant(.init())) {
+    init(path: Binding<NavigationPath>, cardFilter: Binding<CardPredicate> = .constant(.init()), forceReload: Binding<Int> = .constant(0)) {
         _path = path
         _cardFilter = cardFilter
+        _forceReload = forceReload
     }
 
     var body: some View {
@@ -88,6 +90,9 @@ struct CardListView: View {
         }
         .task(id: cardFilter) {
             await viewModel.load(container: context.container, filter: cardFilter)
+        }
+        .task(id: forceReload) {
+            await viewModel.load(container: context.container, filter: cardFilter, force: true)
         }
     }
 }
