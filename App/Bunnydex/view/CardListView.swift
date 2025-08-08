@@ -14,7 +14,7 @@ class CardListViewModel {
         case idle
         case loading
         case failed(Error)
-        case loaded([Card])
+        case loaded([CardView])
     }
 
     private(set) var state = State.idle
@@ -39,7 +39,7 @@ class CardListViewModel {
         }
     }
 
-    nonisolated func fetchData(container: ModelContainer, predicate: Predicate<CardModel>) async throws -> [Card] {
+    nonisolated func fetchData(container: ModelContainer, predicate: Predicate<CardModel>) async throws -> [CardView] {
         let service = ThreadsafeBackgroundActor(modelContainer: container)
         return try await service.fetchData(predicate)
     }
@@ -70,7 +70,7 @@ struct CardListView: View {
             case .loaded(let cards):
                 List {
                     ForEach(cards) { card in
-                        NavigationLink("\(card.id) — \(card.title)", value: card.id)
+                        NavigationLink("\(card.cardId) — \(card.title)", value: card.id)
                     }
                 }
                 .overlay {
@@ -85,7 +85,7 @@ struct CardListView: View {
             }
         }
         .navigationTitle("Cards")
-        .navigationDestination(for: String.self) { id in
+        .navigationDestination(for: PersistentIdentifier.self) { id in
             CardDetailQueryView(id: id, path: $path)
         }
         .task(id: cardFilter) {

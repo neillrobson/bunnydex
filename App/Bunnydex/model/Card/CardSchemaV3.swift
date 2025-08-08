@@ -30,7 +30,7 @@ extension SchemaV3 {
         @Relationship(deleteRule: .cascade, inverse: \RuleModel.card)
         var rules: [RuleModel] = []
 
-        init(json: Card) {
+        init(json: CardJSON) {
             cardId = json.id
             title = json.title
 

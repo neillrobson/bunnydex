@@ -17,10 +17,10 @@ struct CardDetailQueryView: View {
 
     @Query private var cards: [CardModel]
 
-    init(id: String, path: Binding<NavigationPath>) {
+    init(id: PersistentIdentifier, path: Binding<NavigationPath>) {
         self._path = path
 
-        let predicate = #Predicate<CardModel> { $0.cardId == id }
+        let predicate = #Predicate<CardModel> { $0.persistentModelID == id }
         _cards = Query(filter: predicate)
     }
 
@@ -33,20 +33,20 @@ struct CardDetailQueryView: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(SampleData())) {
+    @Previewable @Query(filter: #Predicate<CardModel> { $0.cardId == "0185" }) var cards: [CardModel]
     @Previewable @State var path = NavigationPath()
 
     NavigationStack(path: $path) {
-        CardDetailQueryView(id: "0005", path: $path)
+        CardDetailQueryView(id: cards[0].id, path: $path)
     }
-    .modelContainer(previewContainer)
 }
 
-#Preview("Empty state") {
-    @Previewable @State var path = NavigationPath()
-
-    NavigationStack(path: $path) {
-        CardDetailQueryView(id: "INVALID", path: $path)
-    }
-    .modelContainer(previewContainer)
-}
+//#Preview("Empty state") {
+//    @Previewable @State var path = NavigationPath()
+//
+//    NavigationStack(path: $path) {
+//        CardDetailQueryView(id: .init(from: JSONDecoder()), path: $path)
+//    }
+//    .modelContainer(previewContainer)
+//}

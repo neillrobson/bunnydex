@@ -24,7 +24,7 @@ extension SchemaV1 {
 
         var rules: [Rule]
 
-        init(json: Card) {
+        init(json: CardJSON) {
             id = json.id
             title = json.title
             rules = json.rules ?? []

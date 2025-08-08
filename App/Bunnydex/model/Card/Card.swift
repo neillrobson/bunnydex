@@ -31,7 +31,7 @@ extension CardModel {
      Handles initializing, inserting, and defining relationships for a new Card model object.
      */
     @discardableResult
-    static func create(json: Card, context: ModelContext, dice: [Die: DieModel], symbols: [Symbol: SymbolModel]) -> CardModel {
+    static func create(json: CardJSON, context: ModelContext, dice: [Die: DieModel], symbols: [Symbol: SymbolModel]) -> CardModel {
         let card = CardModel(json: json)
         context.insert(card)
 
@@ -42,19 +42,24 @@ extension CardModel {
     }
 }
 
-struct Card: Codable, Sendable, Hashable, Identifiable {
-    var id: String
+struct CardView: Sendable, Hashable, Identifiable {
+    let model: Model<CardModel>
+
+    var id: PersistentIdentifier { model.persistentIdentifier }
+
+    var cardId: String
     var title: String
     var type: CardType
     var deck: Deck
-    var bunnyRequirement: BunnyRequirement?
-    var dice: [Die]?
+    var bunnyRequirement: BunnyRequirement
+    var dice: [Die]
     var pawn: Pawn?
-    var symbols: [Symbol]?
-    var rules: [Rule]?
+    var symbols: [Symbol]
+    var rules: [Rule]
 
     init(_ card: CardModel) {
-        id = card.cardId
+        model = .init(card)
+        cardId = card.cardId
         title = card.title
         type = card.type
         deck = card.deck

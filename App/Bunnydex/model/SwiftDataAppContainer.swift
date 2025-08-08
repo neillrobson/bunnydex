@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-func getCardsFromJSON() -> [Card] {
+func getCardsFromJSON() -> [CardJSON] {
     do {
         guard let urls = Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: "data") else {
             fatalError("No data files found in bundle")
@@ -17,7 +17,7 @@ func getCardsFromJSON() -> [Card] {
 
         return try urls.flatMap { url in
             let data = try Data(contentsOf: url)
-            var cards = try JSONDecoder().decode([Card].self, from: data)
+            var cards = try JSONDecoder().decode([CardJSON].self, from: data)
 
             for c in cards.indices {
                 guard let rules = cards[c].rules else { continue }
