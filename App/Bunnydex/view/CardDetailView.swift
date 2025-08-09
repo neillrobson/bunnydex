@@ -15,6 +15,8 @@ struct CardDetailView: View {
     }
     @Binding var path: NavigationPath
 
+    @Environment(\.modelContext) var context
+
     @State private var showEditor = false
 
     init(card: CardModel, path: Binding<NavigationPath>) {
@@ -114,6 +116,24 @@ struct CardDetailView: View {
             NavigationStack {
                 CardEditView(card: card)
                     .navigationTitle("Edit Card")
+                    .toolbar {
+                        ToolbarItem {
+                            Button {
+                                showEditor = false
+                            } label: {
+                                Text("Done")
+                            }
+                        }
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                context.delete(card)
+                                showEditor = false
+                                path.removeLast()
+                            } label: {
+                                Text("Delete")
+                            }
+                        }
+                    }
             }
         }
     }
