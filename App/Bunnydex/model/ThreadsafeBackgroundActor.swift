@@ -12,6 +12,39 @@ import Foundation
 actor ThreadsafeBackgroundActor: Sendable {
     private var context: ModelContext { modelExecutor.modelContext }
 
+    func fetchExperiment(_ predicate: Predicate<CardModel>? = nil) -> AsyncStream<[CardView]> {
+        let descriptor = if let p = predicate {
+            FetchDescriptor<CardModel>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])
+        } else {
+            FetchDescriptor<CardModel>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])
+        }
+
+        return AsyncStream { continuation in
+            let task = Task {
+                for await _ in NotificationCenter.default.notifications(named: .NSPersistentStoreRemoteChange
+                ).map({ _ in () }) {
+                    do {
+                        let cards = try context.fetch(descriptor)
+                        continuation.yield(cards.map(CardView.init))
+                    } catch {
+                        // TODO: figure out error handling
+                    }
+                }
+            }
+
+            continuation.onTermination = { _ in
+                task.cancel()
+            }
+
+            do {
+                let cards = try context.fetch(descriptor)
+                continuation.yield(cards.map(CardView.init))
+            } catch {
+                // TODO: figure out error handling
+            }
+        }
+    }
+
     func fetchData(_ predicate: Predicate<CardModel>? = nil) throws -> [CardView] {
         let descriptor = if let p = predicate {
             FetchDescriptor<CardModel>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])

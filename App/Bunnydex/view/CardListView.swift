@@ -21,6 +21,34 @@ class CardListViewModel {
     private var lastFilter: CardPredicate?
     private var lastReloadCount = 0
 
+    nonisolated(unsafe) private var observationTask: Task<Void, Never>?
+
+    deinit {
+        observationTask?.cancel()
+    }
+
+    func loadExperiment(container: ModelContainer, filter: CardPredicate) {
+        if let lastFilter = lastFilter, lastFilter == filter {
+            return
+        }
+
+        state = .loading
+
+        observationTask?.cancel()
+        observationTask = Task { [weak self] in
+            guard let stream = await self?.fetchExperiment(container: container, predicate: filter.predicate) else { return }
+
+            for await cards in stream {
+                self?.state = .loaded(cards)
+            }
+        }
+    }
+
+    nonisolated func fetchExperiment(container: ModelContainer, predicate: Predicate<CardModel>) async -> AsyncStream<[CardView]> {
+        let service = ThreadsafeBackgroundActor(modelContainer: container)
+        return await service.fetchExperiment(predicate)
+    }
+
     func load(container: ModelContainer, filter: CardPredicate, reloadCount: Int = 0) async {
         if let lastFilter = lastFilter, lastFilter == filter && lastReloadCount == reloadCount {
             return
@@ -94,10 +122,7 @@ struct CardListView: View {
             CardDetailQueryView(cardId: cardId, path: $path)
         }
         .task(id: cardFilter) {
-            await viewModel.load(container: context.container, filter: cardFilter, reloadCount: forceReload)
-        }
-        .task(id: forceReload) {
-            await viewModel.load(container: context.container, filter: cardFilter, reloadCount: forceReload)
+            viewModel.loadExperiment(container: context.container, filter: cardFilter)
         }
     }
 }
