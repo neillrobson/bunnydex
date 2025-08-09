@@ -88,6 +88,9 @@ struct CardListView: View {
         .navigationDestination(for: PersistentIdentifier.self) { id in
             CardDetailQueryView(id: id, path: $path)
         }
+        .navigationDestination(for: String.self) { cardId in
+            CardDetailQueryView(cardId: cardId, path: $path)
+        }
         .task(id: cardFilter) {
             await viewModel.load(container: context.container, filter: cardFilter)
         }
