@@ -19,13 +19,15 @@ class CardListViewModel {
 
     private(set) var state = State.idle
     private var lastFilter: CardPredicate?
+    private var lastReloadCount = 0
 
-    func load(container: ModelContainer, filter: CardPredicate, force: Bool = false) async {
-        if let lastFilter = lastFilter, lastFilter == filter && !force {
+    func load(container: ModelContainer, filter: CardPredicate, reloadCount: Int = 0) async {
+        if let lastFilter = lastFilter, lastFilter == filter && lastReloadCount == reloadCount {
             return
         }
 
         state = .loading
+        lastReloadCount = reloadCount
 
         do {
             try await Task.sleep(nanoseconds: 250_000_000)
@@ -92,10 +94,10 @@ struct CardListView: View {
             CardDetailQueryView(cardId: cardId, path: $path)
         }
         .task(id: cardFilter) {
-            await viewModel.load(container: context.container, filter: cardFilter)
+            await viewModel.load(container: context.container, filter: cardFilter, reloadCount: forceReload)
         }
         .task(id: forceReload) {
-            await viewModel.load(container: context.container, filter: cardFilter, force: true)
+            await viewModel.load(container: context.container, filter: cardFilter, reloadCount: forceReload)
         }
     }
 }

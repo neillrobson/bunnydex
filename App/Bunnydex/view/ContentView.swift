@@ -84,7 +84,7 @@ struct ContentView: View {
                         }
                         ToolbarItem(placement: .topBarLeading) {
                             Button {
-                                context.delete(addedModel!)
+                                context.delete(card)
                                 addedModel = nil
                             } label: {
                                 Text("Cancel")
