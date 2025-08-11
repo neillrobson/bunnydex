@@ -127,6 +127,8 @@ struct CardDetailView: View {
                         ToolbarItem(placement: .topBarLeading) {
                             Button {
                                 context.delete(card)
+                                try? context.save()
+
                                 showEditor = false
                                 path.removeLast()
                             } label: {

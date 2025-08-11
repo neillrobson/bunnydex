@@ -36,6 +36,7 @@ class CardListViewModel {
         observationTask?.cancel()
         observationTask = Task { [weak self] in
             guard let stream = await self?.fetchData(container: container, predicate: filter.predicate) else { return }
+            self?.lastFilter = filter
 
             for await cards in stream {
                 self?.state = .loaded(cards)
