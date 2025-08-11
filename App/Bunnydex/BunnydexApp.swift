@@ -12,7 +12,7 @@ import SwiftData
 struct BunnydexApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
         .modelContainer(appContainer)
     }
