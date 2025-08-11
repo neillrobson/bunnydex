@@ -18,6 +18,7 @@ struct CardDetailView: View {
     @Environment(\.modelContext) var context
 
     @State private var showEditor = false
+    @State private var confirmDelete = false
 
     init(card: CardModel, path: Binding<NavigationPath>) {
         self.card = card
@@ -128,13 +129,15 @@ struct CardDetailView: View {
                         }
                         if card.custom {
                             ToolbarItem(placement: .topBarLeading) {
-                                Button {
-                                    context.delete(card)
-                                    showEditor = false
-                                    path.removeLast()
-                                } label: {
-                                    Text("Delete")
-                                        .foregroundStyle(.red)
+                                Button("Delete", role: .destructive) {
+                                    confirmDelete = true
+                                }
+                                .confirmationDialog("Are you sure?", isPresented: $confirmDelete) {
+                                    Button("Delete card", role: .destructive) {
+                                        context.delete(card)
+                                        showEditor = false
+                                        path.removeLast()
+                                    }
                                 }
                             }
                         }
