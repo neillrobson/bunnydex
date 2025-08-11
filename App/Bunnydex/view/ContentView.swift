@@ -17,7 +17,6 @@ struct ContentView: View {
     @State private var path = NavigationPath()
 
     @State private var isCreatingDatabase = true
-    @State private var reloadList = 0
 
     @Environment(\.modelContext) private var context
 
@@ -26,7 +25,7 @@ struct ContentView: View {
             if isCreatingDatabase {
                 ProgressView("Creating database")
             } else {
-                CardListView(path: $path, cardFilter: $cardPredicate, forceReload: $reloadList)
+                CardListView(path: $path, cardFilter: $cardPredicate)
                     .searchable(text: $cardPredicate.searchFilter, prompt: "Search")
                 .toolbar {
                     ToolbarItem {
@@ -69,7 +68,6 @@ struct ContentView: View {
             }
         }.sheet(item: $addedModel, onDismiss: {
             try? context.save()
-            reloadList += 1
         }) { card in
             NavigationStack {
                 CardEditView(card: card)

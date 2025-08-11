@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-@MainActor @Observable
+@Observable
 class CardListViewModel {
     enum State {
         case idle
@@ -19,15 +19,14 @@ class CardListViewModel {
 
     private(set) var state = State.idle
     private var lastFilter: CardPredicate?
-    private var lastReloadCount = 0
 
-    nonisolated(unsafe) private var observationTask: Task<Void, Never>?
+    private var observationTask: Task<Void, Never>?
 
     deinit {
         observationTask?.cancel()
     }
 
-    func loadExperiment(container: ModelContainer, filter: CardPredicate) {
+    @MainActor func load(container: ModelContainer, filter: CardPredicate) {
         if let lastFilter = lastFilter, lastFilter == filter {
             return
         }
@@ -36,7 +35,7 @@ class CardListViewModel {
 
         observationTask?.cancel()
         observationTask = Task { [weak self] in
-            guard let stream = await self?.fetchExperiment(container: container, predicate: filter.predicate) else { return }
+            guard let stream = await self?.fetchData(container: container, predicate: filter.predicate) else { return }
 
             for await cards in stream {
                 self?.state = .loaded(cards)
@@ -44,34 +43,9 @@ class CardListViewModel {
         }
     }
 
-    nonisolated func fetchExperiment(container: ModelContainer, predicate: Predicate<CardModel>) async -> AsyncStream<[CardView]> {
+    func fetchData(container: ModelContainer, predicate: Predicate<CardModel>) async -> AsyncStream<[CardView]> {
         let service = ThreadsafeBackgroundActor(modelContainer: container)
-        return await service.fetchExperiment(predicate)
-    }
-
-    func load(container: ModelContainer, filter: CardPredicate, reloadCount: Int = 0) async {
-        if let lastFilter = lastFilter, lastFilter == filter && lastReloadCount == reloadCount {
-            return
-        }
-
-        state = .loading
-        lastReloadCount = reloadCount
-
-        do {
-            try await Task.sleep(nanoseconds: 250_000_000)
-            let cards = try await fetchData(container: container, predicate: filter.predicate)
-            lastFilter = filter
-            state = .loaded(cards)
-        } catch is CancellationError {
-            state = .idle
-        } catch {
-            state = .failed(error)
-        }
-    }
-
-    nonisolated func fetchData(container: ModelContainer, predicate: Predicate<CardModel>) async throws -> [CardView] {
-        let service = ThreadsafeBackgroundActor(modelContainer: container)
-        return try await service.fetchData(predicate)
+        return await service.fetchData(predicate)
     }
 }
 
@@ -80,12 +54,10 @@ struct CardListView: View {
     @Environment(\.modelContext) private var context
     @Binding var path: NavigationPath
     @Binding var cardFilter: CardPredicate
-    @Binding var forceReload: Int
 
-    init(path: Binding<NavigationPath>, cardFilter: Binding<CardPredicate> = .constant(.init()), forceReload: Binding<Int> = .constant(0)) {
+    init(path: Binding<NavigationPath>, cardFilter: Binding<CardPredicate> = .constant(.init())) {
         _path = path
         _cardFilter = cardFilter
-        _forceReload = forceReload
     }
 
     var body: some View {
@@ -122,7 +94,7 @@ struct CardListView: View {
             CardDetailQueryView(cardId: cardId, path: $path)
         }
         .task(id: cardFilter) {
-            viewModel.loadExperiment(container: context.container, filter: cardFilter)
+            viewModel.load(container: context.container, filter: cardFilter)
         }
     }
 }

@@ -12,7 +12,7 @@ import Foundation
 actor ThreadsafeBackgroundActor: Sendable {
     private var context: ModelContext { modelExecutor.modelContext }
 
-    func fetchExperiment(_ predicate: Predicate<CardModel>? = nil) -> AsyncStream<[CardView]> {
+    func fetchData(_ predicate: Predicate<CardModel>? = nil) -> AsyncStream<[CardView]> {
         let descriptor = if let p = predicate {
             FetchDescriptor<CardModel>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])
         } else {
@@ -43,16 +43,6 @@ actor ThreadsafeBackgroundActor: Sendable {
                 // TODO: figure out error handling
             }
         }
-    }
-
-    func fetchData(_ predicate: Predicate<CardModel>? = nil) throws -> [CardView] {
-        let descriptor = if let p = predicate {
-            FetchDescriptor<CardModel>(predicate: p, sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])
-        } else {
-            FetchDescriptor<CardModel>(sortBy: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])
-        }
-        let cards = try context.fetch(descriptor)
-        return cards.map(CardView.init)
     }
 
     func initializeDatabase() {
