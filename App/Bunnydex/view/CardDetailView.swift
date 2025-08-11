@@ -112,7 +112,9 @@ struct CardDetailView: View {
                 Image(systemName: "pencil.circle")
             }
         }
-        .sheet(isPresented: $showEditor) {
+        .sheet(isPresented: $showEditor, onDismiss: {
+            try? context.save()
+        }) {
             NavigationStack {
                 CardEditView(card: card)
                     .navigationTitle("Edit Card")
@@ -124,15 +126,16 @@ struct CardDetailView: View {
                                 Text("Done")
                             }
                         }
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button {
-                                context.delete(card)
-                                try? context.save()
-
-                                showEditor = false
-                                path.removeLast()
-                            } label: {
-                                Text("Delete")
+                        if card.custom {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    context.delete(card)
+                                    showEditor = false
+                                    path.removeLast()
+                                } label: {
+                                    Text("Delete")
+                                        .foregroundStyle(.red)
+                                }
                             }
                         }
                     }

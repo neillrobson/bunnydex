@@ -22,6 +22,7 @@ extension SchemaV3 {
         var rawDeck: Int
         var rawPawn: Int?
         var rawRequirement: Int
+        var custom: Bool = false
 
         @Relationship(inverse: \DieModel.cards)
         var dice: [DieModel] = []
@@ -52,6 +53,7 @@ extension SchemaV3 {
             rawRequirement = 0
 
             rawPawn = nil
+            custom = true
         }
 
         var orderedRules: [RuleModel] {
