@@ -7,10 +7,6 @@
 
 import SwiftData
 
-// This extension should not be needed in iOS 26
-// See https://developer.apple.com/forums/thread/756802
-extension MigrationStage: @unchecked @retroactive Sendable { }
-
 enum CardMigrationPlan: SchemaMigrationPlan {
     static var schemas: [any VersionedSchema.Type] { [SchemaV1.self, SchemaV1_1.self, SchemaV2.self, SchemaV3.self] }
 

@@ -113,9 +113,7 @@ struct CardDetailView: View {
                 Image(systemName: "pencil.circle")
             }
         }
-        .sheet(isPresented: $showEditor, onDismiss: {
-            try? context.save()
-        }) {
+        .sheet(isPresented: $showEditor) {
             NavigationStack {
                 CardEditView(card: card)
                     .navigationTitle("Edit Card")

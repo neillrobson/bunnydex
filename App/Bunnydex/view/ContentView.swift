@@ -66,9 +66,7 @@ struct ContentView: View {
                     }
                 }
             }
-        }.sheet(item: $addedModel, onDismiss: {
-            try? context.save()
-        }) { card in
+        }.sheet(item: $addedModel) { card in
             NavigationStack {
                 CardEditView(card: card)
                     .navigationTitle("Add Card")
