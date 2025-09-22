@@ -69,7 +69,7 @@ struct CardListView: View {
             case .loading:
                 ProgressView("Loading cards")
             case .failed(let error):
-                Text("Error: \(error)")
+                Text("Error: \(error.localizedDescription)")
             case .loaded(let cards):
                 List {
                     ForEach(cards) { card in
