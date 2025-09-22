@@ -8,72 +8,53 @@
 import SwiftUI
 import SwiftData
 
-@Observable
-class CardListViewModel {
-    enum State {
-        case idle
-        case loading
-        case failed(Error)
-        case loaded([CardView])
-    }
+struct CardListView: View {
+    @Environment(\.modelContext) private var context
 
-    private(set) var state = State.idle
-    private var lastFilter: CardPredicate?
+    @Binding var path: NavigationPath
+    @Binding var cardFilter: CardPredicate
 
-    private var observationTask: Task<Void, Never>?
+    @Query private var cards: [CardModel]
+    @State private var isLoading = false
 
-    deinit {
-        observationTask?.cancel()
-    }
-
-    @MainActor func load(container: ModelContainer, filter: CardPredicate) {
-        if let lastFilter = lastFilter, lastFilter == filter {
+    func save() async {
+        guard context.hasChanges else {
+            print("No changes to save")
             return
         }
 
-        state = .loading
+        self.isLoading = true
+        defer { self.isLoading = false }
 
-        observationTask?.cancel()
-        observationTask = Task { [weak self] in
-            guard let stream = await self?.fetchData(container: container, predicate: filter.predicate) else { return }
-            self?.lastFilter = filter
+        let notifications = NotificationCenter.default.notifications(named: ModelContext.didSave)
 
-            for await cards in stream {
-                self?.state = .loaded(cards)
-            }
+        do {
+            try context.save()
+        } catch {
+            print("Save failed: \(error)")
+            return
+        }
+
+        // Wait for the save, and any downstream reactivity, to complete
+        for await _ in notifications {
+            break
         }
     }
-
-    func fetchData(container: ModelContainer, predicate: Predicate<CardModel>) async -> AsyncStream<[CardView]> {
-        let service = ThreadsafeBackgroundActor(modelContainer: container)
-        return await service.fetchData(predicate)
-    }
-}
-
-struct CardListView: View {
-    @State private var viewModel = CardListViewModel()
-    @Environment(\.modelContext) private var context
-    @Binding var path: NavigationPath
-    @Binding var cardFilter: CardPredicate
 
     init(path: Binding<NavigationPath>, cardFilter: Binding<CardPredicate> = .constant(.init())) {
         _path = path
         _cardFilter = cardFilter
+        _cards = Query(filter: self.cardFilter.predicate, sort: [SortDescriptor(\.rawDeck), SortDescriptor(\.cardId)])
     }
 
     var body: some View {
         Group {
-            switch viewModel.state {
-            case .idle:
-                EmptyView()
-            case .loading:
+            if isLoading {
                 ProgressView("Loading cards")
-            case .failed(let error):
-                Text("Error: \(error.localizedDescription)")
-            case .loaded(let cards):
+            } else {
                 List {
                     ForEach(cards) { card in
-                        NavigationLink("\(card.cardId) — \(card.title)", value: card.id)
+                        NavigationLink("\(card.cardId) — \(card.title)", value: card)
                     }
                 }
                 .overlay {
@@ -88,14 +69,17 @@ struct CardListView: View {
             }
         }
         .navigationTitle("Cards")
+        .navigationDestination(for: CardModel.self) { card in
+            CardDetailView(card: card, path: $path)
+        }
         .navigationDestination(for: PersistentIdentifier.self) { id in
             CardDetailQueryView(id: id, path: $path)
         }
         .navigationDestination(for: String.self) { cardId in
             CardDetailQueryView(cardId: cardId, path: $path)
         }
-        .task(id: cardFilter) {
-            viewModel.load(container: context.container, filter: cardFilter)
+        .task {
+            await save()
         }
     }
 }
